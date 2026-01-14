@@ -40,47 +40,47 @@ const drinkRecipes = {
     winter: [
       { 
         name: "HOT TODDY", 
-        short: "40мл сиропу, 150мл окропу, лимон. Ідеальний зігріваючий напій.", 
-        full: "Класичний зимовий напій, що зігріває душу.\n\nІнгредієнти:\n• 40 мл зимового сиропу\n• 150 мл окропу або чорного чаю\n• Слайс лимона\n• Паличка кориці для прикраси\n\nПриготування:\nЗмішайте сироп з гарячою водою у чашці. Додайте лимон та корицю. Насолоджуйтесь теплом.", 
+        short: "Ідеальний зігріваючий напій для холодних вечорів, що огортає теплом та ароматом спецій.", 
+        full: "Класичний зимовий напій, що зігріває душу.\n\n<strong>Інгредієнти:</strong>\n• 40 мл зимового сиропу\n• 150 мл окропу або чорного чаю\n• Слайс лимона\n• Паличка кориці для прикраси\n\n<strong>Приготування:</strong>\nЗмішайте сироп з гарячою водою у чашці. Додайте лимон та корицю. Насолоджуйтесь теплом.", 
         icon: "assets/winter-icon-1.png", 
-        detailImage: "assets/winter-picture-1.jpg" 
+        detailImage: "assets/winter-icon-1.png" 
       },
       { 
         name: "SPICED COFFEE", 
-        short: "Додайте 30мл сиропу у чорну каву замість цукру для пряного аромату.", 
-        full: "Кава з новим характером.\n\nІнгредієнти:\n• 30 мл зимового сиропу\n• 150 мл свіжозвареної чорної кави\n• Збиті вершки (за бажанням)\n\nПриготування:\nЗваріть вашу улюблену каву. Додайте сироп замість цукру. За бажанням прикрасьте вершками.", 
+        short: "Ваша улюблена кава з новим, глибоким пряним характером, що бадьорить та надихає.", 
+        full: "Кава з новим характером.\n\n<strong>Інгредієнти:</strong>\n• 30 мл зимового сиропу\n• 150 мл свіжозвареної чорної кави\n• Збиті вершки (за бажанням)\n\n<strong>Приготування:</strong>\nЗваріть вашу улюблену каву. Додайте сироп замість цукру. За бажанням прикрасьте вершками.", 
         icon: "assets/winter-icon-2.png", 
-        detailImage: "assets/winter-picture-2.jpg" 
+        detailImage: "assets/winter-icon-2.png" 
       },
       { 
         name: "FOREST TEA", 
-        short: "Трав'яний чай, 30мл сиропу, паличка кориці. Справжня магія лісу.", 
-        full: "Аромат лісу у вашій чашці.\n\nІнгредієнти:\n• 30 мл зимового сиропу\n• 200 мл трав'яного чаю\n• Гілочка розмарину\n\nПриготування:\nЗаваріть чай. Додайте сироп та перемішайте. Прикрасьте розмарином для підсилення аромату.", 
+        short: "Справжня магія лісу у вашій чашці. Трав'яний спокій з нотками хвої та меду.", 
+        full: "Аромат лісу у вашій чашці.\n\n<strong>Інгредієнти:</strong>\n• 30 мл зимового сиропу\n• 200 мл трав'яного чаю\n• Гілочка розмарину\n\n<strong>Приготування:</strong>\nЗаваріть чай. Додайте сироп та перемішайте. Прикрасьте розмарином для підсилення аромату.", 
         icon: "assets/winter-icon-3.png", 
-        detailImage: "assets/winter-picture-3.jpg" 
+        detailImage: "assets/winter-icon-3.png" 
       }
     ],
     summer: [
       { 
         name: "CLASSIC TONIC", 
-        short: "Келих з льодом, 30мл сиропу, 150мл тоніка. Прикрасьте розмарином.", 
-        full: "Освіжаюча класика для спекотного дня.\n\nІнгредієнти:\n• 30 мл літнього сиропу\n• 150 мл тоніка\n• Лід\n• Розмарин\n\nПриготування:\nНаповніть келих льодом. Налийте сироп та тонік. Обережно перемішайте.", 
+        short: "Освіжаюча класика, де гірчинка тоніка ідеально відтіняє солодкість трав.", 
+        full: "Освіжаюча класика для спекотного дня.\n\n<strong>Інгредієнти:</strong>\n• 30 мл літнього сиропу\n• 150 мл тоніка\n• Лід\n• Розмарин\n\n<strong>Приготування:</strong>\nНаповніть келих льодом. Налийте сироп та тонік. Обережно перемішайте.", 
         icon: "assets/summer-icon-1.png", 
-        detailImage: "assets/summer-picture-1.jpg" 
+        detailImage: "assets/summer-icon-1.png" 
       },
       { 
         name: "MOON SPRITZ", 
-        short: "40мл сиропу, 60мл Просекко, сплеш газованої води та слайс апельсина.", 
-        full: "Легкий та ігристий аперитив.\n\nІнгредієнти:\n• 40 мл літнього сиропу\n• 60 мл Просекко\n• 20 мл газованої води\n• Апельсин\n\nПриготування:\nУ келих з льодом налийте всі інгредієнти. Прикрасьте слайсом апельсина.", 
+        short: "Легкий, ігристий та святковий аперитив, наповнений бульбашками радості.", 
+        full: "Легкий та ігристий аперитив.\n\n<strong>Інгредієнти:</strong>\n• 40 мл літнього сиропу\n• 60 мл Просекко\n• 20 мл газованої води\n• Апельсин\n\n<strong>Приготування:</strong>\nУ келих з льодом налийте всі інгредієнти. Прикрасьте слайсом апельсина.", 
         icon: "assets/summer-icon-2.png", 
-        detailImage: "assets/summer-picture-2.jpg" 
+        detailImage: "assets/summer-icon-2.png" 
       },
       { 
         name: "NATURE SOUR", 
-        short: "30мл сиропу, 20мл лимонного соку, лід. Збийте у шейкері.", 
-        full: "Кисло-солодкий баланс природи.\n\nІнгредієнти:\n• 30 мл літнього сиропу\n• 20 мл лимонного соку\n• Лід\n• Яєчний білок (опціонально)\n\nПриготування:\nЗбийте всі інгредієнти у шейкері з льодом. Процідіть у келих.", 
+        short: "Вишуканий кисло-солодкий баланс, що пробуджує рецептори свіжістю природи.", 
+        full: "Кисло-солодкий баланс природи.\n\n<strong>Інгредієнти:</strong>\n• 30 мл літнього сиропу\n• 20 мл лимонного соку\n• Лід\n• Яєчний білок (опціонально)\n\n<strong>Приготування:</strong>\nЗбийте всі інгредієнти у шейкері з льодом. Процідіть у келих.", 
         icon: "assets/summer-icon-3.png", 
-        detailImage: "assets/summer-picture-3.jpg" 
+        detailImage: "assets/summer-icon-3.png" 
       }
     ]
   },
@@ -88,47 +88,47 @@ const drinkRecipes = {
     winter: [
       { 
         name: "HOT TODDY", 
-        short: "40ml syrup, 150ml boiling water, lemon. Perfect warming drink.", 
-        full: "A classic winter drink that warms the soul.\n\nIngredients:\n• 40 ml winter syrup\n• 150 ml boiling water or black tea\n• Lemon slice\n• Cinnamon stick for garnish\n\nPreparation:\nMix syrup with hot water in a cup. Add lemon and cinnamon. Enjoy the warmth.", 
+        short: "The perfect warming drink for cold evenings, wrapping you in warmth and the aroma of spices.", 
+        full: "A classic winter drink that warms the soul.\n\n<strong>Ingredients:</strong>\n• 40 ml winter syrup\n• 150 ml boiling water or black tea\n• Lemon slice\n• Cinnamon stick for garnish\n\n<strong>Preparation:</strong>\nMix syrup with hot water in a cup. Add lemon and cinnamon. Enjoy the warmth.", 
         icon: "assets/winter-icon-1.png", 
-        detailImage: "assets/winter-picture-1.jpg" 
+        detailImage: "assets/winter-icon-1.png" 
       },
       { 
         name: "SPICED COFFEE", 
-        short: "Add 30ml syrup to black coffee instead of sugar for a spicy aroma.", 
-        full: "Coffee with a new character.\n\nIngredients:\n• 30 ml winter syrup\n• 150 ml freshly brewed black coffee\n• Whipped cream (optional)\n\nPreparation:\nBrew your favorite coffee. Add syrup instead of sugar. Garnish with cream if desired.", 
+        short: "Your favorite coffee with a new, deep spicy character that invigorates and inspires.", 
+        full: "Coffee with a new character.\n\n<strong>Ingredients:</strong>\n• 30 ml winter syrup\n• 150 ml freshly brewed black coffee\n• Whipped cream (optional)\n\n<strong>Preparation:</strong>\nBrew your favorite coffee. Add syrup instead of sugar. Garnish with cream if desired.", 
         icon: "assets/winter-icon-2.png", 
-        detailImage: "assets/winter-picture-2.jpg" 
+        detailImage: "assets/winter-icon-2.png" 
       },
       { 
         name: "FOREST TEA", 
-        short: "Herbal tea, 30ml syrup, cinnamon stick. Real forest magic.", 
-        full: "Forest aroma in your cup.\n\nIngredients:\n• 30 ml winter syrup\n• 200 ml herbal tea\n• Rosemary sprig\n\nPreparation:\nBrew the tea. Add syrup and stir. Garnish with rosemary to enhance the aroma.", 
+        short: "Real forest magic in your cup. Herbal serenity with notes of pine and honey.", 
+        full: "Forest aroma in your cup.\n\n<strong>Ingredients:</strong>\n• 30 ml winter syrup\n• 200 ml herbal tea\n• Rosemary sprig\n\n<strong>Preparation:</strong>\nBrew the tea. Add syrup and stir. Garnish with rosemary to enhance the aroma.", 
         icon: "assets/winter-icon-3.png", 
-        detailImage: "assets/winter-picture-3.jpg" 
+        detailImage: "assets/winter-icon-3.png" 
       }
     ],
     summer: [
       { 
         name: "CLASSIC TONIC", 
-        short: "Glass with ice, 30ml syrup, 150ml tonic. Garnish with rosemary.", 
-        full: "Refreshing classic for a hot day.\n\nIngredients:\n• 30 ml summer syrup\n• 150 ml tonic water\n• Ice\n• Rosemary\n\nPreparation:\nFill a glass with ice. Pour syrup and tonic. Stir gently.", 
+        short: "Refreshing classic, where the bitterness of tonic perfectly highlights the sweetness of herbs.", 
+        full: "Refreshing classic for a hot day.\n\n<strong>Ingredients:</strong>\n• 30 ml summer syrup\n• 150 ml tonic water\n• Ice\n• Rosemary\n\n<strong>Preparation:</strong>\nFill a glass with ice. Pour syrup and tonic. Stir gently.", 
         icon: "assets/summer-icon-1.png", 
-        detailImage: "assets/summer-picture-1.jpg" 
+        detailImage: "assets/summer-icon-1.png" 
       },
       { 
         name: "MOON SPRITZ", 
-        short: "40ml syrup, 60ml Prosecco, splash of soda water and an orange slice.", 
-        full: "Light and bubbly aperitif.\n\nIngredients:\n• 40 ml summer syrup\n• 60 ml Prosecco\n• 20 ml soda water\n• Orange\n\nPreparation:\nPour all ingredients into a glass with ice. Garnish with an orange slice.", 
+        short: "Light, bubbly, and festive aperitif, filled with bubbles of joy.", 
+        full: "Light and bubbly aperitif.\n\n<strong>Ingredients:</strong>\n• 40 ml summer syrup\n• 60 ml Prosecco\n• 20 ml soda water\n• Orange\n\n<strong>Preparation:</strong>\nPour all ingredients into a glass with ice. Garnish with an orange slice.", 
         icon: "assets/summer-icon-2.png", 
-        detailImage: "assets/summer-picture-2.jpg" 
+        detailImage: "assets/summer-icon-2.png" 
       },
       { 
         name: "NATURE SOUR", 
-        short: "30ml syrup, 20ml lemon juice, ice. Shake well.", 
-        full: "Sweet and sour balance of nature.\n\nIngredients:\n• 30 ml summer syrup\n• 20 ml lemon juice\n• Ice\n• Egg white (optional)\n\nPreparation:\nShake all ingredients in a shaker with ice. Strain into a glass.", 
+        short: "Exquisite sweet and sour balance that awakens your taste buds with nature's freshness.", 
+        full: "Sweet and sour balance of nature.\n\n<strong>Ingredients:</strong>\n• 30 ml summer syrup\n• 20 ml lemon juice\n• Ice\n• Egg white (optional)\n\n<strong>Preparation:</strong>\nShake all ingredients in a shaker with ice. Strain into a glass.", 
         icon: "assets/summer-icon-3.png", 
-        detailImage: "assets/summer-picture-3.jpg" 
+        detailImage: "assets/summer-icon-3.png" 
       }
     ]
   }
@@ -143,8 +143,7 @@ const copy = {
     summer: "Подих літнього вітру. Легкий та освіжаючий букет з лугових трав, прохолодної м'яти та соковитого лайма на основі ніжного квіткового меду. Додає вишуканості лимонадам та легким аперитивам у спекотний день.",
     editionSuffix: "ВЕРСІЯ",
     aboutLink: "Про нас", aboutTitle: "Наша історія",
-    aboutText: "BRAND NAME — це історія про повернення до витоків. Ми віримо, що природа має відповіді на всі питання, а смак може бути не просто відчуттям, а емоцією.<br><br>Наші сиропи створюються вручну, невеликими партіями, щоб зберегти душу кожного інгредієнта. Ми використовуємо лише натуральний мед, зібраний на диких пасіках, та трави, що виросли під сонцем, а не в теплицях.<br><br>Це не просто додаток до напоїв. Це спроба зупинити час, вдихнути аромат лісу чи поля і відчути справжній смак життя.",
-    // КОНТАКТИ
+    aboutText: "BREWMIEL — це історія про повернення до витоків. Ми віримо, що природа має відповіді на всі питання, а смак може бути не просто відчуттям, а емоцією.<br><br>Наші сиропи створюються вручну, невеликими партіями, щоб зберегти душу кожного інгредієнта. Ми використовуємо лише натуральний мед, зібраний на диких пасіках, та трави, що виросли під сонцем, а не в теплицях.<br><br>Це не просто додаток до напоїв. Це спроба зупинити час, вдихнути аромат лісу чи поля і відчути справжній смак життя.",
     contactTitle: "Напишіть нам",
     contactTopic: "Тема звернення",
     contactOptions: { order: "Замовлення продукту", question: "Запитання", collab: "Співпраця" },
@@ -154,7 +153,8 @@ const copy = {
     contactPlaceholderName: "Олександр",
     contactPlaceholderContact: "@username або email",
     contactPlaceholderMessage: "Я хочу замовити...",
-    contactBtn: "Надіслати"
+    contactBtn: "Надіслати",
+    readMoreBtn: "Детальніше"
   },
   en: {
     tagline: "Magic of wild nature in every drop. Craft honey elixir created from ancient recipes for modern rituals.", 
@@ -165,7 +165,6 @@ const copy = {
     editionSuffix: "EDITION",
     aboutLink: "About Us", aboutTitle: "Our Story",
     aboutText: "BREWMIEL is a story about returning to the roots. We believe that nature has answers to all questions, and taste can be not just a sensation, but an emotion.<br><br>Our syrups are handcrafted in small batches to preserve the soul of every ingredient. We use only natural honey collected from wild apiaries and herbs grown under the sun, not in greenhouses.<br><br>It's not just an additive to drinks. It's an attempt to stop time, breathe in the scent of the forest or field, and feel the true taste of life.",
-    // CONTACTS
     contactTitle: "Contact Us",
     contactTopic: "Subject",
     contactOptions: { order: "Product Order", question: "Question", collab: "Collaboration" },
@@ -175,16 +174,14 @@ const copy = {
     contactPlaceholderName: "Alex",
     contactPlaceholderContact: "@username or email",
     contactPlaceholderMessage: "I want to order...",
-    contactBtn: "Send"
+    contactBtn: "Send",
+    readMoreBtn: "Read More"
   }
 };
 
 const flagUA = `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 480"><g fill-rule="evenodd" stroke-width="1pt"><path fill="#ffd700" d="M0 0h640v480H0z"/><path fill="#0057b8" d="M0 0h640v240H0z"/></g></svg>`;
 const flagUK = `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 480"><path fill="#012169" d="M0 0h640v480H0z"/><path fill="#FFF" d="M75 0l244 181L562 0h78v62L400 241l240 178v61h-80L320 301 81 480H0v-60l239-178L0 64V0h75z"/><path fill="#C8102E" d="M424 281l216 159v40L369 281h55zm-184 20l6 35L54 480H0l240-179zM640 0v3L391 191l2-44L590 0h50zM0 0l239 176h-60L0 42V0z"/><path fill="#FFF" d="M241 0v480h160V0H241zM0 160v160h640V160H0z"/><path fill="#C8102E" d="M0 193v96h640v-96H0zM273 0v480h96V0h-96z"/></svg>`;
 
-/* =========================================
-   3. ЛОГІКА ІНТЕРФЕЙСУ
-   ========================================= */
 let lang = 'ua';
 let index = 0; 
 
@@ -250,7 +247,12 @@ function applyLang() {
   const heroBtn = document.getElementById('heroBtn');
   if(heroBtn) heroBtn.innerText = copy[lang].heroBtn;
 
-  // Тексти контактної форми
+  // Оновлення тексту кнопок на картках
+  document.getElementById('readMore1').innerText = copy[lang].readMoreBtn;
+  document.getElementById('readMore2').innerText = copy[lang].readMoreBtn;
+  document.getElementById('readMore3').innerText = copy[lang].readMoreBtn;
+
+  // Контактна форма
   document.getElementById('contactTitle').innerText = copy[lang].contactTitle;
   document.getElementById('lblTopic').innerText = copy[lang].contactTopic;
   document.getElementById('lblName').innerText = copy[lang].contactName;
@@ -258,12 +260,10 @@ function applyLang() {
   document.getElementById('lblMessage').innerText = copy[lang].contactMessage;
   document.getElementById('btnSubmit').innerText = copy[lang].contactBtn;
   
-  // Плейсхолдери форми
   document.getElementById('name').placeholder = copy[lang].contactPlaceholderName;
   document.getElementById('email').placeholder = copy[lang].contactPlaceholderContact;
   document.getElementById('message').placeholder = copy[lang].contactPlaceholderMessage;
 
-  // Опції селекту
   document.getElementById('optOrder').innerText = copy[lang].contactOptions.order;
   document.getElementById('optQuestion').innerText = copy[lang].contactOptions.question;
   document.getElementById('optCollab').innerText = copy[lang].contactOptions.collab;
@@ -273,9 +273,7 @@ function applyLang() {
 }
 floatingLang.onclick = () => { lang = (lang === 'ua') ? 'en' : 'ua'; applyLang(); };
 
-/* =========================================
-   4. МОДАЛЬНІ ВІКНА
-   ========================================= */
+// --- МОДАЛЬНІ ВІКНА ---
 const contactModal = document.getElementById("contactModal");
 const contactClose = document.querySelector(".contact-close");
 const contactTriggers = document.querySelectorAll('.contact-trigger');
@@ -304,7 +302,8 @@ function openRecipe(cardIndex) {
     const season = index === 0 ? 'winter' : 'summer';
     const recipeData = drinkRecipes[lang][season][cardIndex];
     document.getElementById('recipeTitle').innerText = recipeData.name;
-    document.getElementById('recipeText').innerText = recipeData.full;
+    // ТУТ ВИКОРИСТОВУЄМО .innerHTML ДЛЯ ВІДОБРАЖЕННЯ <strong> ТЕГІВ
+    document.getElementById('recipeText').innerHTML = recipeData.full;
     document.getElementById('recipeImg').src = recipeData.detailImage;
     recipeModal.classList.add('show');
     document.body.classList.add('no-scroll');
@@ -325,9 +324,6 @@ window.onclick = function(event) {
     if (event.target == recipeModal) closeRecipeModal();
 }
 
-/* =========================================
-   5. ОБРОБКА ФОРМИ
-   ========================================= */
 const messageInput = document.getElementById('message');
 messageInput.addEventListener('input', function() { this.style.height = 'auto'; this.style.height = (this.scrollHeight) + 'px'; });
 const form = document.getElementById("ajaxForm");
@@ -347,15 +343,11 @@ async function handleSubmit(event) {
 }
 form.addEventListener("submit", handleSubmit);
 
-/* =========================================
-   6. ІНІЦІАЛІЗАЦІЯ
-   ========================================= */
 toggleSwitch.checked = false;
 document.body.classList.remove('light');
 document.body.setAttribute('data-product', 'winter');
 applyLang();
 
-// Сніг
 const canvas = document.querySelector('.snow');
 const ctx = canvas.getContext('2d');
 let w, h;
