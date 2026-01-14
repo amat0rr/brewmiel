@@ -1,5 +1,5 @@
 :root {
-  --circle-size: 100px;
+  --circle-size: 80px;
   --icon-scale: 100%;
   --noise-img-dark: url('../assets/noise_dark.svg');   
   --noise-img-light: url('../assets/noise_light.svg'); 
@@ -31,7 +31,6 @@ body {
 
 body.no-scroll { overflow: hidden; }
 
-/* Стилі снігу вже прописані в HTML inline, але це залишаємо для порядку */
 .noise-bg {
   position: fixed; top: 0; left: 0; width: 100%; height: 100%;
   pointer-events: none; z-index: 1; 
@@ -164,38 +163,18 @@ body.light .socials a { color: var(--text-dark); }
 body.light .floating-btn { background-color: rgba(245, 241, 224, 0.8); }
 @media (hover: hover) { .floating-btn:hover { transform: translateY(-3px) scale(1.05); background-color: var(--accent); } .floating-contact:hover svg { fill: white; } }
 
-/* СВІТЧЕР ТЕМИ */
 .theme-switch-wrapper { display: flex; align-items: center; margin-left: 5px; }
 .theme-switch { display: inline-block; height: 30px; position: relative; width: 56px; }
 .theme-switch input { display: none; }
 .slider { background-color: #1a1a1a; bottom: 0; cursor: pointer; left: 0; position: absolute; right: 0; top: 0; transition: .4s; border-radius: 34px; display: flex; align-items: center; justify-content: space-between; padding: 0 6px; border: 1px solid var(--accent); }
-
-.icon { 
-    width: 16px; 
-    height: 16px; 
-    transition: .4s; 
-    z-index: 1; 
-    /* Додаємо базовий колір для іконок */
-    fill: #fff; 
-}
-
+.icon { width: 16px; height: 16px; transition: .4s; z-index: 1; fill: #fff; }
 .icon-sun { opacity: 0; transform: scale(0.5); } 
 .icon-moon { opacity: 1; filter: drop-shadow(0 0 3px rgba(255,255,255,0.6)); } 
 .icon-moon path { opacity: 1 !important; fill: #ffffff; }
-
 .knob { background-color: #fff; bottom: 3px; height: 22px; left: 4px; position: absolute; transition: .4s; width: 22px; border-radius: 50%; z-index: 2; box-shadow: 0 2px 5px rgba(0,0,0,0.5); }
-
-/* АКТИВНИЙ СТАН (СВІТЛА ТЕМА) */
 input:checked + .slider { background-color: var(--accent); border-color: transparent; }
 input:checked + .slider .knob { transform: translateX(26px); }
-
-/* Коли увімкнено: показуємо сонце і ФАРБУЄМО його в темний */
-input:checked + .slider .icon-sun { 
-    opacity: 1; 
-    transform: scale(1);
-    fill: var(--bg-summer-light); /* Світлий колір */
-}
-
+input:checked + .slider .icon-sun { opacity: 1; transform: scale(1); fill: var(--bg-winter-dark); }
 input:checked + .slider .icon-moon { opacity: 0; transform: scale(0.5); }
 
 .modal {
@@ -228,6 +207,22 @@ textarea { resize: none; min-height: 50px; max-height: 200px; overflow-y: auto; 
 input:focus, textarea:focus { border-bottom-color: var(--accent); }
 label { font-size: 12px; text-transform: uppercase; letter-spacing: 1px; opacity: 0.7; }
 
+/* Текст рецепту (виділення слів) */
+#recipeText {
+    text-align: justify;
+    white-space: pre-line;
+}
+/* Стиль для слів "Інгредієнти" та "Приготування" */
+#recipeText strong {
+    color: var(--accent);
+    font-size: 1.1em;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    display: inline-block;
+    margin-top: 15px;
+    margin-bottom: 5px;
+}
+
 .recipe-img-container {
     width: 100%; aspect-ratio: 1 / 1; border-radius: 15px;
     overflow: hidden; position: relative; margin-bottom: 20px;
@@ -248,13 +243,10 @@ body.light .recipe-img-container::after { background: linear-gradient(to bottom,
 
 .hero { 
     min-height: 100vh;
-    min-height: 100svh; /* Фікс для мобільних */
+    min-height: 100svh;
     display: flex; 
     flex-direction: column; 
-    
-    /* ПОВЕРНЕНО ЦЕНТРУВАННЯ (оскільки сніг більше не заважає) */
     justify-content: center; 
-    
     align-items: center; 
     text-align: center; 
     padding: 20px; 
@@ -293,40 +285,18 @@ h2 { text-align: center; font-size: 34px; margin-bottom: 40px; font-weight: 600;
 .product-desc { text-align: center; max-width: 600px; min-height: 5em; font-size: 15px; }
 
 .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 24px; }
-.card { background: linear-gradient(var(--card), var(--card)), var(--main-bg); padding: 30px 20px; text-align: center; border: 1px solid rgba(255,255,255,0.12); border-radius: 15px; transition: 0.3s; position: relative; z-index: 2; cursor: pointer; display: flex; flex-direction: column; align-items: center; }
+.card { background: linear-gradient(var(--card), var(--card)), var(--main-bg); padding: 30px 20px 25px 20px; text-align: center; border: 1px solid rgba(255,255,255,0.12); border-radius: 15px; transition: 0.3s; position: relative; z-index: 2; cursor: pointer; display: flex; flex-direction: column; align-items: center; justify-content: space-between; min-height: 320px; }
 .card:hover { transform: translateY(-5px); border-color: var(--accent); }
 
-.card-img { 
-    width: var(--circle-size);  /* Розмір контейнера регулюється зверху файлу */
-    height: var(--circle-size); 
-    margin: 0 auto 20px; 
-    
-    /* ЗМІНИ ТУТ: */
-    background: transparent;    /* Прибираємо сірий фон */
-    border-radius: 0;           /* Прибираємо заокруглення */
-    
-    display: flex; 
-    align-items: center; 
-    justify-content: center; 
-    overflow: hidden; /* Це важливо залишити для зміни кольору іконк */
-}
-
-/* Стилі самої картинки залишаються тими ж */
-.card-img img { 
-    width: var(--icon-scale); 
-    height: var(--icon-scale); 
-    object-fit: contain; 
-    transform: translateY(100px); 
-    filter: drop-shadow(0 -100px 0 var(--accent)); 
-    transition: filter 0.3s ease; 
-} 
-
-body.light .card-img img { 
-    filter: drop-shadow(0 -100px 0 var(--text-dark)); 
-}
+.card-img { width: var(--circle-size); height: var(--circle-size); margin: 0 auto 20px; background: transparent; border-radius: 0; display: flex; align-items: center; justify-content: center; overflow: hidden; }
+.card-img img { width: var(--icon-scale); height: var(--icon-scale); object-fit: contain; transform: translateY(100px); filter: drop-shadow(0 -100px 0 var(--accent)); transition: filter 0.3s ease; } 
+body.light .card-img img { filter: drop-shadow(0 -100px 0 var(--text-dark)); }
 
 .card h3 { font-family: var(--font-heading); font-size: 18px; margin-bottom: 10px; color: var(--accent); text-transform: uppercase; letter-spacing: 1px; }
-.card p { font-size: 14px; opacity: 0.9; margin: 0; }
+.card p { font-size: 14px; opacity: 0.9; margin: 0 0 20px 0; flex-grow: 1; }
+
+.card-link { font-size: 12px; font-weight: 600; text-transform: uppercase; letter-spacing: 1px; color: var(--accent); opacity: 0.8; transition: 0.3s; margin-top: auto; }
+.card:hover .card-link { opacity: 1; transform: translateX(3px); }
 
 .status-message { margin-top: 10px; text-align: center; font-size: 14px; height: 20px; }
 .status-message.success { color: #4BB543; }
