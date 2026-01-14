@@ -31,6 +31,7 @@ body {
 
 body.no-scroll { overflow: hidden; }
 
+/* Стилі снігу вже прописані в HTML inline */
 .noise-bg {
   position: fixed; top: 0; left: 0; width: 100%; height: 100%;
   pointer-events: none; z-index: 1; 
@@ -167,38 +168,64 @@ body.light .floating-btn { background-color: rgba(245, 241, 224, 0.8); }
 .theme-switch { display: inline-block; height: 30px; position: relative; width: 56px; }
 .theme-switch input { display: none; }
 .slider { background-color: #1a1a1a; bottom: 0; cursor: pointer; left: 0; position: absolute; right: 0; top: 0; transition: .4s; border-radius: 34px; display: flex; align-items: center; justify-content: space-between; padding: 0 6px; border: 1px solid var(--accent); }
+
 .icon { width: 16px; height: 16px; transition: .4s; z-index: 1; fill: #fff; }
 .icon-sun { opacity: 0; transform: scale(0.5); } 
 .icon-moon { opacity: 1; filter: drop-shadow(0 0 3px rgba(255,255,255,0.6)); } 
 .icon-moon path { opacity: 1 !important; fill: #ffffff; }
+
 .knob { background-color: #fff; bottom: 3px; height: 22px; left: 4px; position: absolute; transition: .4s; width: 22px; border-radius: 50%; z-index: 2; box-shadow: 0 2px 5px rgba(0,0,0,0.5); }
+
+/* АКТИВНИЙ СТАН */
 input:checked + .slider { background-color: var(--accent); border-color: transparent; }
 input:checked + .slider .knob { transform: translateX(26px); }
-input:checked + .slider .icon-sun { opacity: 1; transform: scale(1); fill: var(--bg-winter-dark); }
+input:checked + .slider .icon-sun { opacity: 1; transform: scale(1); fill: #fff; }
 input:checked + .slider .icon-moon { opacity: 0; transform: scale(0.5); }
 
+/* --- МОДАЛЬНІ ВІКНА (ОНОВЛЕНО) --- */
 .modal {
-    display: flex; align-items: center; justify-content: center; position: fixed; z-index: 100;
-    left: 0; top: 0; width: 100%; height: 100%; background-color: rgba(0,0,0,0.6); backdrop-filter: blur(5px); -webkit-backdrop-filter: blur(5px);
-    opacity: 0; visibility: hidden; pointer-events: none; transition: opacity 0.3s ease, visibility 0.3s ease;
+    display: flex; 
+    align-items: center; 
+    justify-content: center; 
+    position: fixed; 
+    z-index: 100;
+    left: 0; top: 0; 
+    width: 100%; height: 100%; 
+    background-color: rgba(0,0,0,0.6); 
+    backdrop-filter: blur(5px); -webkit-backdrop-filter: blur(5px);
+    opacity: 0; visibility: hidden; 
+    pointer-events: none; 
+    transition: opacity 0.3s ease, visibility 0.3s ease;
+    
+    /* Скрол тепер тут (на темному фоні) */
+    overflow-y: auto; 
+    padding: 20px; 
 }
+
 .modal.show { opacity: 1; visibility: visible; pointer-events: auto; }
 
 .modal-content {
-    background-color: var(--bg-winter-dark); border: 1px solid var(--accent);
-    padding: 30px; border-radius: 15px; width: 90%; max-width: 400px;
-    position: relative; box-shadow: 0 10px 30px rgba(0,0,0,0.5);
-    color: var(--text-light); transform: scale(0.95); transition: transform 0.3s ease;
-    max-height: 90vh; overflow-y: auto; overscroll-behavior: contain;
-    -webkit-overflow-scrolling: touch;
+    background-color: var(--bg-winter-dark); 
+    border: 1px solid var(--accent);
+    padding: 30px; 
+    border-radius: 15px; 
+    width: 90%; max-width: 400px;
+    position: relative; 
+    box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+    color: var(--text-light); 
+    transform: scale(0.95); 
+    transition: transform 0.3s ease;
+    
+    /* Прибираємо внутрішній скрол */
+    max-height: none; 
+    overflow: visible; 
+    margin: auto; 
 }
-.modal-content::-webkit-scrollbar { width: 6px; }
-.modal-content::-webkit-scrollbar-track { background: rgba(255, 255, 255, 0.05); border-radius: 3px; }
-.modal-content::-webkit-scrollbar-thumb { background-color: var(--accent); border-radius: 10px; }
+
+.modal-content::-webkit-scrollbar { display: none; }
 
 .modal.show .modal-content { transform: scale(1); }
 body.light .modal-content { background-color: var(--bg-summer-light); color: var(--text-dark); border: 1px solid var(--accent); }
-body.light .modal-content::-webkit-scrollbar-track { background: rgba(0, 0, 0, 0.05); }
 
 .close { color: var(--accent); float: right; font-size: 28px; font-weight: bold; cursor: pointer; position: absolute; right: 20px; top: 10px; z-index: 10; }
 form { display: flex; flex-direction: column; gap: 15px; margin-top: 20px; }
@@ -206,22 +233,11 @@ input, select, textarea { width: 100%; padding: 12px; border: none; border-botto
 textarea { resize: none; min-height: 50px; max-height: 200px; overflow-y: auto; }
 input:focus, textarea:focus { border-bottom-color: var(--accent); }
 label { font-size: 12px; text-transform: uppercase; letter-spacing: 1px; opacity: 0.7; }
+.submit-btn { width: 100%; margin-top: 10px; background-color: var(--accent); color: white; border: none; }
+.submit-btn:hover { background-color: #b08d28; }
 
-/* Текст рецепту (виділення слів) */
-#recipeText {
-    text-align: justify;
-    white-space: pre-line;
-}
-/* Стиль для слів "Інгредієнти" та "Приготування" */
-#recipeText strong {
-    color: var(--accent);
-    font-size: 1.1em;
-    text-transform: uppercase;
-    letter-spacing: 1px;
-    display: inline-block;
-    margin-top: 15px;
-    margin-bottom: 5px;
-}
+#recipeText { text-align: justify; white-space: pre-line; }
+#recipeText strong { color: var(--accent); font-size: 1.1em; text-transform: uppercase; letter-spacing: 1px; display: inline-block; margin-top: 15px; margin-bottom: 5px; }
 
 .recipe-img-container {
     width: 100%; aspect-ratio: 1 / 1; border-radius: 15px;
@@ -236,7 +252,6 @@ label { font-size: 12px; text-transform: uppercase; letter-spacing: 1px; opacity
 body.light .recipe-img-container::after { background: linear-gradient(to bottom, transparent, var(--bg-summer-light)); }
 
 @media (max-width: 600px) {
-    .modal-content { width: 95%; padding: 20px; max-height: 85vh; }
     .close { right: 15px; top: 10px; font-size: 32px; padding: 5px; }
     h2 { font-size: 28px; }
 }
@@ -244,25 +259,15 @@ body.light .recipe-img-container::after { background: linear-gradient(to bottom,
 .hero { 
     min-height: 100vh;
     min-height: 100svh;
-    display: flex; 
-    flex-direction: column; 
-    justify-content: center; 
-    align-items: center; 
+    display: flex; flex-direction: column; 
+    justify-content: center; align-items: center; 
     text-align: center; 
-    padding: 20px; 
-    padding-top: 80px; 
-    position: relative; 
-    z-index: 2; 
+    padding: 20px; padding-top: 80px; 
+    position: relative; z-index: 2; 
 }
 
-.logo-wrapper {
-    position: relative; 
-    display: flex; justify-content: center; align-items: center;
-    margin-bottom: 10px;
-}
-
+.logo-wrapper { position: relative; display: flex; justify-content: center; align-items: center; margin-bottom: 10px; }
 .logo-img { width: 260px; max-width: 70vw; height: auto; filter: drop-shadow(0 5px 15px rgba(0,0,0,0.3)); transition: 0.3s; position: relative; z-index: 2; }
-
 .hero-brand-text { font-family: var(--font-heading); font-size: clamp(32px, 5vw, 48px); letter-spacing: 6px; margin-bottom: 10px; color: var(--text-light); text-transform: uppercase; font-weight: 600; transition: color 0.3s ease; }
 #tagline { margin-bottom: 30px; max-width: 600px; opacity: 0.9; font-size: 16px; }
 section { padding: 60px 20px; max-width: 1100px; margin: auto; position: relative; z-index: 2; }
