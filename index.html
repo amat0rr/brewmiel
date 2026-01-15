@@ -53,7 +53,6 @@
   <div class="modal-content">
     <span class="close contact-close">&times;</span>
     <h2 id="contactTitle" style="margin-top:0; margin-bottom:20px;">Напишіть нам</h2>
-    
     <form id="ajaxForm" action="https://formspree.io/f/YOUR_ID_HERE" method="POST">
       <label id="lblTopic" for="type">Тема звернення</label>
       <select id="type" name="type">
@@ -94,7 +93,7 @@
         <img id="recipeImg" src="" alt="Cocktail Image" class="recipe-detail-img">
     </div>
 
-    <p id="recipeText" style="text-align: justify; white-space: pre-line;"></p>
+    <p id="recipeText"></p>
   </div>
 </div>
 
@@ -118,7 +117,6 @@
   
   <div class="product-stage-container">
     <div class="syrup-glow product-glow"></div>
-    
     <div class="bottle-stage">
       <div class="bottle-card winter" onclick="if(index!==0) changeBtn.click()">
         <img src="assets/png_winter.png" alt="Winter Syrup">
@@ -140,33 +138,25 @@
   <div class="divider-icon"></div>
 </div>
 
-<section>
+<section class="recipes-section">
   <h2 id="drinkTitle"></h2>
-  <div class="grid">
-    <div class="card" onclick="openRecipe(0)">
-        <div class="card-img"><img id="drinkImg1" src="" alt="" onerror="this.style.display='none'"></div>
-        <h3 id="drinkTitle1"></h3>
-        <p id="drinkDesc1"></p>
-        <div class="card-link"><span id="readMore1">Детальніше</span> &rarr;</div>
-    </div>
-    <div class="card" onclick="openRecipe(1)">
-        <div class="card-img"><img id="drinkImg2" src="" alt="" onerror="this.style.display='none'"></div>
-        <h3 id="drinkTitle2"></h3>
-        <p id="drinkDesc2"></p>
-        <div class="card-link"><span id="readMore2">Детальніше</span> &rarr;</div>
-    </div>
-    <div class="card" onclick="openRecipe(2)">
-        <div class="card-img"><img id="drinkImg3" src="" alt="" onerror="this.style.display='none'"></div>
-        <h3 id="drinkTitle3"></h3>
-        <p id="drinkDesc3"></p>
-        <div class="card-link"><span id="readMore3">Детальніше</span> &rarr;</div>
-    </div>
+  
+  <div class="carousel-container">
+    <button class="nav-btn prev" id="prevBtn">
+      <svg viewBox="0 0 24 24"><path d="M15.41 7.41L14 6l-6 6 6 6 1.41-1.41L10.83 12z"/></svg>
+    </button>
+
+    <div class="carousel-track" id="carouselTrack"></div>
+
+    <button class="nav-btn next" id="nextBtn">
+      <svg viewBox="0 0 24 24"><path d="M10 6L8.59 7.41 13.17 12l-4.58 4.59L10 18l6-6z"/></svg>
+    </button>
   </div>
 </section>
 
 <footer>
   <div class="socials">
-    <a href="https://www.instagram.com/brewmiel">Instagram</a>
+    <a href="https://www.instagram.com/amat0rr">Instagram</a>
     <a href="https://www.tiktok.com/@amatorr_studio">TikTok</a>
     <a href="#" id="aboutBtn">Про нас</a>
   </div>
