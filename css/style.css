@@ -60,6 +60,7 @@ body.no-scroll { overflow: hidden; }
 
 @keyframes noise-flow { 0% { background-position: 0 0; } 100% { background-position: 0 512px; } }
 
+/* СЯЙВО (Глобальне) */
 .syrup-glow {
     position: absolute; top: 50%; left: 50%;
     transform: translate(-50%, -50%);
@@ -73,6 +74,24 @@ body.no-scroll { overflow: hidden; }
 
 .product-glow { width: 500px; height: 500px; transform: translate(-50%, -60%); }
 .hero-glow { width: 350px; height: 350px; }
+
+/* === ОНОВЛЕНЕ СЯЙВО РЕЦЕПТІВ (ВИПРАВЛЕНО ОБРІЗАННЯ) === */
+.recipe-glow {
+    /* На ПК: Велике, гарне сяйво */
+    width: 600px;
+    height: 600px;
+    transform: translate(-50%, -50%);
+    opacity: 0.6;
+}
+
+/* Адаптація сяйва для мобільних */
+@media (max-width: 600px) {
+    .recipe-glow {
+        /* На телефонах: Менше, щоб не обрізалось по боках */
+        width: 300px;
+        height: 300px;
+    }
+}
 
 @keyframes pulse-syrup {
     0% { transform: translate(-50%, -50%) scale(1); opacity: 0.4; }
@@ -210,161 +229,75 @@ h2 { text-align: center; font-size: 34px; margin-bottom: 40px; font-weight: 600;
 /* === КАРУСЕЛЬ РЕЦЕПТІВ (CAROUSEL) === */
 .recipes-section { 
     position: relative; 
-    overflow: hidden; /* Ховає картки, що вилітають за екран */
-    
-    /* ЗБІЛЬШЕНО ВІДСТУП ЗНИЗУ: щоб тінь не обрізалась */
-    padding: 40px 0 100px 0; 
-    
+    overflow: hidden; 
+    padding: 40px 0 100px 0; /* Великий відступ знизу, щоб не обрізати тіні */
     width: 100%; 
-}
-
-/* Налаштування плями сяйва для рецептів */
-.recipe-glow {
-    width: 600px; 
-    height: 600px; 
-    transform: translate(-50%, -40%); /* Центруємо позаду карток */
-    opacity: 0.6;
 }
 
 .carousel-container { 
     position: relative; 
-    display: flex; 
-    align-items: center; 
-    justify-content: center; 
-    height: 500px; 
-    perspective: 1000px; 
+    display: flex; align-items: center; justify-content: center; 
+    height: 500px; perspective: 1000px; 
     z-index: 2; /* Щоб бути над сяйвом */
 }
+.carousel-track { position: relative; width: 100%; height: 100%; display: flex; justify-content: center; align-items: center; }
 
-.carousel-track { 
-    position: relative; 
-    width: 100%; 
-    height: 100%; 
-    display: flex; 
-    justify-content: center; 
-    align-items: center; 
-}
-
-/* --- СТИЛІ КАРТКИ --- */
+/* Картка */
 .card {
-    position: absolute; 
-    width: 300px; 
-    height: 420px;
+    position: absolute; width: 300px; height: 420px;
     background: linear-gradient(var(--card), var(--card)), var(--main-bg);
-    border: 1px solid rgba(255,255,255,0.12); 
-    border-radius: 20px; 
-    padding: 20px;
-    text-align: center; 
-    transition: all 0.5s cubic-bezier(0.25, 0.8, 0.25, 1);
-    display: flex; 
-    flex-direction: column; 
-    align-items: center; 
-    justify-content: space-between;
-    cursor: pointer; 
-    
-    /* Тінь картки */
-    box-shadow: 0 15px 35px rgba(0,0,0,0.3);
-    
-    opacity: 0; 
-    pointer-events: none; 
-    z-index: 0;
+    border: 1px solid rgba(255,255,255,0.12); border-radius: 20px; padding: 20px;
+    text-align: center; transition: all 0.5s cubic-bezier(0.25, 0.8, 0.25, 1);
+    display: flex; flex-direction: column; align-items: center; justify-content: space-between;
+    cursor: pointer; box-shadow: 0 15px 35px rgba(0,0,0,0.3);
+    opacity: 0; pointer-events: none; z-index: 0;
 }
 
-/* Стани карток */
-.card.active { 
-    opacity: 1; 
-    z-index: 10; 
-    transform: translateX(0) scale(1.1); 
-    pointer-events: auto; 
-    border-color: var(--accent); 
-    filter: none; 
-    /* Яскрава тінь під активною карткою */
-    box-shadow: 0 30px 60px rgba(212, 160, 23, 0.15); 
-}
+/* Стани */
+.card.active { opacity: 1; z-index: 10; transform: translateX(0) scale(1.1); pointer-events: auto; border-color: var(--accent); filter: none; box-shadow: 0 30px 60px rgba(212, 160, 23, 0.15); }
+.card.prev { opacity: 0.5; z-index: 5; transform: translateX(-110%) scale(0.85) rotateY(15deg); filter: blur(3px); pointer-events: auto; }
+.card.next { opacity: 0.5; z-index: 5; transform: translateX(110%) scale(0.85) rotateY(-15deg); filter: blur(3px); pointer-events: auto; }
 
-.card.prev { 
-    opacity: 0.5; /* Більш прозорі */
-    z-index: 5; 
-    transform: translateX(-110%) scale(0.85) rotateY(15deg); 
-    filter: blur(3px); /* Більше розмиття */
-    pointer-events: auto; 
-}
-
-.card.next { 
-    opacity: 0.5; 
-    z-index: 5; 
-    transform: translateX(110%) scale(0.85) rotateY(-15deg); 
-    filter: blur(3px); 
-    pointer-events: auto; 
-}
-
-/* --- МОБІЛЬНА АДАПТАЦІЯ (ТЕЛЕФОНИ) --- */
+/* --- МОБІЛЬНА АДАПТАЦІЯ --- */
 @media (max-width: 600px) {
     .carousel-container { height: 420px; }
     
-    /* ЗМЕНШУЄМО КАРТКУ */
-    .card { 
-        width: 220px;  /* Було більше, тепер компактно */
-        height: 340px; 
-        padding: 15px;
-    }
+    /* Картки значно вужчі на телефонах */
+    .card { width: 220px; height: 340px; padding: 15px; }
     
-    /* Зміщуємо бокові картки ближче до центру, щоб вони не вилазили за екран */
+    /* Зсуваємо бокові картки ближче до центру */
     .card.prev { transform: translateX(-60%) scale(0.75); }
     .card.next { transform: translateX(60%) scale(0.75); }
     
-    /* Менший шрифт на телефонах */
     .card h3 { font-size: 18px; margin-bottom: 5px; }
     .card p { font-size: 12px; margin-bottom: 10px; -webkit-line-clamp: 3; }
     .card-img { height: 140px; margin-bottom: 10px; }
     
-    /* Кнопки навігації не біля самого краю */
+    /* Кнопки трохи далі від країв */
     .nav-btn { width: 40px; height: 40px; }
-    .nav-btn.prev { left: 10px; } /* Відступ від краю */
+    .nav-btn.prev { left: 10px; }
     .nav-btn.next { right: 10px; }
 }
 
-/* --- ВМІСТ КАРТКИ --- */
-.card-img { 
-    width: 100%; height: 180px; margin-bottom: 15px; 
-    background: transparent; border-radius: 0; 
-    display: flex; align-items: center; justify-content: center; overflow: hidden; 
-}
-.card-img img { 
-    width: 100%; height: 100%; object-fit: contain; 
-    transform: translateY(200px); 
-    filter: drop-shadow(0 -200px 0 var(--accent)); 
-    transition: filter 0.3s ease; 
-} 
+/* Іконки на картках (Трюк з кольором) */
+.card-img { width: 100%; height: 180px; margin-bottom: 15px; background: transparent; border-radius: 0; display: flex; align-items: center; justify-content: center; overflow: hidden; }
+.card-img img { width: 100%; height: 100%; object-fit: contain; transform: translateY(200px); filter: drop-shadow(0 -200px 0 var(--accent)); transition: filter 0.3s ease; } 
 body.light .card-img img { filter: drop-shadow(0 -200px 0 var(--text-dark)); }
 
 .card h3 { font-family: var(--font-heading); font-size: 22px; margin-bottom: 10px; color: var(--accent); text-transform: uppercase; letter-spacing: 1px; }
-.card p { 
-    font-size: 13px; opacity: 0.9; line-height: 1.5; margin-bottom: 20px; flex-grow: 1; 
-    display: -webkit-box; -webkit-line-clamp: 4; -webkit-box-orient: vertical; overflow: hidden; 
-}
+.card p { font-size: 13px; opacity: 0.9; line-height: 1.5; margin-bottom: 20px; flex-grow: 1; display: -webkit-box; -webkit-line-clamp: 4; -webkit-box-orient: vertical; overflow: hidden; }
 
 .card-link { font-size: 11px; font-weight: 700; text-transform: uppercase; letter-spacing: 2px; color: var(--accent); border: 1px solid var(--accent); padding: 8px 20px; border-radius: 50px; transition: 0.3s; margin-top: auto; }
 .card:hover .card-link { background: var(--accent); color: var(--bg-winter-dark); }
 body.light .card:hover .card-link { color: #fff; }
 
-/* КНОПКИ НАВІГАЦІЇ */
-.nav-btn { 
-    position: absolute; top: 50%; transform: translateY(-50%); 
-    background: rgba(15, 42, 29, 0.4); /* Напівпрозорий фон для кращої видимості */
-    border: 1px solid var(--accent); color: var(--accent); 
-    width: 50px; height: 50px; border-radius: 50%; 
-    display: flex; align-items: center; justify-content: center; 
-    cursor: pointer; z-index: 20; transition: 0.3s; 
-    backdrop-filter: blur(5px); 
-}
+.nav-btn { position: absolute; top: 50%; transform: translateY(-50%); background: rgba(15, 42, 29, 0.4); border: 1px solid var(--accent); color: var(--accent); width: 50px; height: 50px; border-radius: 50%; display: flex; align-items: center; justify-content: center; cursor: pointer; z-index: 20; transition: 0.3s; backdrop-filter: blur(5px); }
 .nav-btn:hover { background: var(--accent); fill: var(--bg-winter-dark); }
 .nav-btn svg { width: 24px; height: 24px; fill: var(--accent); }
 .nav-btn:hover svg { fill: var(--bg-winter-dark); }
 body.light .nav-btn:hover svg { fill: #fff; }
 .nav-btn.prev { left: 20px; }
 .nav-btn.next { right: 20px; }
-@media (max-width: 600px) { .nav-btn { width: 40px; height: 40px; } .nav-btn.prev { left: 5px; } .nav-btn.next { right: 5px; } }
 
 .status-message { margin-top: 10px; text-align: center; font-size: 14px; height: 20px; }
 .status-message.success { color: #4BB543; }
