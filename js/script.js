@@ -1,6 +1,6 @@
-/* =========================================
-   1. КЕРУВАННЯ СКРОЛОМ ТА ЗАВАНТАЖЕННЯМ
-   ========================================= */
+/* ==========================================================================
+   1. НАЛАШТУВАННЯ СКРОЛУ (LENIS) ТА ЗАВАНТАЖЕННЯ
+   ========================================================================== */
 function forceScrollTop() { 
     if ('scrollRestoration' in history) history.scrollRestoration = 'manual';
     window.scrollTo(0, 0);
@@ -10,12 +10,12 @@ window.onbeforeunload = forceScrollTop;
 
 const lenis = new Lenis({
   duration: 1.2,
-  easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
+  easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)), 
   direction: 'vertical',
   gestureDirection: 'vertical',
   smooth: true,
   mouseMultiplier: 1,
-  smoothTouch: false, // ВИМКНЕНО на телефонах для кращої продуктивності
+  smoothTouch: false, 
   touchMultiplier: 2,
 });
 
@@ -32,9 +32,9 @@ document.querySelectorAll('a[href^="#"]').forEach(anchor => {
   });
 });
 
-/* =========================================
-   2. ДАНІ ПРОДУКТУ ТА РЕЦЕПТИ (UA / EN)
-   ========================================= */
+/* ==========================================================================
+   2. БАЗА ДАНИХ РЕЦЕПТІВ (UA / EN)
+   ========================================================================== */
 const drinkRecipes = {
   ua: {
     winter: [
@@ -43,21 +43,21 @@ const drinkRecipes = {
         short: "Ідеальний зігріваючий напій для холодних вечорів, що огортає теплом та ароматом спецій.", 
         full: "Класичний зимовий напій, що зігріває душу.\n\n<strong>Інгредієнти:</strong>\n• 40 мл зимового сиропу\n• 150 мл окропу або чорного чаю\n• Слайс лимона\n• Паличка кориці для прикраси\n\n<strong>Приготування:</strong>\nЗмішайте сироп з гарячою водою у чашці. Додайте лимон та корицю. Насолоджуйтесь теплом.", 
         icon: "assets/winter-icon-1.png", 
-        detailImage: "assets/winter-icon-1.png" 
+        detailImage: "assets/winter-picture-1.png" 
       },
       { 
         name: "SPICED COFFEE", 
         short: "Ваша улюблена кава з новим, глибоким пряним характером, що бадьорить та надихає.", 
         full: "Кава з новим характером.\n\n<strong>Інгредієнти:</strong>\n• 30 мл зимового сиропу\n• 150 мл свіжозвареної чорної кави\n• Збиті вершки (за бажанням)\n\n<strong>Приготування:</strong>\nЗваріть вашу улюблену каву. Додайте сироп замість цукру. За бажанням прикрасьте вершками.", 
         icon: "assets/winter-icon-2.png", 
-        detailImage: "assets/winter-icon-2.png" 
+        detailImage: "assets/winter-picture-2.png" 
       },
       { 
         name: "FOREST TEA", 
         short: "Справжня магія лісу у вашій чашці. Трав'яний спокій з нотками хвої та меду.", 
         full: "Аромат лісу у вашій чашці.\n\n<strong>Інгредієнти:</strong>\n• 30 мл зимового сиропу\n• 200 мл трав'яного чаю\n• Гілочка розмарину\n\n<strong>Приготування:</strong>\nЗаваріть чай. Додайте сироп та перемішайте. Прикрасьте розмарином для підсилення аромату.", 
         icon: "assets/winter-icon-3.png", 
-        detailImage: "assets/winter-icon-3.png" 
+        detailImage: "assets/winter-picture-3.png" 
       }
     ],
     summer: [
@@ -66,21 +66,21 @@ const drinkRecipes = {
         short: "Освіжаюча класика, де гірчинка тоніка ідеально відтіняє солодкість трав.", 
         full: "Освіжаюча класика для спекотного дня.\n\n<strong>Інгредієнти:</strong>\n• 30 мл літнього сиропу\n• 150 мл тоніка\n• Лід\n• Розмарин\n\n<strong>Приготування:</strong>\nНаповніть келих льодом. Налийте сироп та тонік. Обережно перемішайте.", 
         icon: "assets/summer-icon-1.png", 
-        detailImage: "assets/summer-icon-1.png" 
+        detailImage: "assets/summer-picture-1.png" 
       },
       { 
         name: "MOON SPRITZ", 
         short: "Легкий, ігристий та святковий аперитив, наповнений бульбашками радості.", 
         full: "Легкий та ігристий аперитив.\n\n<strong>Інгредієнти:</strong>\n• 40 мл літнього сиропу\n• 60 мл Просекко\n• 20 мл газованої води\n• Апельсин\n\n<strong>Приготування:</strong>\nУ келих з льодом налийте всі інгредієнти. Прикрасьте слайсом апельсина.", 
         icon: "assets/summer-icon-2.png", 
-        detailImage: "assets/summer-icon-2.png" 
+        detailImage: "assets/summer-picture-2.png" 
       },
       { 
         name: "NATURE SOUR", 
         short: "Вишуканий кисло-солодкий баланс, що пробуджує рецептори свіжістю природи.", 
         full: "Кисло-солодкий баланс природи.\n\n<strong>Інгредієнти:</strong>\n• 30 мл літнього сиропу\n• 20 мл лимонного соку\n• Лід\n• Яєчний білок (опціонально)\n\n<strong>Приготування:</strong>\nЗбийте всі інгредієнти у шейкері з льодом. Процідіть у келих.", 
         icon: "assets/summer-icon-3.png", 
-        detailImage: "assets/summer-icon-3.png" 
+        detailImage: "assets/summer-picture-3.png" 
       }
     ]
   },
@@ -91,21 +91,21 @@ const drinkRecipes = {
         short: "The perfect warming drink for cold evenings, wrapping you in warmth and the aroma of spices.", 
         full: "A classic winter drink that warms the soul.\n\n<strong>Ingredients:</strong>\n• 40 ml winter syrup\n• 150 ml boiling water or black tea\n• Lemon slice\n• Cinnamon stick for garnish\n\n<strong>Preparation:</strong>\nMix syrup with hot water in a cup. Add lemon and cinnamon. Enjoy the warmth.", 
         icon: "assets/winter-icon-1.png", 
-        detailImage: "assets/winter-icon-1.png" 
+        detailImage: "assets/winter-picture-1.png" 
       },
       { 
         name: "SPICED COFFEE", 
         short: "Your favorite coffee with a new, deep spicy character that invigorates and inspires.", 
         full: "Coffee with a new character.\n\n<strong>Ingredients:</strong>\n• 30 ml winter syrup\n• 150 ml freshly brewed black coffee\n• Whipped cream (optional)\n\n<strong>Preparation:</strong>\nBrew your favorite coffee. Add syrup instead of sugar. Garnish with cream if desired.", 
         icon: "assets/winter-icon-2.png", 
-        detailImage: "assets/winter-icon-2.png" 
+        detailImage: "assets/winter-picture-2.png" 
       },
       { 
         name: "FOREST TEA", 
         short: "Real forest magic in your cup. Herbal serenity with notes of pine and honey.", 
         full: "Forest aroma in your cup.\n\n<strong>Ingredients:</strong>\n• 30 ml winter syrup\n• 200 ml herbal tea\n• Rosemary sprig\n\n<strong>Preparation:</strong>\nBrew the tea. Add syrup and stir. Garnish with rosemary to enhance the aroma.", 
         icon: "assets/winter-icon-3.png", 
-        detailImage: "assets/winter-icon-3.png" 
+        detailImage: "assets/winter-picture-3.png" 
       }
     ],
     summer: [
@@ -114,21 +114,21 @@ const drinkRecipes = {
         short: "Refreshing classic, where the bitterness of tonic perfectly highlights the sweetness of herbs.", 
         full: "Refreshing classic for a hot day.\n\n<strong>Ingredients:</strong>\n• 30 ml summer syrup\n• 150 ml tonic water\n• Ice\n• Rosemary\n\n<strong>Preparation:</strong>\nFill a glass with ice. Pour syrup and tonic. Stir gently.", 
         icon: "assets/summer-icon-1.png", 
-        detailImage: "assets/summer-icon-1.png" 
+        detailImage: "assets/summer-picture-1.png" 
       },
       { 
         name: "MOON SPRITZ", 
         short: "Light, bubbly, and festive aperitif, filled with bubbles of joy.", 
         full: "Light and bubbly aperitif.\n\n<strong>Ingredients:</strong>\n• 40 ml summer syrup\n• 60 ml Prosecco\n• 20 ml soda water\n• Orange\n\n<strong>Preparation:</strong>\nPour all ingredients into a glass with ice. Garnish with an orange slice.", 
         icon: "assets/summer-icon-2.png", 
-        detailImage: "assets/summer-icon-2.png" 
+        detailImage: "assets/summer-picture-2.png" 
       },
       { 
         name: "NATURE SOUR", 
         short: "Exquisite sweet and sour balance that awakens your taste buds with nature's freshness.", 
         full: "Sweet and sour balance of nature.\n\n<strong>Ingredients:</strong>\n• 30 ml summer syrup\n• 20 ml lemon juice\n• Ice\n• Egg white (optional)\n\n<strong>Preparation:</strong>\nShake all ingredients in a shaker with ice. Strain into a glass.", 
         icon: "assets/summer-icon-3.png", 
-        detailImage: "assets/summer-icon-3.png" 
+        detailImage: "assets/summer-picture-3.png" 
       }
     ]
   }
@@ -182,8 +182,12 @@ const copy = {
 const flagUA = `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 480"><g fill-rule="evenodd" stroke-width="1pt"><path fill="#ffd700" d="M0 0h640v480H0z"/><path fill="#0057b8" d="M0 0h640v240H0z"/></g></svg>`;
 const flagUK = `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 480"><path fill="#012169" d="M0 0h640v480H0z"/><path fill="#FFF" d="M75 0l244 181L562 0h78v62L400 241l240 178v61h-80L320 301 81 480H0v-60l239-178L0 64V0h75z"/><path fill="#C8102E" d="M424 281l216 159v40L369 281h55zm-184 20l6 35L54 480H0l240-179zM640 0v3L391 191l2-44L590 0h50zM0 0l239 176h-60L0 42V0z"/><path fill="#FFF" d="M241 0v480h160V0H241zM0 160v160h640V160H0z"/><path fill="#C8102E" d="M0 193v96h640v-96H0zM273 0v480h96V0h-96z"/></svg>`;
 
+/* ==========================================================================
+   4. ЛОГІКА ІНТЕРФЕЙСУ ТА КАРУСЕЛІ
+   ========================================================================== */
 let lang = 'ua';
 let index = 0; 
+let currentRecipeIndex = 0;
 
 const edition = document.getElementById('edition');
 const desc = document.getElementById('productDesc');
@@ -213,21 +217,79 @@ function updateProduct() {
   updateDrinks(key);
 }
 
+// --- СТВОРЕННЯ КАРУСЕЛІ ---
 function updateDrinks(season) {
     const recipes = drinkRecipes[lang][season];
-    document.getElementById('drinkTitle1').innerText = recipes[0].name;
-    document.getElementById('drinkDesc1').innerText = recipes[0].short;
-    document.getElementById('drinkTitle2').innerText = recipes[1].name;
-    document.getElementById('drinkDesc2').innerText = recipes[1].short;
-    document.getElementById('drinkTitle3').innerText = recipes[2].name;
-    document.getElementById('drinkDesc3').innerText = recipes[2].short;
-    document.getElementById('drinkImg1').src = recipes[0].icon;
-    document.getElementById('drinkImg2').src = recipes[1].icon;
-    document.getElementById('drinkImg3').src = recipes[2].icon;
-    document.getElementById('drinkImg1').style.display = 'block';
-    document.getElementById('drinkImg2').style.display = 'block';
-    document.getElementById('drinkImg3').style.display = 'block';
+    const track = document.getElementById('carouselTrack');
+    track.innerHTML = '';
+
+    recipes.forEach((recipe, i) => {
+        const card = document.createElement('div');
+        card.className = 'card';
+        card.onclick = () => handleCardClick(i);
+
+        card.innerHTML = `
+            <div class="card-img">
+                <img src="${recipe.icon}" alt="${recipe.name}">
+            </div>
+            <h3>${recipe.name}</h3>
+            <p>${recipe.short}</p>
+            <div class="card-link">${copy[lang].readMoreBtn} &rarr;</div>
+        `;
+        track.appendChild(card);
+    });
+
+    updateCarouselVisuals();
 }
+
+// --- МАТЕМАТИКА КАРУСЕЛІ ---
+function updateCarouselVisuals() {
+    const cards = document.querySelectorAll('.carousel-track .card');
+    const total = cards.length;
+
+    cards.forEach((card, i) => {
+        card.className = 'card'; 
+        if (i === currentRecipeIndex) {
+            card.classList.add('active');
+        } else if (i === getPrevIndex(total)) {
+            card.classList.add('prev');
+        } else if (i === getNextIndex(total)) {
+            card.classList.add('next');
+        }
+    });
+}
+
+function getPrevIndex(total) { return (currentRecipeIndex - 1 + total) % total; }
+function getNextIndex(total) { return (currentRecipeIndex + 1) % total; }
+
+function handleCardClick(index) {
+    const total = document.querySelectorAll('.carousel-track .card').length;
+    if (index === currentRecipeIndex) {
+        openRecipe(index);
+    } else if (index === getNextIndex(total)) {
+        nextSlide();
+    } else if (index === getPrevIndex(total)) {
+        prevSlide();
+    } else {
+        currentRecipeIndex = index;
+        updateCarouselVisuals();
+    }
+}
+
+function nextSlide() {
+    const total = document.querySelectorAll('.carousel-track .card').length;
+    currentRecipeIndex = (currentRecipeIndex + 1) % total;
+    updateCarouselVisuals();
+}
+
+function prevSlide() {
+    const total = document.querySelectorAll('.carousel-track .card').length;
+    currentRecipeIndex = (currentRecipeIndex - 1 + total) % total;
+    updateCarouselVisuals();
+}
+
+document.getElementById('prevBtn').onclick = prevSlide;
+document.getElementById('nextBtn').onclick = nextSlide;
 
 changeBtn.onclick = () => { index = (index + 1) % 2; updateProduct(); };
 toggleSwitch.addEventListener('change', (e) => {
@@ -236,7 +298,6 @@ toggleSwitch.addEventListener('change', (e) => {
 });
 
 function applyLang() {
-  // Основні тексти
   document.getElementById('tagline').innerText = copy[lang].tagline;
   document.getElementById('productTitle').innerText = copy[lang].productTitle;
   document.getElementById('drinkTitle').innerText = copy[lang].drinkTitle;
@@ -247,12 +308,13 @@ function applyLang() {
   const heroBtn = document.getElementById('heroBtn');
   if(heroBtn) heroBtn.innerText = copy[lang].heroBtn;
 
-  // Оновлення тексту кнопок на картках
-  document.getElementById('readMore1').innerText = copy[lang].readMoreBtn;
-  document.getElementById('readMore2').innerText = copy[lang].readMoreBtn;
-  document.getElementById('readMore3').innerText = copy[lang].readMoreBtn;
+  // Текст на кнопках карток
+  const links = document.querySelectorAll('.card-link');
+  links.forEach(link => {
+      link.innerHTML = `${copy[lang].readMoreBtn} &rarr;`;
+  });
 
-  // Контактна форма
+  // Контакти
   document.getElementById('contactTitle').innerText = copy[lang].contactTitle;
   document.getElementById('lblTopic').innerText = copy[lang].contactTopic;
   document.getElementById('lblName').innerText = copy[lang].contactName;
@@ -273,7 +335,9 @@ function applyLang() {
 }
 floatingLang.onclick = () => { lang = (lang === 'ua') ? 'en' : 'ua'; applyLang(); };
 
-// --- МОДАЛЬНІ ВІКНА ---
+/* ==========================================================================
+   5. ЛОГІКА МОДАЛЬНИХ ВІКОН
+   ========================================================================== */
 const contactModal = document.getElementById("contactModal");
 const contactClose = document.querySelector(".contact-close");
 const contactTriggers = document.querySelectorAll('.contact-trigger');
@@ -302,7 +366,6 @@ function openRecipe(cardIndex) {
     const season = index === 0 ? 'winter' : 'summer';
     const recipeData = drinkRecipes[lang][season][cardIndex];
     document.getElementById('recipeTitle').innerText = recipeData.name;
-    // ТУТ ВИКОРИСТОВУЄМО .innerHTML ДЛЯ ВІДОБРАЖЕННЯ <strong> ТЕГІВ
     document.getElementById('recipeText').innerHTML = recipeData.full;
     document.getElementById('recipeImg').src = recipeData.detailImage;
     recipeModal.classList.add('show');
@@ -324,6 +387,9 @@ window.onclick = function(event) {
     if (event.target == recipeModal) closeRecipeModal();
 }
 
+/* ==========================================================================
+   6. ОБРОБКА ФОРМИ
+   ========================================================================== */
 const messageInput = document.getElementById('message');
 messageInput.addEventListener('input', function() { this.style.height = 'auto'; this.style.height = (this.scrollHeight) + 'px'; });
 const form = document.getElementById("ajaxForm");
@@ -343,6 +409,9 @@ async function handleSubmit(event) {
 }
 form.addEventListener("submit", handleSubmit);
 
+/* ==========================================================================
+   7. СТАРТ ТА СНІГ
+   ========================================================================== */
 toggleSwitch.checked = false;
 document.body.classList.remove('light');
 document.body.setAttribute('data-product', 'winter');
