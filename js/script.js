@@ -182,9 +182,6 @@ const copy = {
 const flagUA = `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 480"><g fill-rule="evenodd" stroke-width="1pt"><path fill="#ffd700" d="M0 0h640v480H0z"/><path fill="#0057b8" d="M0 0h640v240H0z"/></g></svg>`;
 const flagUK = `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 480"><path fill="#012169" d="M0 0h640v480H0z"/><path fill="#FFF" d="M75 0l244 181L562 0h78v62L400 241l240 178v61h-80L320 301 81 480H0v-60l239-178L0 64V0h75z"/><path fill="#C8102E" d="M424 281l216 159v40L369 281h55zm-184 20l6 35L54 480H0l240-179zM640 0v3L391 191l2-44L590 0h50zM0 0l239 176h-60L0 42V0z"/><path fill="#FFF" d="M241 0v480h160V0H241zM0 160v160h640V160H0z"/><path fill="#C8102E" d="M0 193v96h640v-96H0zM273 0v480h96V0h-96z"/></svg>`;
 
-/* ==========================================================================
-   4. ЛОГІКА ІНТЕРФЕЙСУ ТА КАРУСЕЛІ
-   ========================================================================== */
 let lang = 'ua';
 let index = 0; 
 let currentRecipeIndex = 0;
@@ -217,7 +214,7 @@ function updateProduct() {
   updateDrinks(key);
 }
 
-// --- СТВОРЕННЯ КАРУСЕЛІ ---
+// --- ОНОВЛЕНА ЛОГІКА КАРУСЕЛІ ---
 function updateDrinks(season) {
     const recipes = drinkRecipes[lang][season];
     const track = document.getElementById('carouselTrack');
@@ -242,7 +239,6 @@ function updateDrinks(season) {
     updateCarouselVisuals();
 }
 
-// --- МАТЕМАТИКА КАРУСЕЛІ ---
 function updateCarouselVisuals() {
     const cards = document.querySelectorAll('.carousel-track .card');
     const total = cards.length;
@@ -308,13 +304,12 @@ function applyLang() {
   const heroBtn = document.getElementById('heroBtn');
   if(heroBtn) heroBtn.innerText = copy[lang].heroBtn;
 
-  // Текст на кнопках карток
+  // Оновлення тексту в каруселі
   const links = document.querySelectorAll('.card-link');
   links.forEach(link => {
       link.innerHTML = `${copy[lang].readMoreBtn} &rarr;`;
   });
 
-  // Контакти
   document.getElementById('contactTitle').innerText = copy[lang].contactTitle;
   document.getElementById('lblTopic').innerText = copy[lang].contactTopic;
   document.getElementById('lblName').innerText = copy[lang].contactName;
@@ -335,9 +330,6 @@ function applyLang() {
 }
 floatingLang.onclick = () => { lang = (lang === 'ua') ? 'en' : 'ua'; applyLang(); };
 
-/* ==========================================================================
-   5. ЛОГІКА МОДАЛЬНИХ ВІКОН
-   ========================================================================== */
 const contactModal = document.getElementById("contactModal");
 const contactClose = document.querySelector(".contact-close");
 const contactTriggers = document.querySelectorAll('.contact-trigger');
@@ -387,9 +379,6 @@ window.onclick = function(event) {
     if (event.target == recipeModal) closeRecipeModal();
 }
 
-/* ==========================================================================
-   6. ОБРОБКА ФОРМИ
-   ========================================================================== */
 const messageInput = document.getElementById('message');
 messageInput.addEventListener('input', function() { this.style.height = 'auto'; this.style.height = (this.scrollHeight) + 'px'; });
 const form = document.getElementById("ajaxForm");
@@ -409,9 +398,6 @@ async function handleSubmit(event) {
 }
 form.addEventListener("submit", handleSubmit);
 
-/* ==========================================================================
-   7. СТАРТ ТА СНІГ
-   ========================================================================== */
 toggleSwitch.checked = false;
 document.body.classList.remove('light');
 document.body.setAttribute('data-product', 'winter');
