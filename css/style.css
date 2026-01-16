@@ -75,22 +75,18 @@ body.no-scroll { overflow: hidden; }
 .product-glow { width: 500px; height: 500px; transform: translate(-50%, -60%); }
 .hero-glow { width: 350px; height: 350px; }
 
-/* === ОНОВЛЕНЕ СЯЙВО РЕЦЕПТІВ (ВИПРАВЛЕНО ОБРІЗАННЯ) === */
+/* === ВИПРАВЛЕНО: Сяйво рецептів === */
+/* Градієнт тепер зникає (transparent) на 65%, не доходячи до країв контейнера */
 .recipe-glow {
-    /* На ПК: Велике, гарне сяйво */
-    width: 600px;
-    height: 600px;
+    width: 100%; 
+    height: 100%;
     transform: translate(-50%, -50%);
-    opacity: 0.6;
+    background: radial-gradient(circle, rgba(212, 160, 23, 0.3) 0%, rgba(212, 160, 23, 0) 65%);
+    opacity: 0.8;
 }
 
-/* Адаптація сяйва для мобільних */
-@media (max-width: 600px) {
-    .recipe-glow {
-        /* На телефонах: Менше, щоб не обрізалось по боках */
-        width: 300px;
-        height: 300px;
-    }
+body.light .recipe-glow { 
+    background: radial-gradient(circle, rgba(45, 74, 47, 0.2) 0%, rgba(45, 74, 47, 0) 65%); 
 }
 
 @keyframes pulse-syrup {
@@ -156,6 +152,15 @@ body.light .socials a { color: var(--text-dark); }
 body.light .floating-btn { background-color: rgba(245, 241, 224, 0.8); }
 @media (hover: hover) { .floating-btn:hover { transform: translateY(-3px) scale(1.05); background-color: var(--accent); } .floating-contact:hover svg { fill: white; } }
 
+/* ІНДИКАТОР КОШИКА */
+.cart-badge {
+    position: absolute; top: 0; right: 0; width: 12px; height: 12px;
+    background: #ff3333; border-radius: 50%;
+    display: none; 
+    animation: pulse-red 1.5s infinite;
+}
+@keyframes pulse-red { 0% { transform: scale(0.9); box-shadow: 0 0 0 0 rgba(255, 51, 51, 0.7); } 70% { transform: scale(1); box-shadow: 0 0 0 10px rgba(255, 51, 51, 0); } 100% { transform: scale(0.9); box-shadow: 0 0 0 0 rgba(255, 51, 51, 0); } }
+
 /* СЛАЙДЕР ТЕМИ */
 .theme-switch-wrapper { display: flex; align-items: center; margin-left: 5px; }
 .theme-switch { display: inline-block; height: 30px; position: relative; width: 56px; }
@@ -185,7 +190,14 @@ body.light .modal-content { background-color: var(--bg-summer-light); color: var
 
 form { display: flex; flex-direction: column; gap: 15px; margin-top: 20px; }
 input, select, textarea { width: 100%; padding: 12px; border: none; border-bottom: 1px solid rgba(255,255,255,0.3); background: rgba(255,255,255,0.05); color: inherit; font-family: var(--font-body); font-size: 16px; border-radius: 4px; outline: none; }
-textarea { resize: none; min-height: 50px; max-height: 200px; overflow-y: auto; }
+
+/* === ВИПРАВЛЕНО: Текстове поле === */
+textarea { 
+    resize: none; /* Забороняємо ручне розтягування */
+    min-height: 50px; 
+    max-height: 200px; 
+    overflow-y: hidden; /* Ховаємо скрол поки не треба */
+}
 input:focus, textarea:focus { border-bottom-color: var(--accent); }
 label { font-size: 12px; text-transform: uppercase; letter-spacing: 1px; opacity: 0.7; }
 .submit-btn { width: 100%; margin-top: 10px; background-color: var(--accent); color: white; border: none; }
@@ -226,20 +238,39 @@ h2 { text-align: center; font-size: 34px; margin-bottom: 40px; font-weight: 600;
 .edition { font-size: 14px; letter-spacing: 2px; text-transform: uppercase; opacity: .9; margin-top: 10px; }
 .product-desc { text-align: center; max-width: 600px; min-height: 5em; font-size: 15px; }
 
-/* === КАРУСЕЛЬ РЕЦЕПТІВ (CAROUSEL) === */
-.recipes-section { 
-    position: relative; 
-    overflow: hidden; 
-    padding: 40px 0 100px 0; /* Великий відступ знизу, щоб не обрізати тіні */
-    width: 100%; 
-}
+/* === ЦІНА ТА КОШИК === */
+.price-container { display: flex; flex-direction: column; align-items: center; gap: 15px; margin-top: 10px; }
+.price-tag { font-family: var(--font-heading); font-size: 32px; font-weight: 600; color: var(--accent); letter-spacing: 1px; }
+.add-cart-btn { border: 1px solid var(--accent); color: var(--accent); background: transparent; padding: 12px 24px; font-size: 14px; cursor: pointer; border-radius: 50px; text-transform: uppercase; letter-spacing: 1px; font-weight: 600; transition: 0.3s; }
+.add-cart-btn:hover { background: var(--accent); color: white; }
 
-.carousel-container { 
-    position: relative; 
+/* Елементи Кошика */
+.cart-item { display: flex; align-items: center; gap: 15px; background: rgba(0,0,0,0.1); padding: 10px; border-radius: 8px; margin-bottom: 10px; border: 1px solid rgba(255,255,255,0.1); }
+.cart-item-img { width: 40px; height: auto; }
+.cart-item-info { flex-grow: 1; }
+.cart-item-name { font-size: 14px; font-weight: 600; }
+.cart-item-price { font-size: 12px; opacity: 0.7; }
+
+/* === ВИПРАВЛЕНО: Кнопки +/- === */
+.qty-controls { display: flex; align-items: center; gap: 10px; }
+.qty-btn { 
+    width: 24px; height: 24px; border-radius: 50%; border: 1px solid var(--accent); 
+    background: transparent; color: var(--accent); cursor: pointer; 
+    
+    /* Центрування вмісту (символів) */
     display: flex; align-items: center; justify-content: center; 
-    height: 500px; perspective: 1000px; 
-    z-index: 2; /* Щоб бути над сяйвом */
+    font-size: 16px; 
+    padding: 0; 
+    padding-bottom: 2px; /* Мікро-зсув для оптичного центру */
+    line-height: 0; 
 }
+.qty-btn:disabled { opacity: 0.3; cursor: not-allowed; }
+.delete-btn { background: transparent; border: none; color: #ff3333; cursor: pointer; font-size: 18px; }
+body.light .cart-item { background: rgba(0,0,0,0.05); border-color: rgba(0,0,0,0.1); }
+
+/* === КАРУСЕЛЬ РЕЦЕПТІВ === */
+.recipes-section { position: relative; overflow: hidden; padding: 40px 0 100px 0; width: 100%; }
+.carousel-container { position: relative; display: flex; align-items: center; justify-content: center; height: 500px; perspective: 1000px; z-index: 2; }
 .carousel-track { position: relative; width: 100%; height: 100%; display: flex; justify-content: center; align-items: center; }
 
 /* Картка */
@@ -258,28 +289,19 @@ h2 { text-align: center; font-size: 34px; margin-bottom: 40px; font-weight: 600;
 .card.prev { opacity: 0.5; z-index: 5; transform: translateX(-110%) scale(0.85) rotateY(15deg); filter: blur(3px); pointer-events: auto; }
 .card.next { opacity: 0.5; z-index: 5; transform: translateX(110%) scale(0.85) rotateY(-15deg); filter: blur(3px); pointer-events: auto; }
 
-/* --- МОБІЛЬНА АДАПТАЦІЯ --- */
 @media (max-width: 600px) {
     .carousel-container { height: 420px; }
-    
-    /* Картки значно вужчі на телефонах */
     .card { width: 220px; height: 340px; padding: 15px; }
-    
-    /* Зсуваємо бокові картки ближче до центру */
     .card.prev { transform: translateX(-60%) scale(0.75); }
     .card.next { transform: translateX(60%) scale(0.75); }
-    
     .card h3 { font-size: 18px; margin-bottom: 5px; }
     .card p { font-size: 12px; margin-bottom: 10px; -webkit-line-clamp: 3; }
     .card-img { height: 140px; margin-bottom: 10px; }
-    
-    /* Кнопки трохи далі від країв */
     .nav-btn { width: 40px; height: 40px; }
     .nav-btn.prev { left: 10px; }
     .nav-btn.next { right: 10px; }
 }
 
-/* Іконки на картках (Трюк з кольором) */
 .card-img { width: 100%; height: 180px; margin-bottom: 15px; background: transparent; border-radius: 0; display: flex; align-items: center; justify-content: center; overflow: hidden; }
 .card-img img { width: 100%; height: 100%; object-fit: contain; transform: translateY(200px); filter: drop-shadow(0 -200px 0 var(--accent)); transition: filter 0.3s ease; } 
 body.light .card-img img { filter: drop-shadow(0 -200px 0 var(--text-dark)); }
@@ -298,6 +320,11 @@ body.light .card:hover .card-link { color: #fff; }
 body.light .nav-btn:hover svg { fill: #fff; }
 .nav-btn.prev { left: 20px; }
 .nav-btn.next { right: 20px; }
+body.light .nav-btn { background: rgba(255, 255, 255, 0.5); }
+
+.nav-btn.prod-prev { left: 5%; }
+.nav-btn.prod-next { right: 5%; }
+@media (max-width: 600px) { .nav-btn.prod-prev { left: 0; } .nav-btn.prod-next { right: 0; } }
 
 .status-message { margin-top: 10px; text-align: center; font-size: 14px; height: 20px; }
 .status-message.success { color: #4BB543; }
