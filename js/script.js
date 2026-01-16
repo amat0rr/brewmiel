@@ -1,5 +1,5 @@
 /* ==========================================================================
-   1. НАЛАШТУВАННЯ СКРОЛУ (LENIS) ТА ЗАВАНТАЖЕННЯ
+   1. НАЛАШТУВАННЯ СКРОЛУ (LENIS)
    ========================================================================== */
 function forceScrollTop() { 
     if ('scrollRestoration' in history) history.scrollRestoration = 'manual';
@@ -9,32 +9,28 @@ window.onload = forceScrollTop;
 window.onbeforeunload = forceScrollTop;
 
 const lenis = new Lenis({
-  duration: 1.2,
-  easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)), 
-  direction: 'vertical',
-  gestureDirection: 'vertical',
-  smooth: true,
-  mouseMultiplier: 1,
-  smoothTouch: false, 
-  touchMultiplier: 2,
+  duration: 1.2, easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)), 
+  direction: 'vertical', gestureDirection: 'vertical', smooth: true, mouseMultiplier: 1, smoothTouch: false, touchMultiplier: 2,
 });
-
-function raf(time) {
-  lenis.raf(time);
-  requestAnimationFrame(raf);
-}
+function raf(time) { lenis.raf(time); requestAnimationFrame(raf); }
 requestAnimationFrame(raf);
 
 document.querySelectorAll('a[href^="#"]').forEach(anchor => {
   anchor.addEventListener('click', function (e) {
-    e.preventDefault();
-    lenis.scrollTo(this.getAttribute('href'));
+    e.preventDefault(); lenis.scrollTo(this.getAttribute('href'));
   });
 });
 
 /* ==========================================================================
-   2. БАЗА ДАНИХ РЕЦЕПТІВ (UA / EN)
+   2. БАЗА ДАНИХ (ПРОДУКТИ, РЕЦЕПТИ, ТЕКСТИ)
    ========================================================================== */
+const products = {
+    winter: { id: 'winter', img: 'assets/png_winter.png', priceUA: 250, priceEN: 7 },
+    summer: { id: 'summer', img: 'assets/png_summer.png', priceUA: 250, priceEN: 7 }
+};
+
+let cart = []; 
+
 const drinkRecipes = {
   ua: {
     winter: [
@@ -142,19 +138,14 @@ const copy = {
     winter: "Зимова казка у пляшці. Глибокий смак темного меду поєднаний з зігріваючою корицею, бодяном та пікантним коренем імбиру. Ідеальний компаньйон для затишних вечорів, гарячого чаю або авторського глінтвейну.",
     summer: "Подих літнього вітру. Легкий та освіжаючий букет з лугових трав, прохолодної м'яти та соковитого лайма на основі ніжного квіткового меду. Додає вишуканості лимонадам та легким аперитивам у спекотний день.",
     editionSuffix: "ВЕРСІЯ",
+    winterName: "Brewmiel. Зимова версія", summerName: "Brewmiel. Літня версія",
     aboutLink: "Про нас", aboutTitle: "Наша історія",
     aboutText: "BREWMIEL — це історія про повернення до витоків. Ми віримо, що природа має відповіді на всі питання, а смак може бути не просто відчуттям, а емоцією.<br><br>Наші сиропи створюються вручну, невеликими партіями, щоб зберегти душу кожного інгредієнта. Ми використовуємо лише натуральний мед, зібраний на диких пасіках, та трави, що виросли під сонцем, а не в теплицях.<br><br>Це не просто додаток до напоїв. Це спроба зупинити час, вдихнути аромат лісу чи поля і відчути справжній смак життя.",
-    contactTitle: "Напишіть нам",
-    contactTopic: "Тема звернення",
+    contactTitle: "Напишіть нам", cartTitle: "Замовити продукт",
     contactOptions: { order: "Замовлення продукту", question: "Запитання", collab: "Співпраця" },
-    contactName: "Ваше ім'я",
-    contactContact: "Email або Telegram",
-    contactMessage: "Повідомлення",
-    contactPlaceholderName: "Олександр",
-    contactPlaceholderContact: "@username або email",
-    contactPlaceholderMessage: "Я хочу замовити...",
-    contactBtn: "Надіслати",
-    readMoreBtn: "Детальніше"
+    contactName: "Ваше ім'я", contactContact: "Email або Telegram", contactMessage: "Повідомлення",
+    contactPlaceholderName: "Олександр", contactPlaceholderContact: "@username або email", contactPlaceholderMessage: "Я хочу замовити...",
+    contactBtn: "Надіслати", addToCart: "Додати до кошика", readMoreBtn: "Детальніше"
   },
   en: {
     tagline: "Magic of wild nature in every drop. Craft honey elixir created from ancient recipes for modern rituals.", 
@@ -163,95 +154,190 @@ const copy = {
     winter: "Winter fairy tale in a bottle. The deep taste of dark honey combined with warming cinnamon, star anise, and spicy ginger root. The perfect companion for cozy evenings, hot tea, or signature mulled wine.",
     summer: "Breath of the summer wind. Light and refreshing bouquet of meadow herbs, cool mint, and juicy lime based on delicate floral honey. Adds sophistication to lemonades and light aperitifs on a hot day.",
     editionSuffix: "EDITION",
+    winterName: "Brewmiel. Winter Edition", summerName: "Brewmiel. Summer Edition",
     aboutLink: "About Us", aboutTitle: "Our Story",
     aboutText: "BREWMIEL is a story about returning to the roots. We believe that nature has answers to all questions, and taste can be not just a sensation, but an emotion.<br><br>Our syrups are handcrafted in small batches to preserve the soul of every ingredient. We use only natural honey collected from wild apiaries and herbs grown under the sun, not in greenhouses.<br><br>It's not just an additive to drinks. It's an attempt to stop time, breathe in the scent of the forest or field, and feel the true taste of life.",
-    contactTitle: "Contact Us",
-    contactTopic: "Subject",
+    contactTitle: "Contact Us", cartTitle: "Order Product",
     contactOptions: { order: "Product Order", question: "Question", collab: "Collaboration" },
-    contactName: "Your Name",
-    contactContact: "Email or Telegram",
-    contactMessage: "Message",
-    contactPlaceholderName: "Alex",
-    contactPlaceholderContact: "@username or email",
-    contactPlaceholderMessage: "I want to order...",
-    contactBtn: "Send",
-    readMoreBtn: "Read More"
+    contactName: "Your Name", contactContact: "Email or Telegram", contactMessage: "Message",
+    contactPlaceholderName: "Alex", contactPlaceholderContact: "@username or email", contactPlaceholderMessage: "I want to order...",
+    contactBtn: "Send", addToCart: "Add to Cart", readMoreBtn: "Read More"
   }
 };
 
 const flagUA = `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 480"><g fill-rule="evenodd" stroke-width="1pt"><path fill="#ffd700" d="M0 0h640v480H0z"/><path fill="#0057b8" d="M0 0h640v240H0z"/></g></svg>`;
 const flagUK = `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 480"><path fill="#012169" d="M0 0h640v480H0z"/><path fill="#FFF" d="M75 0l244 181L562 0h78v62L400 241l240 178v61h-80L320 301 81 480H0v-60l239-178L0 64V0h75z"/><path fill="#C8102E" d="M424 281l216 159v40L369 281h55zm-184 20l6 35L54 480H0l240-179zM640 0v3L391 191l2-44L590 0h50zM0 0l239 176h-60L0 42V0z"/><path fill="#FFF" d="M241 0v480h160V0H241zM0 160v160h640V160H0z"/><path fill="#C8102E" d="M0 193v96h640v-96H0zM273 0v480h96V0h-96z"/></svg>`;
 
+/* =========================================
+   3. ЛОГІКА ІНТЕРФЕЙСУ
+   ========================================= */
 let lang = 'ua';
 let index = 0; 
 let currentRecipeIndex = 0;
 
-const edition = document.getElementById('edition');
-const desc = document.getElementById('productDesc');
-const changeBtn = document.getElementById('changeBtn');
-const toggleSwitch = document.querySelector('.theme-switch input[type="checkbox"]');
-const floatingLang = document.getElementById('floatingLang');
-const langFlag = document.getElementById('langFlag');
-const winterBottle = document.querySelector('.bottle-card.winter');
-const summerBottle = document.querySelector('.bottle-card.summer');
-
 function updateProduct() {
   if (index === 0) {
-    winterBottle.classList.add('active');
-    summerBottle.classList.remove('active');
+    document.querySelector('.bottle-card.winter').classList.add('active');
+    document.querySelector('.bottle-card.summer').classList.remove('active');
     document.body.setAttribute('data-product', 'winter');
   } else {
-    summerBottle.classList.add('active');
-    winterBottle.classList.remove('active');
+    document.querySelector('.bottle-card.summer').classList.add('active');
+    document.querySelector('.bottle-card.winter').classList.remove('active');
     document.body.setAttribute('data-product', 'summer');
   }
-  
   const key = index === 0 ? 'winter' : 'summer';
   const editionName = lang === 'ua' ? (index === 0 ? 'ЗИМОВА' : 'ЛІТНЯ') : (index === 0 ? 'WINTER' : 'SUMMER');
-  edition.innerText = `${editionName} ${copy[lang].editionSuffix}`;
-  desc.innerText = copy[lang][key];
-
+  document.getElementById('edition').innerText = `${editionName} ${copy[lang].editionSuffix}`;
+  document.getElementById('productDesc').innerText = copy[lang][key];
+  const price = lang === 'ua' ? products[key].priceUA + ' ₴' : '$' + products[key].priceEN;
+  document.getElementById('priceDisplay').innerText = price;
   updateDrinks(key);
 }
 
-// --- ОНОВЛЕНА ЛОГІКА КАРУСЕЛІ ---
+document.getElementById('prodNextBtn').onclick = () => { index = (index + 1) % 2; updateProduct(); };
+document.getElementById('prodPrevBtn').onclick = () => { index = (index - 1 + 2) % 2; updateProduct(); };
+
+/* --- ЛОГІКА КОШИКА --- */
+function addToCart() {
+    const productId = index === 0 ? 'winter' : 'summer';
+    const existingItem = cart.find(item => item.id === productId);
+    if (existingItem) { existingItem.quantity++; } else { cart.push({ id: productId, quantity: 1 }); }
+    updateFloatingButton();
+    const btn = document.getElementById('addToCartBtn');
+    const originalText = btn.innerText;
+    btn.innerText = "✓";
+    setTimeout(() => { btn.innerText = originalText; }, 1000);
+}
+document.getElementById('addToCartBtn').onclick = addToCart;
+
+function updateFloatingButton() {
+    const icon = document.getElementById('contactIcon');
+    const badge = document.getElementById('cartBadge');
+    if (cart.length > 0) {
+        icon.innerHTML = '<path d="M7 18c-1.1 0-1.99.9-1.99 2S5.9 22 7 22s2-.9 2-2-.9-2-2-2zM1 2v2h2l3.6 7.59-1.35 2.45c-.16.28-.25.61-.25.96 0 1.1.9 2 2 2h12v-2H7.42c-.14 0-.25-.11-.25-.25l.03-.12.9-1.63h7.45c.75 0 1.41-.41 1.75-1.03l3.58-6.49c.08-.14.12-.31.12-.48 0-.55-.45-1-1-1H5.21l-.94-2H1zm16 16c-1.1 0-1.99.9-1.99 2s.89 2 1.99 2 2-.9 2-2-.9-2-2-2z"/>';
+        badge.style.display = 'block';
+    } else {
+        icon.innerHTML = '<path d="M20 4H4C2.9 4 2.01 4.9 2.01 6L2 18C2 19.1 2.9 20 4 20H20C21.1 20 22 19.1 22 18V6C22 4.9 21.1 4 20 4ZM20 8L12 13L4 8V6L12 11L20 6V8Z"/>';
+        badge.style.display = 'none';
+    }
+}
+
+function renderCartInModal() {
+    const listContainer = document.getElementById('cartItemsList');
+    const title = document.getElementById('contactTitle');
+    const topicWrapper = document.getElementById('topicWrapper');
+    const message = document.getElementById('message');
+    const totalBlock = document.getElementById('cartTotalBlock'); 
+    
+    if (cart.length > 0) {
+        title.innerText = copy[lang].cartTitle;
+        listContainer.style.display = 'block';
+        topicWrapper.style.display = 'none'; 
+        totalBlock.style.display = 'block';
+        
+        let html = '';
+        let orderText = 'Замовлення:\n';
+        let totalPrice = 0;
+        
+        cart.forEach((item) => {
+            const productData = products[item.id];
+            const name = lang === 'ua' ? copy[lang][item.id + 'Name'] : copy[lang][item.id + 'Name'];
+            const price = lang === 'ua' ? productData.priceUA : productData.priceEN;
+            const currency = lang === 'ua' ? ' ₴' : '$';
+            
+            totalPrice += price * item.quantity;
+            orderText += `- ${name}: ${item.quantity} шт.\n`;
+            
+            html += `
+            <div class="cart-item">
+                <img src="${productData.img}" class="cart-item-img">
+                <div class="cart-item-info">
+                    <div class="cart-item-name">${name}</div>
+                    <div class="cart-item-price">${lang === 'ua' ? price + currency : currency + price}</div>
+                </div>
+                <div class="qty-controls">
+                    <button class="qty-btn" onclick="changeQty('${item.id}', -1)" ${item.quantity <= 1 ? 'disabled style="opacity: 0.3"' : ''}>-</button>
+                    <span>${item.quantity}</span>
+                    <button class="qty-btn" onclick="changeQty('${item.id}', 1)">+</button>
+                </div>
+                <button class="delete-btn" onclick="removeItem('${item.id}')">&times;</button>
+            </div>`;
+        });
+        
+        listContainer.innerHTML = html;
+        const totalStr = lang === 'ua' ? `Загалом: ${totalPrice} ₴` : `Total: $${totalPrice}`;
+        totalBlock.innerText = totalStr;
+        message.value = orderText + `\n${totalStr}`; 
+        
+        // === ВИПРАВЛЕННЯ: АВТО-РОЗШИРЕННЯ ПІСЛЯ ЗАПОВНЕННЯ ===
+        message.style.height = 'auto';
+        message.style.height = (message.scrollHeight) + 'px';
+        if (message.scrollHeight >= 200) { message.style.overflowY = "auto"; }
+        else { message.style.overflowY = "hidden"; }
+        
+    } else {
+        title.innerText = copy[lang].contactTitle;
+        listContainer.style.display = 'none';
+        totalBlock.style.display = 'none';
+        topicWrapper.style.display = 'block';
+        message.value = '';
+        message.style.height = 'auto'; // Скидання висоти
+    }
+}
+
+window.changeQty = function(id, delta) {
+    const item = cart.find(i => i.id === id);
+    if (item) {
+        item.quantity += delta;
+        if (item.quantity < 1) item.quantity = 1;
+        renderCartInModal();
+    }
+};
+
+window.removeItem = function(id) {
+    cart = cart.filter(i => i.id !== id);
+    updateFloatingButton();
+    renderCartInModal();
+};
+
+const contactTriggers = document.querySelectorAll('.contact-trigger');
+contactTriggers.forEach(btn => { 
+    btn.addEventListener('click', () => { 
+        renderCartInModal(); 
+        document.getElementById("contactModal").classList.add('show'); 
+        document.body.classList.add('no-scroll');
+        lenis.stop();
+    }); 
+});
+
+/* =========================================
+   4. КАРУСЕЛЬ РЕЦЕПТІВ
+   ========================================= */
 function updateDrinks(season) {
     const recipes = drinkRecipes[lang][season];
     const track = document.getElementById('carouselTrack');
     track.innerHTML = '';
-
     recipes.forEach((recipe, i) => {
         const card = document.createElement('div');
         card.className = 'card';
         card.onclick = () => handleCardClick(i);
-
         card.innerHTML = `
-            <div class="card-img">
-                <img src="${recipe.icon}" alt="${recipe.name}">
-            </div>
-            <h3>${recipe.name}</h3>
-            <p>${recipe.short}</p>
-            <div class="card-link">${copy[lang].readMoreBtn} &rarr;</div>
-        `;
+            <div class="card-img"><img src="${recipe.icon}" alt="${recipe.name}"></div>
+            <h3>${recipe.name}</h3><p>${recipe.short}</p>
+            <div class="card-link">${copy[lang].readMoreBtn} &rarr;</div>`;
         track.appendChild(card);
     });
-
     updateCarouselVisuals();
 }
 
 function updateCarouselVisuals() {
     const cards = document.querySelectorAll('.carousel-track .card');
     const total = cards.length;
-
     cards.forEach((card, i) => {
         card.className = 'card'; 
-        if (i === currentRecipeIndex) {
-            card.classList.add('active');
-        } else if (i === getPrevIndex(total)) {
-            card.classList.add('prev');
-        } else if (i === getNextIndex(total)) {
-            card.classList.add('next');
-        }
+        if (i === currentRecipeIndex) { card.classList.add('active'); } 
+        else if (i === getPrevIndex(total)) { card.classList.add('prev'); } 
+        else if (i === getNextIndex(total)) { card.classList.add('next'); }
     });
 }
 
@@ -260,16 +346,10 @@ function getNextIndex(total) { return (currentRecipeIndex + 1) % total; }
 
 function handleCardClick(index) {
     const total = document.querySelectorAll('.carousel-track .card').length;
-    if (index === currentRecipeIndex) {
-        openRecipe(index);
-    } else if (index === getNextIndex(total)) {
-        nextSlide();
-    } else if (index === getPrevIndex(total)) {
-        prevSlide();
-    } else {
-        currentRecipeIndex = index;
-        updateCarouselVisuals();
-    }
+    if (index === currentRecipeIndex) { openRecipe(index); } 
+    else if (index === getNextIndex(total)) { nextSlide(); } 
+    else if (index === getPrevIndex(total)) { prevSlide(); } 
+    else { currentRecipeIndex = index; updateCarouselVisuals(); }
 }
 
 function nextSlide() {
@@ -277,38 +357,29 @@ function nextSlide() {
     currentRecipeIndex = (currentRecipeIndex + 1) % total;
     updateCarouselVisuals();
 }
-
 function prevSlide() {
     const total = document.querySelectorAll('.carousel-track .card').length;
     currentRecipeIndex = (currentRecipeIndex - 1 + total) % total;
     updateCarouselVisuals();
 }
-
 document.getElementById('prevBtn').onclick = prevSlide;
 document.getElementById('nextBtn').onclick = nextSlide;
 
-changeBtn.onclick = () => { index = (index + 1) % 2; updateProduct(); };
-toggleSwitch.addEventListener('change', (e) => {
-  if (e.target.checked) document.body.classList.add('light');
-  else document.body.classList.remove('light');
-});
-
+/* =========================================
+   5. ПЕРЕКЛАД ТА ІНШЕ
+   ========================================= */
 function applyLang() {
   document.getElementById('tagline').innerText = copy[lang].tagline;
   document.getElementById('productTitle').innerText = copy[lang].productTitle;
   document.getElementById('drinkTitle').innerText = copy[lang].drinkTitle;
-  document.getElementById('changeBtn').innerText = copy[lang].change;
   document.getElementById('aboutBtn').innerText = copy[lang].aboutLink;
   document.getElementById('aboutTitle').innerText = copy[lang].aboutTitle;
   document.getElementById('aboutText').innerHTML = copy[lang].aboutText;
-  const heroBtn = document.getElementById('heroBtn');
-  if(heroBtn) heroBtn.innerText = copy[lang].heroBtn;
+  document.getElementById('heroBtn').innerText = copy[lang].heroBtn;
+  document.getElementById('addToCartBtn').innerText = copy[lang].addToCart;
 
-  // Оновлення тексту в каруселі
   const links = document.querySelectorAll('.card-link');
-  links.forEach(link => {
-      link.innerHTML = `${copy[lang].readMoreBtn} &rarr;`;
-  });
+  links.forEach(link => { link.innerHTML = `${copy[lang].readMoreBtn} &rarr;`; });
 
   document.getElementById('contactTitle').innerText = copy[lang].contactTitle;
   document.getElementById('lblTopic').innerText = copy[lang].contactTopic;
@@ -320,32 +391,34 @@ function applyLang() {
   document.getElementById('name').placeholder = copy[lang].contactPlaceholderName;
   document.getElementById('email').placeholder = copy[lang].contactPlaceholderContact;
   document.getElementById('message').placeholder = copy[lang].contactPlaceholderMessage;
-
   document.getElementById('optOrder').innerText = copy[lang].contactOptions.order;
   document.getElementById('optQuestion').innerText = copy[lang].contactOptions.question;
   document.getElementById('optCollab').innerText = copy[lang].contactOptions.collab;
 
-  if (lang === 'ua') { langFlag.innerHTML = flagUK; } else { langFlag.innerHTML = flagUA; }
+  if (lang === 'ua') { document.getElementById('langFlag').innerHTML = flagUK; } 
+  else { document.getElementById('langFlag').innerHTML = flagUA; }
+  
   updateProduct(); 
 }
-floatingLang.onclick = () => { lang = (lang === 'ua') ? 'en' : 'ua'; applyLang(); };
 
-const contactModal = document.getElementById("contactModal");
-const contactClose = document.querySelector(".contact-close");
-const contactTriggers = document.querySelectorAll('.contact-trigger');
+const changeBtn = document.getElementById('changeBtn'); 
+const toggleSwitch = document.querySelector('.theme-switch input[type="checkbox"]');
+const floatingLang = document.getElementById('floatingLang');
+const langFlag = document.getElementById('langFlag');
+
+floatingLang.onclick = () => { lang = (lang === 'ua') ? 'en' : 'ua'; applyLang(); };
+toggleSwitch.addEventListener('change', (e) => {
+  if (e.target.checked) document.body.classList.add('light');
+  else document.body.classList.remove('light');
+});
+
 const aboutModal = document.getElementById("aboutModal");
 const aboutClose = document.querySelector(".about-close");
 const aboutBtn = document.getElementById("aboutBtn");
 const recipeModal = document.getElementById("recipeModal");
 const recipeClose = document.querySelector(".recipe-close");
-
-contactTriggers.forEach(btn => { 
-    btn.addEventListener('click', () => { 
-        contactModal.classList.add('show'); 
-        document.body.classList.add('no-scroll');
-        lenis.stop();
-    }); 
-});
+const contactModal = document.getElementById("contactModal");
+const contactClose = document.querySelector(".contact-close");
 
 aboutBtn.addEventListener('click', (e) => { 
     e.preventDefault(); 
@@ -379,10 +452,22 @@ window.onclick = function(event) {
     if (event.target == recipeModal) closeRecipeModal();
 }
 
+// === ЛОГІКА АВТО-РОЗШИРЕННЯ ПРИ ВВОДІ ===
 const messageInput = document.getElementById('message');
-messageInput.addEventListener('input', function() { this.style.height = 'auto'; this.style.height = (this.scrollHeight) + 'px'; });
+messageInput.addEventListener('input', function() { 
+    this.style.height = 'auto'; // Скидаємо, щоб визначити реальну висоту
+    this.style.height = (this.scrollHeight) + 'px'; 
+    
+    if (this.scrollHeight >= 200) {
+        this.style.overflowY = "auto"; // Якщо велике - скрол
+    } else {
+        this.style.overflowY = "hidden"; // Якщо мале - без скролу
+    }
+});
+
 const form = document.getElementById("ajaxForm");
 const statusMsg = document.getElementById("statusMessage");
+
 async function handleSubmit(event) {
   event.preventDefault();
   const data = new FormData(event.target);
@@ -398,6 +483,9 @@ async function handleSubmit(event) {
 }
 form.addEventListener("submit", handleSubmit);
 
+/* ==========================================================================
+   6. СТАРТ ТА СНІГ
+   ========================================================================== */
 toggleSwitch.checked = false;
 document.body.classList.remove('light');
 document.body.setAttribute('data-product', 'winter');
