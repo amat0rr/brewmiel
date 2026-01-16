@@ -46,20 +46,29 @@
 </div>
 
 <button class="floating-btn floating-contact contact-trigger" id="contactBtn" aria-label="Зв'язатись з нами">
-    <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M20 4H4C2.9 4 2.01 4.9 2.01 6L2 18C2 19.1 2.9 20 4 20H20C21.1 20 22 19.1 22 18V6C22 4.9 21.1 4 20 4ZM20 8L12 13L4 8V6L12 11L20 6V8Z"/></svg>
+    <div class="cart-badge" id="cartBadge"></div>
+    <svg id="contactIcon" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M20 4H4C2.9 4 2.01 4.9 2.01 6L2 18C2 19.1 2.9 20 4 20H20C21.1 20 22 19.1 22 18V6C22 4.9 21.1 4 20 4ZM20 8L12 13L4 8V6L12 11L20 6V8Z"/></svg>
 </button>
 
 <div id="contactModal" class="modal" data-lenis-prevent>
   <div class="modal-content">
     <span class="close contact-close">&times;</span>
     <h2 id="contactTitle" style="margin-top:0; margin-bottom:20px;">Напишіть нам</h2>
-    <form id="ajaxForm" action="https://formspree.io/f/YOUR_ID_HERE" method="POST">
-      <label id="lblTopic" for="type">Тема звернення</label>
-      <select id="type" name="type">
-        <option id="optOrder" value="Замовлення">Замовлення продукту</option>
-        <option id="optQuestion" value="Питання">Запитання</option>
-        <option id="optCollab" value="Співпраця">Співпраця</option>
-      </select>
+    
+    <div id="cartItemsList" style="display: none; margin-bottom: 20px;">
+        </div>
+    
+    <div id="cartTotalBlock" style="display: none; text-align: right; margin-bottom: 20px; font-weight: bold; color: var(--accent); font-size: 18px;"></div>
+
+    <form id="ajaxForm" action="https://formspree.io/f/mdaaaelw" method="POST">
+      <div id="topicWrapper">
+          <label id="lblTopic" for="type">Тема звернення</label>
+          <select id="type" name="type">
+            <option id="optOrder" value="Замовлення">Замовлення продукту</option>
+            <option id="optQuestion" value="Питання">Запитання</option>
+            <option id="optCollab" value="Співпраця">Співпраця</option>
+          </select>
+      </div>
       
       <label id="lblName" for="name">Ваше ім'я</label>
       <input type="text" id="name" name="name" required placeholder="Олександр">
@@ -100,7 +109,6 @@
       <div class="syrup-glow hero-glow"></div>
       <img src="assets/logo.svg" alt="Logo" class="logo-img">
   </div>
-  
   <div class="hero-brand-text">BREWMIEL</div>
   <p id="tagline" style="margin-bottom: 30px;"></p>
   <a href="#product" class="cta" id="heroBtn" style="border-radius:50px; text-decoration: none; display: inline-block;">ДІЗНАТИСЯ БІЛЬШЕ</a>
@@ -115,20 +123,33 @@
   
   <div class="product-stage-container">
     <div class="syrup-glow product-glow"></div>
+    
+    <button class="nav-btn prod-nav prod-prev" id="prodPrevBtn">
+        <svg viewBox="0 0 24 24"><path d="M15.41 7.41L14 6l-6 6 6 6 1.41-1.41L10.83 12z"/></svg>
+    </button>
+
     <div class="bottle-stage">
-      <div class="bottle-card winter" onclick="if(index!==0) changeBtn.click()">
+      <div class="bottle-card winter" onclick="if(index!==0) prodNextBtn.click()">
         <img src="assets/png_winter.png" alt="Winter Syrup">
       </div>
-      <div class="bottle-card summer" onclick="if(index!==1) changeBtn.click()">
+      <div class="bottle-card summer" onclick="if(index!==1) prodNextBtn.click()">
         <img src="assets/png_summer.png" alt="Summer Syrup">
       </div>
     </div>
+
+    <button class="nav-btn prod-nav prod-next" id="prodNextBtn">
+        <svg viewBox="0 0 24 24"><path d="M10 6L8.59 7.41 13.17 12l-4.58 4.59L10 18l6-6z"/></svg>
+    </button>
   </div>
 
   <div class="product-info">
     <div class="edition" id="edition"></div>
     <p class="product-desc" id="productDesc"></p>
-    <button class="change-btn" id="changeBtn"></button>
+    
+    <div class="price-container">
+        <div class="price-tag" id="priceDisplay">250 ₴</div>
+        <button class="add-cart-btn" id="addToCartBtn">Додати до кошика</button>
+    </div>
   </div>
 </section>
 
@@ -138,16 +159,12 @@
 
 <section class="recipes-section">
   <div class="syrup-glow recipe-glow"></div>
-
   <h2 id="drinkTitle"></h2>
-  
   <div class="carousel-container">
     <button class="nav-btn prev" id="prevBtn">
       <svg viewBox="0 0 24 24"><path d="M15.41 7.41L14 6l-6 6 6 6 1.41-1.41L10.83 12z"/></svg>
     </button>
-
     <div class="carousel-track" id="carouselTrack"></div>
-
     <button class="nav-btn next" id="nextBtn">
       <svg viewBox="0 0 24 24"><path d="M10 6L8.59 7.41 13.17 12l-4.58 4.59L10 18l6-6z"/></svg>
     </button>
