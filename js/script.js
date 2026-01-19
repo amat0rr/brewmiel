@@ -34,98 +34,26 @@ let cart = [];
 const drinkRecipes = {
   ua: {
     winter: [
-      { 
-        name: "HOT TODDY", 
-        short: "Ідеальний зігріваючий напій для холодних вечорів, що огортає теплом та ароматом спецій.", 
-        full: "Класичний зимовий напій, що зігріває душу.\n\n<strong>Інгредієнти:</strong>\n• 40 мл зимового сиропу\n• 150 мл окропу або чорного чаю\n• Слайс лимона\n• Паличка кориці для прикраси\n\n<strong>Приготування:</strong>\nЗмішайте сироп з гарячою водою у чашці. Додайте лимон та корицю. Насолоджуйтесь теплом.", 
-        icon: "assets/winter-icon-1.png", 
-        detailImage: "assets/winter-picture-1.png" 
-      },
-      { 
-        name: "SPICED COFFEE", 
-        short: "Ваша улюблена кава з новим, глибоким пряним характером, що бадьорить та надихає.", 
-        full: "Кава з новим характером.\n\n<strong>Інгредієнти:</strong>\n• 30 мл зимового сиропу\n• 150 мл свіжозвареної чорної кави\n• Збиті вершки (за бажанням)\n\n<strong>Приготування:</strong>\nЗваріть вашу улюблену каву. Додайте сироп замість цукру. За бажанням прикрасьте вершками.", 
-        icon: "assets/winter-icon-2.png", 
-        detailImage: "assets/winter-picture-2.png" 
-      },
-      { 
-        name: "FOREST TEA", 
-        short: "Справжня магія лісу у вашій чашці. Трав'яний спокій з нотками хвої та меду.", 
-        full: "Аромат лісу у вашій чашці.\n\n<strong>Інгредієнти:</strong>\n• 30 мл зимового сиропу\n• 200 мл трав'яного чаю\n• Гілочка розмарину\n\n<strong>Приготування:</strong>\nЗаваріть чай. Додайте сироп та перемішайте. Прикрасьте розмарином для підсилення аромату.", 
-        icon: "assets/winter-icon-3.png", 
-        detailImage: "assets/winter-picture-3.png" 
-      }
+      { name: "HOT TODDY", short: "Ідеальний зігріваючий напій для холодних вечорів.", full: "Класичний зимовий напій, що зігріває душу.\n\n<strong>Інгредієнти:</strong>\n• 40 мл зимового сиропу\n• 150 мл окропу або чорного чаю\n• Слайс лимона\n• Паличка кориці\n\n<strong>Приготування:</strong>\nЗмішайте сироп з гарячою водою у чашці. Додайте лимон та корицю. Насолоджуйтесь теплом.", icon: "assets/winter-icon-1.png", detailImage: "assets/winter-picture-1.png" },
+      { name: "SPICED COFFEE", short: "Ваша улюблена кава з новим пряним характером.", full: "Кава з новим характером.\n\n<strong>Інгредієнти:</strong>\n• 30 мл зимового сиропу\n• 150 мл чорної кави\n• Збиті вершки\n\n<strong>Приготування:</strong>\nЗваріть вашу улюблену каву. Додайте сироп замість цукру. За бажанням прикрасьте вершками.", icon: "assets/winter-icon-2.png", detailImage: "assets/winter-picture-2.png" },
+      { name: "FOREST TEA", short: "Справжня магія лісу у вашій чашці.", full: "Аромат лісу у вашій чашці.\n\n<strong>Інгредієнти:</strong>\n• 30 мл зимового сиропу\n• 200 мл трав'яного чаю\n• Розмарин\n\n<strong>Приготування:</strong>\nЗаваріть чай. Додайте сироп та перемішайте. Прикрасьте розмарином.", icon: "assets/winter-icon-3.png", detailImage: "assets/winter-picture-3.png" }
     ],
     summer: [
-      { 
-        name: "CLASSIC TONIC", 
-        short: "Освіжаюча класика, де гірчинка тоніка ідеально відтіняє солодкість трав.", 
-        full: "Освіжаюча класика для спекотного дня.\n\n<strong>Інгредієнти:</strong>\n• 30 мл літнього сиропу\n• 150 мл тоніка\n• Лід\n• Розмарин\n\n<strong>Приготування:</strong>\nНаповніть келих льодом. Налийте сироп та тонік. Обережно перемішайте.", 
-        icon: "assets/summer-icon-1.png", 
-        detailImage: "assets/summer-picture-1.png" 
-      },
-      { 
-        name: "MOON SPRITZ", 
-        short: "Легкий, ігристий та святковий аперитив, наповнений бульбашками радості.", 
-        full: "Легкий та ігристий аперитив.\n\n<strong>Інгредієнти:</strong>\n• 40 мл літнього сиропу\n• 60 мл Просекко\n• 20 мл газованої води\n• Апельсин\n\n<strong>Приготування:</strong>\nУ келих з льодом налийте всі інгредієнти. Прикрасьте слайсом апельсина.", 
-        icon: "assets/summer-icon-2.png", 
-        detailImage: "assets/summer-picture-2.png" 
-      },
-      { 
-        name: "NATURE SOUR", 
-        short: "Вишуканий кисло-солодкий баланс, що пробуджує рецептори свіжістю природи.", 
-        full: "Кисло-солодкий баланс природи.\n\n<strong>Інгредієнти:</strong>\n• 30 мл літнього сиропу\n• 20 мл лимонного соку\n• Лід\n• Яєчний білок (опціонально)\n\n<strong>Приготування:</strong>\nЗбийте всі інгредієнти у шейкері з льодом. Процідіть у келих.", 
-        icon: "assets/summer-icon-3.png", 
-        detailImage: "assets/summer-picture-3.png" 
-      }
+      { name: "CLASSIC TONIC", short: "Освіжаюча класика з гірчинкою тоніка.", full: "Освіжаюча класика для спекотного дня.\n\n<strong>Інгредієнти:</strong>\n• 30 мл літнього сиропу\n• 150 мл тоніка\n• Лід\n• Розмарин\n\n<strong>Приготування:</strong>\nНаповніть келих льодом. Налийте сироп та тонік. Обережно перемішайте.", icon: "assets/summer-icon-1.png", detailImage: "assets/summer-picture-1.png" },
+      { name: "MOON SPRITZ", short: "Легкий, ігристий та святковий аперитив.", full: "Легкий та ігристий аперитив.\n\n<strong>Інгредієнти:</strong>\n• 40 мл літнього сиропу\n• 60 мл Просекко\n• 20 мл газованої води\n• Апельсин\n\n<strong>Приготування:</strong>\nУ келих з льодом налийте всі інгредієнти. Прикрасьте слайсом апельсина.", icon: "assets/summer-icon-2.png", detailImage: "assets/summer-picture-2.png" },
+      { name: "NATURE SOUR", short: "Вишуканий кисло-солодкий баланс.", full: "Кисло-солодкий баланс природи.\n\n<strong>Інгредієнти:</strong>\n• 30 мл літнього сиропу\n• 20 мл лимонного соку\n• Лід\n• Яєчний білок\n\n<strong>Приготування:</strong>\nЗбийте всі інгредієнти у шейкері з льодом. Процідіть у келих.", icon: "assets/summer-icon-3.png", detailImage: "assets/summer-picture-3.png" }
     ]
   },
   en: {
     winter: [
-      { 
-        name: "HOT TODDY", 
-        short: "The perfect warming drink for cold evenings, wrapping you in warmth and the aroma of spices.", 
-        full: "A classic winter drink that warms the soul.\n\n<strong>Ingredients:</strong>\n• 40 ml winter syrup\n• 150 ml boiling water or black tea\n• Lemon slice\n• Cinnamon stick for garnish\n\n<strong>Preparation:</strong>\nMix syrup with hot water in a cup. Add lemon and cinnamon. Enjoy the warmth.", 
-        icon: "assets/winter-icon-1.png", 
-        detailImage: "assets/winter-picture-1.png" 
-      },
-      { 
-        name: "SPICED COFFEE", 
-        short: "Your favorite coffee with a new, deep spicy character that invigorates and inspires.", 
-        full: "Coffee with a new character.\n\n<strong>Ingredients:</strong>\n• 30 ml winter syrup\n• 150 ml freshly brewed black coffee\n• Whipped cream (optional)\n\n<strong>Preparation:</strong>\nBrew your favorite coffee. Add syrup instead of sugar. Garnish with cream if desired.", 
-        icon: "assets/winter-icon-2.png", 
-        detailImage: "assets/winter-picture-2.png" 
-      },
-      { 
-        name: "FOREST TEA", 
-        short: "Real forest magic in your cup. Herbal serenity with notes of pine and honey.", 
-        full: "Forest aroma in your cup.\n\n<strong>Ingredients:</strong>\n• 30 ml winter syrup\n• 200 ml herbal tea\n• Rosemary sprig\n\n<strong>Preparation:</strong>\nBrew the tea. Add syrup and stir. Garnish with rosemary to enhance the aroma.", 
-        icon: "assets/winter-icon-3.png", 
-        detailImage: "assets/winter-picture-3.png" 
-      }
+      { name: "HOT TODDY", short: "Perfect warming drink for cold evenings.", full: "A classic winter drink that warms the soul.\n\n<strong>Ingredients:</strong>\n• 40 ml winter syrup\n• 150 ml boiling water or black tea\n• Lemon slice\n• Cinnamon stick\n\n<strong>Preparation:</strong>\nMix syrup with hot water in a cup. Add lemon and cinnamon. Enjoy the warmth.", icon: "assets/winter-icon-1.png", detailImage: "assets/winter-picture-1.png" },
+      { name: "SPICED COFFEE", short: "Your favorite coffee with a new spicy character.", full: "Coffee with a new character.\n\n<strong>Ingredients:</strong>\n• 30 ml winter syrup\n• 150 ml black coffee\n• Whipped cream\n\n<strong>Preparation:</strong>\nBrew your favorite coffee. Add syrup instead of sugar. Garnish with cream if desired.", icon: "assets/winter-icon-2.png", detailImage: "assets/winter-picture-2.png" },
+      { name: "FOREST TEA", short: "Real forest magic in your cup.", full: "Forest aroma in your cup.\n\n<strong>Ingredients:</strong>\n• 30 ml winter syrup\n• 200 ml herbal tea\n• Rosemary sprig\n\n<strong>Preparation:</strong>\nBrew the tea. Add syrup and stir. Garnish with rosemary.", icon: "assets/winter-icon-3.png", detailImage: "assets/winter-picture-3.png" }
     ],
     summer: [
-      { 
-        name: "CLASSIC TONIC", 
-        short: "Refreshing classic, where the bitterness of tonic perfectly highlights the sweetness of herbs.", 
-        full: "Refreshing classic for a hot day.\n\n<strong>Ingredients:</strong>\n• 30 ml summer syrup\n• 150 ml tonic water\n• Ice\n• Rosemary\n\n<strong>Preparation:</strong>\nFill a glass with ice. Pour syrup and tonic. Stir gently.", 
-        icon: "assets/summer-icon-1.png", 
-        detailImage: "assets/summer-picture-1.png" 
-      },
-      { 
-        name: "MOON SPRITZ", 
-        short: "Light, bubbly, and festive aperitif, filled with bubbles of joy.", 
-        full: "Light and bubbly aperitif.\n\n<strong>Ingredients:</strong>\n• 40 ml summer syrup\n• 60 ml Prosecco\n• 20 ml soda water\n• Orange\n\n<strong>Preparation:</strong>\nPour all ingredients into a glass with ice. Garnish with an orange slice.", 
-        icon: "assets/summer-icon-2.png", 
-        detailImage: "assets/summer-picture-2.png" 
-      },
-      { 
-        name: "NATURE SOUR", 
-        short: "Exquisite sweet and sour balance that awakens your taste buds with nature's freshness.", 
-        full: "Sweet and sour balance of nature.\n\n<strong>Ingredients:</strong>\n• 30 ml summer syrup\n• 20 ml lemon juice\n• Ice\n• Egg white (optional)\n\n<strong>Preparation:</strong>\nShake all ingredients in a shaker with ice. Strain into a glass.", 
-        icon: "assets/summer-icon-3.png", 
-        detailImage: "assets/summer-picture-3.png" 
-      }
+      { name: "CLASSIC TONIC", short: "Refreshing classic with tonic bitterness.", full: "Refreshing classic for a hot day.\n\n<strong>Ingredients:</strong>\n• 30 ml summer syrup\n• 150 ml tonic water\n• Ice\n• Rosemary\n\n<strong>Preparation:</strong>\nFill a glass with ice. Pour syrup and tonic. Stir gently.", icon: "assets/summer-icon-1.png", detailImage: "assets/summer-picture-1.png" },
+      { name: "MOON SPRITZ", short: "Light, bubbly, and festive aperitif.", full: "Light and bubbly aperitif.\n\n<strong>Ingredients:</strong>\n• 40 ml summer syrup\n• 60 ml Prosecco\n• 20 ml soda water\n• Orange\n\n<strong>Preparation:</strong>\nPour all ingredients into a glass with ice. Garnish with an orange slice.", icon: "assets/summer-icon-2.png", detailImage: "assets/summer-picture-2.png" },
+      { name: "NATURE SOUR", short: "Exquisite sweet and sour balance.", full: "Sweet and sour balance of nature.\n\n<strong>Ingredients:</strong>\n• 30 ml summer syrup\n• 20 ml lemon juice\n• Ice\n• Egg white\n\n<strong>Preparation:</strong>\nShake all ingredients in a shaker with ice. Strain into a glass.", icon: "assets/summer-icon-3.png", detailImage: "assets/summer-picture-3.png" }
     ]
   }
 };
@@ -145,7 +73,16 @@ const copy = {
     contactOptions: { order: "Замовлення продукту", question: "Запитання", collab: "Співпраця" },
     contactName: "Ваше ім'я", contactContact: "Email або Telegram", contactMessage: "Повідомлення",
     contactPlaceholderName: "Олександр", contactPlaceholderContact: "@username або email", contactPlaceholderMessage: "Я хочу замовити...",
-    contactBtn: "Надіслати", addToCart: "Додати до кошика", readMoreBtn: "Детальніше"
+    contactBtn: "Надіслати", addToCart: "Додати до кошика", readMoreBtn: "Детальніше",
+    contactTopic: "Тема звернення", total: "Загалом",
+    deliveryToggle: "Вказати адресу доставки",
+    delService: "Служба доставки",
+    delCity: "Місто",
+    delBranch: "Відділення / Поштомат",
+    delPhone: "Номер телефону",
+    delSurname: "Прізвище", 
+    delName: "Ім'я",
+    paymentInfo: "💰 Оплата: При отриманні"
   },
   en: {
     tagline: "Magic of wild nature in every drop. Craft honey elixir created from ancient recipes for modern rituals.", 
@@ -161,7 +98,16 @@ const copy = {
     contactOptions: { order: "Product Order", question: "Question", collab: "Collaboration" },
     contactName: "Your Name", contactContact: "Email or Telegram", contactMessage: "Message",
     contactPlaceholderName: "Alex", contactPlaceholderContact: "@username or email", contactPlaceholderMessage: "I want to order...",
-    contactBtn: "Send", addToCart: "Add to Cart", readMoreBtn: "Read More"
+    contactBtn: "Send", addToCart: "Add to Cart", readMoreBtn: "Read More",
+    contactTopic: "Subject", total: "Total",
+    deliveryToggle: "Specify delivery address",
+    delService: "Delivery Service",
+    delCity: "City",
+    delBranch: "Branch / Postomat",
+    delPhone: "Phone Number",
+    delSurname: "Surname", 
+    delName: "First Name",
+    paymentInfo: "💰 Payment: Upon Receipt"
   }
 };
 
@@ -175,16 +121,30 @@ let lang = 'ua';
 let index = 0; 
 let currentRecipeIndex = 0;
 
-function updateProduct() {
-  if (index === 0) {
-    document.querySelector('.bottle-card.winter').classList.add('active');
-    document.querySelector('.bottle-card.summer').classList.remove('active');
+function updateProductVisuals() {
+  const winterCard = document.querySelector('.bottle-card.winter');
+  const summerCard = document.querySelector('.bottle-card.summer');
+  const prevBtn = document.getElementById('prodPrevBtn');
+  const nextBtn = document.getElementById('prodNextBtn');
+
+  winterCard.classList.remove('active', 'on-right', 'on-left');
+  summerCard.classList.remove('active', 'on-right', 'on-left');
+  
+  prevBtn.classList.remove('hidden');
+  nextBtn.classList.remove('hidden');
+
+  if (index === 0) { 
+    winterCard.classList.add('active'); 
+    summerCard.classList.add('on-right'); 
     document.body.setAttribute('data-product', 'winter');
-  } else {
-    document.querySelector('.bottle-card.summer').classList.add('active');
-    document.querySelector('.bottle-card.winter').classList.remove('active');
+    prevBtn.classList.add('hidden'); 
+  } else { 
+    summerCard.classList.add('active'); 
+    winterCard.classList.add('on-left'); 
     document.body.setAttribute('data-product', 'summer');
+    nextBtn.classList.add('hidden'); 
   }
+  
   const key = index === 0 ? 'winter' : 'summer';
   const editionName = lang === 'ua' ? (index === 0 ? 'ЗИМОВА' : 'ЛІТНЯ') : (index === 0 ? 'WINTER' : 'SUMMER');
   document.getElementById('edition').innerText = `${editionName} ${copy[lang].editionSuffix}`;
@@ -194,8 +154,18 @@ function updateProduct() {
   updateDrinks(key);
 }
 
-document.getElementById('prodNextBtn').onclick = () => { index = (index + 1) % 2; updateProduct(); };
-document.getElementById('prodPrevBtn').onclick = () => { index = (index - 1 + 2) % 2; updateProduct(); };
+// Запуск
+updateProductVisuals();
+
+function setProduct(selected) {
+    if ((selected === 'winter' && index === 0) || (selected === 'summer' && index === 1)) return;
+    if (selected === 'winter') index = 0;
+    else index = 1;
+    updateProductVisuals();
+}
+
+document.getElementById('prodNextBtn').onclick = () => { index = 1; updateProductVisuals(); };
+document.getElementById('prodPrevBtn').onclick = () => { index = 0; updateProductVisuals(); };
 
 /* --- ЛОГІКА КОШИКА --- */
 function addToCart() {
@@ -204,9 +174,12 @@ function addToCart() {
     if (existingItem) { existingItem.quantity++; } else { cart.push({ id: productId, quantity: 1 }); }
     updateFloatingButton();
     const btn = document.getElementById('addToCartBtn');
-    const originalText = btn.innerText;
-    btn.innerText = "✓";
-    setTimeout(() => { btn.innerText = originalText; }, 1000);
+    btn.classList.add('clicked');
+    setTimeout(() => { btn.classList.remove('clicked'); }, 100);
+    const badge = document.getElementById('cartBadge');
+    badge.classList.remove('pop');
+    void badge.offsetWidth;
+    badge.classList.add('pop');
 }
 document.getElementById('addToCartBtn').onclick = addToCart;
 
@@ -220,6 +193,14 @@ function updateFloatingButton() {
         icon.innerHTML = '<path d="M20 4H4C2.9 4 2.01 4.9 2.01 6L2 18C2 19.1 2.9 20 4 20H20C21.1 20 22 19.1 22 18V6C22 4.9 21.1 4 20 4ZM20 8L12 13L4 8V6L12 11L20 6V8Z"/>';
         badge.style.display = 'none';
     }
+}
+
+function resizeTextarea() {
+    const msg = document.getElementById('message');
+    msg.style.height = 'auto'; 
+    msg.style.height = (msg.scrollHeight) + 'px'; 
+    if (msg.scrollHeight >= 200) { msg.style.overflowY = "auto"; } 
+    else { msg.style.overflowY = "hidden"; }
 }
 
 function renderCartInModal() {
@@ -265,15 +246,10 @@ function renderCartInModal() {
         });
         
         listContainer.innerHTML = html;
-        const totalStr = lang === 'ua' ? `Загалом: ${totalPrice} ₴` : `Total: $${totalPrice}`;
+        const totalStr = lang === 'ua' ? `${copy[lang].total}: ${totalPrice} ₴` : `${copy[lang].total}: $${totalPrice}`;
         totalBlock.innerText = totalStr;
         message.value = orderText + `\n${totalStr}`; 
-        
-        // === ВИПРАВЛЕННЯ: АВТО-РОЗШИРЕННЯ ПІСЛЯ ЗАПОВНЕННЯ ===
-        message.style.height = 'auto';
-        message.style.height = (message.scrollHeight) + 'px';
-        if (message.scrollHeight >= 200) { message.style.overflowY = "auto"; }
-        else { message.style.overflowY = "hidden"; }
+        resizeTextarea(); 
         
     } else {
         title.innerText = copy[lang].contactTitle;
@@ -281,7 +257,7 @@ function renderCartInModal() {
         totalBlock.style.display = 'none';
         topicWrapper.style.display = 'block';
         message.value = '';
-        message.style.height = 'auto'; // Скидання висоти
+        resizeTextarea(); 
     }
 }
 
@@ -307,6 +283,12 @@ contactTriggers.forEach(btn => {
         document.getElementById("contactModal").classList.add('show'); 
         document.body.classList.add('no-scroll');
         lenis.stop();
+        // При відкритті модалки перевіряємо, чи треба показати доставку (якщо в кошику товари, то це Замовлення)
+        if (cart.length > 0) {
+            handleTopicChange(true); // Форсуємо показ доставки для кошика
+        } else {
+            handleTopicChange(); // Перевіряємо селект
+        }
     }); 
 });
 
@@ -381,8 +363,9 @@ function applyLang() {
   const links = document.querySelectorAll('.card-link');
   links.forEach(link => { link.innerHTML = `${copy[lang].readMoreBtn} &rarr;`; });
 
+  // Форма
   document.getElementById('contactTitle').innerText = copy[lang].contactTitle;
-  document.getElementById('lblTopic').innerText = copy[lang].contactTopic;
+  document.getElementById('lblTopic').innerText = copy[lang].contactTopic; 
   document.getElementById('lblName').innerText = copy[lang].contactName;
   document.getElementById('lblContact').innerText = copy[lang].contactContact;
   document.getElementById('lblMessage').innerText = copy[lang].contactMessage;
@@ -391,14 +374,26 @@ function applyLang() {
   document.getElementById('name').placeholder = copy[lang].contactPlaceholderName;
   document.getElementById('email').placeholder = copy[lang].contactPlaceholderContact;
   document.getElementById('message').placeholder = copy[lang].contactPlaceholderMessage;
+  
   document.getElementById('optOrder').innerText = copy[lang].contactOptions.order;
   document.getElementById('optQuestion').innerText = copy[lang].contactOptions.question;
   document.getElementById('optCollab').innerText = copy[lang].contactOptions.collab;
 
+  // Оновлення текстів доставки
+  document.getElementById('lblDelivery').innerText = copy[lang].deliveryToggle;
+  document.getElementById('lblService').innerText = copy[lang].delService;
+  document.getElementById('lblCity').innerText = copy[lang].delCity;
+  document.getElementById('lblBranch').innerText = copy[lang].delBranch;
+  document.getElementById('lblPhone').innerText = copy[lang].delPhone;
+  document.getElementById('lblDelSurname').innerText = copy[lang].delSurname; 
+  document.getElementById('lblDelName').innerText = copy[lang].delName; 
+  document.getElementById('paymentInfo').innerText = copy[lang].paymentInfo;
+
   if (lang === 'ua') { document.getElementById('langFlag').innerHTML = flagUK; } 
   else { document.getElementById('langFlag').innerHTML = flagUA; }
   
-  updateProduct(); 
+  if (cart.length > 0) renderCartInModal();
+  updateProductVisuals();
 }
 
 const changeBtn = document.getElementById('changeBtn'); 
@@ -452,36 +447,239 @@ window.onclick = function(event) {
     if (event.target == recipeModal) closeRecipeModal();
 }
 
-// === ЛОГІКА АВТО-РОЗШИРЕННЯ ПРИ ВВОДІ ===
 const messageInput = document.getElementById('message');
-messageInput.addEventListener('input', function() { 
-    this.style.height = 'auto'; // Скидаємо, щоб визначити реальну висоту
-    this.style.height = (this.scrollHeight) + 'px'; 
-    
-    if (this.scrollHeight >= 200) {
-        this.style.overflowY = "auto"; // Якщо велике - скрол
+messageInput.addEventListener('input', resizeTextarea); 
+
+// === ЛОГІКА ДОСТАВКИ ===
+const deliveryToggle = document.getElementById('deliveryToggle');
+const deliveryContainer = document.getElementById('deliveryFields');
+const closeDeliveryBtn = document.getElementById('closeDeliveryBtn');
+const deliverySectionWrapper = document.querySelector('.delivery-section'); // Wrapper
+const typeSelect = document.getElementById('type'); // Dropdown
+const delInputs = deliveryContainer.querySelectorAll('input[type="text"], input[type="tel"]');
+
+function toggleDelivery(show) {
+    if (show) {
+        deliveryContainer.classList.remove('hidden');
+        deliveryToggle.checked = true;
+        delInputs.forEach(input => input.required = true);
     } else {
-        this.style.overflowY = "hidden"; // Якщо мале - без скролу
+        deliveryContainer.classList.add('hidden');
+        deliveryToggle.checked = false;
+        delInputs.forEach(input => {
+            input.value = '';
+            input.required = false;
+        });
+    }
+}
+
+// === НОВА ЛОГІКА: Слідкуємо за Темою ===
+function handleTopicChange(forceOrder = false) {
+    // Якщо forceOrder (наприклад, з кошика), то ставимо "Замовлення"
+    if (forceOrder) {
+        typeSelect.value = "Замовлення";
+    }
+
+    if (typeSelect.value === 'Замовлення') {
+        deliverySectionWrapper.style.display = 'block';
+    } else {
+        deliverySectionWrapper.style.display = 'none';
+        toggleDelivery(false); // Скидаємо, якщо змінили тему
+    }
+}
+
+// Слухаємо зміну теми
+typeSelect.addEventListener('change', () => handleTopicChange());
+
+// ГАРАНТОВАНО ЗАКРИВАЄМО ПРИ ЗАВАНТАЖЕННІ
+window.addEventListener('load', () => {
+    deliveryToggle.checked = false;
+    toggleDelivery(false);
+    handleTopicChange(); // Перевіряємо початковий стан
+});
+
+deliveryToggle.addEventListener('change', (e) => toggleDelivery(e.target.checked));
+closeDeliveryBtn.addEventListener('click', () => toggleDelivery(false));
+
+// === АВТОПІДСТАНОВКА НОВОЇ ПОШТИ ===
+const cityInput = document.getElementById('delCity');
+const cityList = document.getElementById('citySuggestions');
+const branchInput = document.getElementById('delBranch');
+const branchList = document.getElementById('branchSuggestions');
+
+let selectedCityRef = null;
+
+function debounce(func, timeout = 300){
+  let timer;
+  return (...args) => {
+    clearTimeout(timer);
+    timer = setTimeout(() => { func.apply(this, args); }, timeout);
+  };
+}
+
+const searchCities = async (e) => {
+    const query = e.target.value;
+    const service = document.querySelector('input[name="deliveryService"]:checked').value;
+    
+    if (service !== 'Нова Пошта' || query.length < 2) {
+        cityList.classList.remove('active');
+        return;
+    }
+
+    try {
+        const res = await fetch('http://localhost:3000/api/np/cities', {
+            method: 'POST',
+            headers: {'Content-Type': 'application/json'},
+            body: JSON.stringify({ query })
+        });
+        const cities = await res.json();
+
+        cityList.innerHTML = '';
+        if (cities.length > 0) {
+            cities.forEach(city => {
+                const li = document.createElement('li');
+                li.innerText = city.name;
+                li.onclick = () => {
+                    cityInput.value = city.name;
+                    selectedCityRef = city.ref;
+                    cityList.classList.remove('active');
+                    branchInput.value = '';
+                    branchInput.focus();
+                };
+                cityList.appendChild(li);
+            });
+            cityList.classList.add('active');
+        } else {
+            cityList.classList.remove('active');
+        }
+    } catch (err) {
+        console.error(err);
+    }
+};
+
+const searchBranches = async (e) => {
+    const query = e.target.value;
+    if (!selectedCityRef) return; 
+
+    try {
+        const res = await fetch('http://localhost:3000/api/np/warehouses', {
+            method: 'POST',
+            headers: {'Content-Type': 'application/json'},
+            body: JSON.stringify({ cityRef: selectedCityRef, query })
+        });
+        const branches = await res.json();
+
+        branchList.innerHTML = '';
+        if (branches.length > 0) {
+            branches.forEach(branch => {
+                const li = document.createElement('li');
+                li.innerText = branch;
+                li.onclick = () => {
+                    branchInput.value = branch;
+                    branchList.classList.remove('active');
+                };
+                branchList.appendChild(li);
+            });
+            branchList.classList.add('active');
+        } else {
+            branchList.classList.remove('active');
+        }
+    } catch (err) {
+        console.error(err);
+    }
+};
+
+cityInput.addEventListener('input', debounce(searchCities));
+branchInput.addEventListener('focus', (e) => { if(selectedCityRef) searchBranches(e); });
+branchInput.addEventListener('input', debounce(searchBranches));
+
+document.addEventListener('click', (e) => {
+    if (!e.target.closest('.input-group-relative')) {
+        if(cityList) cityList.classList.remove('active');
+        if(branchList) branchList.classList.remove('active');
     }
 });
 
+// === ВІДПРАВКА ФОРМИ ===
 const form = document.getElementById("ajaxForm");
 const statusMsg = document.getElementById("statusMessage");
 
 async function handleSubmit(event) {
   event.preventDefault();
-  const data = new FormData(event.target);
-  const submitBtn = form.querySelector('.submit-btn');
+  
+  const formEl = event.target;
+  const submitBtn = formEl.querySelector('.submit-btn');
   const originalText = submitBtn.innerText;
+  const statusMsg = document.getElementById("statusMessage");
+
   submitBtn.innerText = "Відправляємо...";
   submitBtn.disabled = true;
-  fetch(event.target.action, { method: form.method, body: data, headers: { 'Accept': 'application/json' } })
-  .then(response => {
-    if (response.ok) { statusMsg.innerHTML = "Дякуємо! Ваше повідомлення надіслано."; statusMsg.className = "status-message success"; form.reset(); setTimeout(() => { closeContactModal(); statusMsg.innerHTML=""; }, 2000); } 
-    else { response.json().then(data => { if (Object.hasOwn(data, 'errors')) { statusMsg.innerHTML = data["errors"].map(error => error["message"]).join(", "); } else { statusMsg.innerHTML = "Сталася помилка. Спробуйте ще раз."; } statusMsg.className = "status-message error"; }) }
-  }).catch(error => { statusMsg.innerHTML = "Помилка мережі."; statusMsg.className = "status-message error"; }).finally(() => { submitBtn.innerText = originalText; submitBtn.disabled = false; });
+
+  const formData = new FormData(formEl);
+  const data = Object.fromEntries(formData.entries()); 
+  
+  const isDelivery = document.getElementById('deliveryToggle').checked;
+  const deliveryData = isDelivery ? {
+      active: true,
+      service: document.querySelector('input[name="deliveryService"]:checked').value,
+      city: document.getElementById('delCity').value,
+      branch: document.getElementById('delBranch').value,
+      phone: document.getElementById('delPhone').value,
+      surname: document.getElementById('delSurname').value,
+      name: document.getElementById('delName').value
+  } : { active: false };
+
+  data.delivery = deliveryData;
+  
+  const serverUrl = 'http://localhost:3000/send-order';
+
+  try {
+    const response = await fetch(serverUrl, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        'Accept': 'application/json'
+      },
+      body: JSON.stringify(data)
+    });
+
+    const result = await response.json();
+
+    if (response.ok) {
+      statusMsg.innerHTML = "Дякуємо! Ваше замовлення надіслано.";
+      statusMsg.className = "status-message success";
+      formEl.reset();
+      
+      toggleDelivery(false);
+      handleTopicChange(); // Оновлюємо стан після ресету
+      
+      if (cart.length > 0) {
+          cart = [];
+          updateFloatingButton();
+          setTimeout(() => { closeContactModal(); statusMsg.innerHTML=""; }, 2000);
+      } else {
+          setTimeout(() => { closeContactModal(); statusMsg.innerHTML=""; }, 2000);
+      }
+      
+    } else {
+      statusMsg.innerHTML = "Сталася помилка. Спробуйте ще раз.";
+      statusMsg.className = "status-message error";
+      console.error('Server Error:', result);
+    }
+
+  } catch (error) {
+    statusMsg.innerHTML = "Помилка з'єднання з сервером.";
+    statusMsg.className = "status-message error";
+    console.error('Network Error:', error);
+  } finally {
+    submitBtn.innerText = originalText;
+    submitBtn.disabled = false;
+  }
 }
-form.addEventListener("submit", handleSubmit);
+
+if (form) {
+    form.addEventListener("submit", handleSubmit);
+}
 
 /* ==========================================================================
    6. СТАРТ ТА СНІГ
@@ -516,3 +714,36 @@ if (isWinter) {
 } else {
     canvas.style.display = 'none'; 
 }
+
+/* ==========================================================================
+   7. СВАЙПИ (SWIPES)
+   ========================================================================== */
+function addSwipeSupport(element, onLeft, onRight) {
+    let touchStartX = 0;
+    let touchEndX = 0;
+    
+    element.addEventListener('touchstart', (e) => {
+        touchStartX = e.changedTouches[0].screenX;
+    }, {passive: true});
+    
+    element.addEventListener('touchend', (e) => {
+        touchEndX = e.changedTouches[0].screenX;
+        handleGesture();
+    }, {passive: true});
+    
+    function handleGesture() {
+        if (touchEndX < touchStartX - 50) onLeft(); 
+        if (touchEndX > touchStartX + 50) onRight(); 
+    }
+}
+
+// Свайпи для пляшок
+const productStage = document.getElementById('productStage');
+addSwipeSupport(productStage, 
+    () => { if(index === 0) setProduct('summer'); }, // Swipe Left -> Go Summer
+    () => { if(index === 1) setProduct('winter'); }  // Swipe Right -> Go Winter
+);
+
+// Свайпи для рецептів
+const recipeSection = document.getElementById('recipeSection');
+addSwipeSupport(recipeSection, nextSlide, prevSlide);
