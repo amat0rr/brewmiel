@@ -156,7 +156,7 @@
 <div class="hero">
   <div class="logo-wrapper">
       <div class="syrup-glow hero-glow"></div>
-      <img src="assets/logo.svg" alt="Logo" class="logo-img">
+      <img src="assets/logo.svg" alt="BREWMIEL Logo" class="logo-img">
   </div>
   <div class="hero-brand-text">BREWMIEL</div>
   <p id="tagline" style="margin-bottom: 30px;"></p>
@@ -173,14 +173,19 @@
   <div class="product-stage-container" id="productStage">
     <div class="syrup-glow product-glow"></div>
     
-    <button class="nav-btn prod-nav prod-prev hidden" id="prodPrevBtn">
+    <button class="nav-btn prod-nav prod-prev" id="prodPrevBtn">
         <svg viewBox="0 0 24 24"><path d="M15.41 7.41L14 6l-6 6 6 6 1.41-1.41L10.83 12z"/></svg>
     </button>
 
     <div class="bottle-stage">
-      <div class="bottle-card winter active" onclick="setProduct('winter')">
+      <div class="bottle-card winter on-left" onclick="setProduct('winter')">
         <img src="assets/png_winter.png" alt="Winter Syrup">
       </div>
+      
+      <div class="bottle-card classic active" onclick="setProduct('classic')">
+        <img src="assets/png_classic.png" alt="Classic Syrup">
+      </div>
+
       <div class="bottle-card summer on-right" onclick="setProduct('summer')">
         <img src="assets/png_summer.png" alt="Summer Syrup">
       </div>
