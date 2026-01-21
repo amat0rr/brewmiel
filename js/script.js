@@ -24,8 +24,11 @@ document.querySelectorAll('a[href^="#"]').forEach(anchor => {
 /* ==========================================================================
    2. БАЗА ДАНИХ (ПРОДУКТИ, РЕЦЕПТИ, ТЕКСТИ)
    ========================================================================== */
+const productKeys = ['winter', 'classic', 'summer'];
+
 const products = {
     winter: { id: 'winter', img: 'assets/png_winter.png', priceUA: 250, priceEN: 7 },
+    classic: { id: 'classic', img: 'assets/png_classic.png', priceUA: 250, priceEN: 7 },
     summer: { id: 'summer', img: 'assets/png_summer.png', priceUA: 250, priceEN: 7 }
 };
 
@@ -38,6 +41,11 @@ const drinkRecipes = {
       { name: "SPICED COFFEE", short: "Ваша улюблена кава з новим пряним характером.", full: "Кава з новим характером.\n\n<strong>Інгредієнти:</strong>\n• 30 мл зимового сиропу\n• 150 мл чорної кави\n• Збиті вершки\n\n<strong>Приготування:</strong>\nЗваріть вашу улюблену каву. Додайте сироп замість цукру. За бажанням прикрасьте вершками.", icon: "assets/winter-icon-2.png", detailImage: "assets/winter-picture-2.png" },
       { name: "FOREST TEA", short: "Справжня магія лісу у вашій чашці.", full: "Аромат лісу у вашій чашці.\n\n<strong>Інгредієнти:</strong>\n• 30 мл зимового сиропу\n• 200 мл трав'яного чаю\n• Розмарин\n\n<strong>Приготування:</strong>\nЗаваріть чай. Додайте сироп та перемішайте. Прикрасьте розмарином.", icon: "assets/winter-icon-3.png", detailImage: "assets/winter-picture-3.png" }
     ],
+    classic: [
+      { name: "GOLD RUSH", short: "Золота класика віскі сауер з медовим відтінком.", full: "Сучасна класика, що розкриває смак віскі по-новому.\n\n<strong>Інгредієнти:</strong>\n• 30 мл класичного сиропу\n• 60 мл бурбону\n• 25 мл лимонного соку\n• Лід\n\n<strong>Приготування:</strong>\nЕнергійно збийте всі інгредієнти в шейкері з льодом. Процідіть у стакан з новим льодом.", icon: "assets/winter-icon-1.png", detailImage: "assets/classic-picture-1.jpg" },
+      { name: "BEE'S KNEES", short: "Елегантний джин-коктейль епохи сухого закону.", full: "Коктейль, назва якого означає 'вершина досконалості'.\n\n<strong>Інгредієнти:</strong>\n• 25 мл класичного сиропу\n• 60 мл джину\n• 25 мл лимонного соку\n\n<strong>Приготування:</strong>\nЗбийте інгредієнти в шейкері з льодом до охолодження. Процідіть в охолоджений коктейльний келих.", icon: "assets/winter-icon-2.png", detailImage: "assets/classic-picture-2.jpg" },
+      { name: "HONEY LEMONADE", short: "Освіжаючий домашній лимонад.", full: "Найкращий спосіб втамувати спрагу.\n\n<strong>Інгредієнти:</strong>\n• 40 мл класичного сиропу\n• 200 мл газованої води\n• 30 мл лимонного соку\n• М'ята\n\n<strong>Приготування:</strong>\nЗмішайте сироп та сік у склянці. Додайте лід та воду. Прикрасьте м'ятою.", icon: "assets/winter-icon-3.png", detailImage: "assets/classic-picture-3.jpg" }
+    ],
     summer: [
       { name: "CLASSIC TONIC", short: "Освіжаюча класика з гірчинкою тоніка.", full: "Освіжаюча класика для спекотного дня.\n\n<strong>Інгредієнти:</strong>\n• 30 мл літнього сиропу\n• 150 мл тоніка\n• Лід\n• Розмарин\n\n<strong>Приготування:</strong>\nНаповніть келих льодом. Налийте сироп та тонік. Обережно перемішайте.", icon: "assets/summer-icon-1.png", detailImage: "assets/summer-picture-1.png" },
       { name: "MOON SPRITZ", short: "Легкий, ігристий та святковий аперитив.", full: "Легкий та ігристий аперитив.\n\n<strong>Інгредієнти:</strong>\n• 40 мл літнього сиропу\n• 60 мл Просекко\n• 20 мл газованої води\n• Апельсин\n\n<strong>Приготування:</strong>\nУ келих з льодом налийте всі інгредієнти. Прикрасьте слайсом апельсина.", icon: "assets/summer-icon-2.png", detailImage: "assets/summer-picture-2.png" },
@@ -49,6 +57,11 @@ const drinkRecipes = {
       { name: "HOT TODDY", short: "Perfect warming drink for cold evenings.", full: "A classic winter drink that warms the soul.\n\n<strong>Ingredients:</strong>\n• 40 ml winter syrup\n• 150 ml boiling water or black tea\n• Lemon slice\n• Cinnamon stick\n\n<strong>Preparation:</strong>\nMix syrup with hot water in a cup. Add lemon and cinnamon. Enjoy the warmth.", icon: "assets/winter-icon-1.png", detailImage: "assets/winter-picture-1.png" },
       { name: "SPICED COFFEE", short: "Your favorite coffee with a new spicy character.", full: "Coffee with a new character.\n\n<strong>Ingredients:</strong>\n• 30 ml winter syrup\n• 150 ml black coffee\n• Whipped cream\n\n<strong>Preparation:</strong>\nBrew your favorite coffee. Add syrup instead of sugar. Garnish with cream if desired.", icon: "assets/winter-icon-2.png", detailImage: "assets/winter-picture-2.png" },
       { name: "FOREST TEA", short: "Real forest magic in your cup.", full: "Forest aroma in your cup.\n\n<strong>Ingredients:</strong>\n• 30 ml winter syrup\n• 200 ml herbal tea\n• Rosemary sprig\n\n<strong>Preparation:</strong>\nBrew the tea. Add syrup and stir. Garnish with rosemary.", icon: "assets/winter-icon-3.png", detailImage: "assets/winter-picture-3.png" }
+    ],
+    classic: [
+      { name: "GOLD RUSH", short: "Golden classic whiskey sour with a honey touch.", full: "A modern classic that reveals whiskey in a new way.\n\n<strong>Ingredients:</strong>\n• 30 ml classic syrup\n• 60 ml bourbon\n• 25 ml lemon juice\n• Ice\n\n<strong>Preparation:</strong>\nShake all ingredients vigorously with ice. Strain into a rock glass with fresh ice.", icon: "assets/winter-icon-1.png", detailImage: "assets/classic-picture-1.jpg" },
+      { name: "BEE'S KNEES", short: "Elegant prohibition-era gin cocktail.", full: "A cocktail appropriately named 'the height of excellence'.\n\n<strong>Ingredients:</strong>\n• 25 ml classic syrup\n• 60 ml gin\n• 25 ml lemon juice\n\n<strong>Preparation:</strong>\nShake ingredients with ice until chilled. Strain into a chilled cocktail glass.", icon: "assets/winter-icon-2.png", detailImage: "assets/classic-picture-2.jpg" },
+      { name: "HONEY LEMONADE", short: "Refreshing homemade lemonade.", full: "The best way to quench your thirst.\n\n<strong>Ingredients:</strong>\n• 40 ml classic syrup\n• 200 ml soda water\n• 30 ml lemon juice\n• Mint\n\n<strong>Preparation:</strong>\nMix syrup and juice in a glass. Add ice and water. Garnish with mint.", icon: "assets/winter-icon-3.png", detailImage: "assets/classic-picture-3.jpg" }
     ],
     summer: [
       { name: "CLASSIC TONIC", short: "Refreshing classic with tonic bitterness.", full: "Refreshing classic for a hot day.\n\n<strong>Ingredients:</strong>\n• 30 ml summer syrup\n• 150 ml tonic water\n• Ice\n• Rosemary\n\n<strong>Preparation:</strong>\nFill a glass with ice. Pour syrup and tonic. Stir gently.", icon: "assets/summer-icon-1.png", detailImage: "assets/summer-picture-1.png" },
@@ -63,10 +76,11 @@ const copy = {
     tagline: "Магія дикої природи у кожній краплі. Крафтовий медовий еліксир, створений за стародавніми рецептами для сучасних ритуалів.", 
     heroBtn: "ДІЗНАТИСЯ БІЛЬШЕ",
     productTitle: "Колекції", drinkTitle: "Мистецтво споживання", change: "Змінити смак",
-    winter: "Зимова казка у пляшці. Глибокий смак темного меду поєднаний з зігріваючою корицею, бодяном та пікантним коренем імбиру. Ідеальний компаньйон для затишних вечорів, гарячого чаю або авторського глінтвейну.",
-    summer: "Подих літнього вітру. Легкий та освіжаючий букет з лугових трав, прохолодної м'яти та соковитого лайма на основі ніжного квіткового меду. Додає вишуканості лимонадам та легким аперитивам у спекотний день.",
+    winter: "Зимова казка у пляшці. Глибокий смак темного меду поєднаний з зігріваючою корицею, бодяном та пікантним коренем імбиру.",
+    classic: "Чиста гармонія природи. Збалансований смак різнотрав'я з ледь відчутними нотками квіткового пилку. Універсальний еліксир.",
+    summer: "Подих літнього вітру. Легкий та освіжаючий букет з лугових трав, прохолодної м'яти та соковитого лайма.",
     editionSuffix: "ВЕРСІЯ",
-    winterName: "Brewmiel. Зимова версія", summerName: "Brewmiel. Літня версія",
+    winterName: "Brewmiel. Зимова версія", classicName: "Brewmiel. Класична версія", summerName: "Brewmiel. Літня версія",
     aboutLink: "Про нас", aboutTitle: "Наша історія",
     aboutText: "BREWMIEL — це історія про повернення до витоків. Ми віримо, що природа має відповіді на всі питання, а смак може бути не просто відчуттям, а емоцією.<br><br>Наші сиропи створюються вручну, невеликими партіями, щоб зберегти душу кожного інгредієнта. Ми використовуємо лише натуральний мед, зібраний на диких пасіках, та трави, що виросли під сонцем, а не в теплицях.<br><br>Це не просто додаток до напоїв. Це спроба зупинити час, вдихнути аромат лісу чи поля і відчути справжній смак життя.",
     contactTitle: "Напишіть нам", cartTitle: "Замовити продукт",
@@ -88,10 +102,11 @@ const copy = {
     tagline: "Magic of wild nature in every drop. Craft honey elixir created from ancient recipes for modern rituals.", 
     heroBtn: "LEARN MORE",
     productTitle: "Collections", drinkTitle: "Art of Drinking", change: "Change Flavor",
-    winter: "Winter fairy tale in a bottle. The deep taste of dark honey combined with warming cinnamon, star anise, and spicy ginger root. The perfect companion for cozy evenings, hot tea, or signature mulled wine.",
-    summer: "Breath of the summer wind. Light and refreshing bouquet of meadow herbs, cool mint, and juicy lime based on delicate floral honey. Adds sophistication to lemonades and light aperitifs on a hot day.",
+    winter: "Winter fairy tale in a bottle. The deep taste of dark honey combined with warming cinnamon, star anise, and spicy ginger root.",
+    classic: "Pure harmony of nature. Balanced taste of wildflowers with subtle notes of pollen. A universal elixir.",
+    summer: "Breath of the summer wind. Light and refreshing bouquet of meadow herbs, cool mint, and juicy lime.",
     editionSuffix: "EDITION",
-    winterName: "Brewmiel. Winter Edition", summerName: "Brewmiel. Summer Edition",
+    winterName: "Brewmiel. Winter Edition", classicName: "Brewmiel. Classic Edition", summerName: "Brewmiel. Summer Edition",
     aboutLink: "About Us", aboutTitle: "Our Story",
     aboutText: "BREWMIEL is a story about returning to the roots. We believe that nature has answers to all questions, and taste can be not just a sensation, but an emotion.<br><br>Our syrups are handcrafted in small batches to preserve the soul of every ingredient. We use only natural honey collected from wild apiaries and herbs grown under the sun, not in greenhouses.<br><br>It's not just an additive to drinks. It's an attempt to stop time, breathe in the scent of the forest or field, and feel the true taste of life.",
     contactTitle: "Contact Us", cartTitle: "Order Product",
@@ -118,58 +133,74 @@ const flagUK = `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 480"><p
    3. ЛОГІКА ІНТЕРФЕЙСУ
    ========================================= */
 let lang = 'ua';
-let index = 0; 
+// ЗМІНА: Починаємо з індексу 1 (Classic)
+let index = 1; 
 let currentRecipeIndex = 0;
 
 function updateProductVisuals() {
-  const winterCard = document.querySelector('.bottle-card.winter');
-  const summerCard = document.querySelector('.bottle-card.summer');
-  const prevBtn = document.getElementById('prodPrevBtn');
-  const nextBtn = document.getElementById('prodNextBtn');
+  // Очищаємо всі класи позиціонування
+  document.querySelectorAll('.bottle-card').forEach(c => c.classList.remove('active', 'on-left', 'on-right'));
 
-  winterCard.classList.remove('active', 'on-right', 'on-left');
-  summerCard.classList.remove('active', 'on-right', 'on-left');
+  const total = productKeys.length;
+  const activeKey = productKeys[index];
   
-  prevBtn.classList.remove('hidden');
-  nextBtn.classList.remove('hidden');
+  // Визначаємо сусідів (циклічно)
+  const prevIndex = (index - 1 + total) % total;
+  const nextIndex = (index + 1) % total;
 
-  if (index === 0) { 
-    winterCard.classList.add('active'); 
-    summerCard.classList.add('on-right'); 
-    document.body.setAttribute('data-product', 'winter');
-    prevBtn.classList.add('hidden'); 
-  } else { 
-    summerCard.classList.add('active'); 
-    winterCard.classList.add('on-left'); 
-    document.body.setAttribute('data-product', 'summer');
-    nextBtn.classList.add('hidden'); 
-  }
+  const activeCard = document.querySelector(`.bottle-card.${activeKey}`);
+  const prevCard = document.querySelector(`.bottle-card.${productKeys[prevIndex]}`);
+  const nextCard = document.querySelector(`.bottle-card.${productKeys[nextIndex]}`);
+
+  // Ставимо класи
+  if(activeCard) activeCard.classList.add('active');
+  if(prevCard) prevCard.classList.add('on-left');
+  if(nextCard) nextCard.classList.add('on-right');
+
+  // Встановлюємо продукт для зміни кольорів
+  document.body.setAttribute('data-product', activeKey);
   
-  const key = index === 0 ? 'winter' : 'summer';
-  const editionName = lang === 'ua' ? (index === 0 ? 'ЗИМОВА' : 'ЛІТНЯ') : (index === 0 ? 'WINTER' : 'SUMMER');
+  // Кнопки навігації завжди видимі, бо слайдер циклічний
+  document.getElementById('prodPrevBtn').classList.remove('hidden');
+  document.getElementById('prodNextBtn').classList.remove('hidden');
+  
+  const editionName = lang === 'ua' ? 
+      (activeKey === 'winter' ? 'ЗИМОВА' : activeKey === 'classic' ? 'КЛАСИЧНА' : 'ЛІТНЯ') : 
+      (activeKey === 'winter' ? 'WINTER' : activeKey === 'classic' ? 'CLASSIC' : 'SUMMER');
+      
   document.getElementById('edition').innerText = `${editionName} ${copy[lang].editionSuffix}`;
-  document.getElementById('productDesc').innerText = copy[lang][key];
-  const price = lang === 'ua' ? products[key].priceUA + ' ₴' : '$' + products[key].priceEN;
+  document.getElementById('productDesc').innerText = copy[lang][activeKey];
+  
+  const price = lang === 'ua' ? products[activeKey].priceUA + ' ₴' : '$' + products[activeKey].priceEN;
   document.getElementById('priceDisplay').innerText = price;
-  updateDrinks(key);
+  
+  updateDrinks(activeKey);
 }
 
 // Запуск
 updateProductVisuals();
 
 function setProduct(selected) {
-    if ((selected === 'winter' && index === 0) || (selected === 'summer' && index === 1)) return;
-    if (selected === 'winter') index = 0;
-    else index = 1;
-    updateProductVisuals();
+    const newIndex = productKeys.indexOf(selected);
+    if (newIndex !== -1 && newIndex !== index) {
+        index = newIndex;
+        updateProductVisuals();
+    }
 }
 
-document.getElementById('prodNextBtn').onclick = () => { index = 1; updateProductVisuals(); };
-document.getElementById('prodPrevBtn').onclick = () => { index = 0; updateProductVisuals(); };
+// Циклічне перемикання
+document.getElementById('prodNextBtn').onclick = () => { 
+    index = (index + 1) % productKeys.length; 
+    updateProductVisuals(); 
+};
+document.getElementById('prodPrevBtn').onclick = () => { 
+    index = (index - 1 + productKeys.length) % productKeys.length; 
+    updateProductVisuals(); 
+};
 
 /* --- ЛОГІКА КОШИКА --- */
 function addToCart() {
-    const productId = index === 0 ? 'winter' : 'summer';
+    const productId = productKeys[index];
     const existingItem = cart.find(item => item.id === productId);
     if (existingItem) { existingItem.quantity++; } else { cart.push({ id: productId, quantity: 1 }); }
     updateFloatingButton();
@@ -283,11 +314,10 @@ contactTriggers.forEach(btn => {
         document.getElementById("contactModal").classList.add('show'); 
         document.body.classList.add('no-scroll');
         lenis.stop();
-        // При відкритті модалки перевіряємо, чи треба показати доставку (якщо в кошику товари, то це Замовлення)
         if (cart.length > 0) {
-            handleTopicChange(true); // Форсуємо показ доставки для кошика
+            handleTopicChange(true); 
         } else {
-            handleTopicChange(); // Перевіряємо селект
+            handleTopicChange(); 
         }
     }); 
 });
@@ -309,6 +339,7 @@ function updateDrinks(season) {
             <div class="card-link">${copy[lang].readMoreBtn} &rarr;</div>`;
         track.appendChild(card);
     });
+    currentRecipeIndex = 0; // Скидаємо індекс при зміні продукту
     updateCarouselVisuals();
 }
 
@@ -423,8 +454,8 @@ aboutBtn.addEventListener('click', (e) => {
 });
 
 function openRecipe(cardIndex) {
-    const season = index === 0 ? 'winter' : 'summer';
-    const recipeData = drinkRecipes[lang][season][cardIndex];
+    const productId = productKeys[index];
+    const recipeData = drinkRecipes[lang][productId][cardIndex];
     document.getElementById('recipeTitle').innerText = recipeData.name;
     document.getElementById('recipeText').innerHTML = recipeData.full;
     document.getElementById('recipeImg').src = recipeData.detailImage;
@@ -454,8 +485,8 @@ messageInput.addEventListener('input', resizeTextarea);
 const deliveryToggle = document.getElementById('deliveryToggle');
 const deliveryContainer = document.getElementById('deliveryFields');
 const closeDeliveryBtn = document.getElementById('closeDeliveryBtn');
-const deliverySectionWrapper = document.querySelector('.delivery-section'); // Wrapper
-const typeSelect = document.getElementById('type'); // Dropdown
+const deliverySectionWrapper = document.querySelector('.delivery-section'); 
+const typeSelect = document.getElementById('type'); 
 const delInputs = deliveryContainer.querySelectorAll('input[type="text"], input[type="tel"]');
 
 function toggleDelivery(show) {
@@ -473,9 +504,7 @@ function toggleDelivery(show) {
     }
 }
 
-// === НОВА ЛОГІКА: Слідкуємо за Темою ===
 function handleTopicChange(forceOrder = false) {
-    // Якщо forceOrder (наприклад, з кошика), то ставимо "Замовлення"
     if (forceOrder) {
         typeSelect.value = "Замовлення";
     }
@@ -484,18 +513,16 @@ function handleTopicChange(forceOrder = false) {
         deliverySectionWrapper.style.display = 'block';
     } else {
         deliverySectionWrapper.style.display = 'none';
-        toggleDelivery(false); // Скидаємо, якщо змінили тему
+        toggleDelivery(false); 
     }
 }
 
-// Слухаємо зміну теми
 typeSelect.addEventListener('change', () => handleTopicChange());
 
-// ГАРАНТОВАНО ЗАКРИВАЄМО ПРИ ЗАВАНТАЖЕННІ
 window.addEventListener('load', () => {
     deliveryToggle.checked = false;
     toggleDelivery(false);
-    handleTopicChange(); // Перевіряємо початковий стан
+    handleTopicChange(); 
 });
 
 deliveryToggle.addEventListener('change', (e) => toggleDelivery(e.target.checked));
@@ -589,9 +616,11 @@ const searchBranches = async (e) => {
     }
 };
 
-cityInput.addEventListener('input', debounce(searchCities));
-branchInput.addEventListener('focus', (e) => { if(selectedCityRef) searchBranches(e); });
-branchInput.addEventListener('input', debounce(searchBranches));
+if (cityInput) cityInput.addEventListener('input', debounce(searchCities));
+if (branchInput) {
+    branchInput.addEventListener('focus', (e) => { if(selectedCityRef) searchBranches(e); });
+    branchInput.addEventListener('input', debounce(searchBranches));
+}
 
 document.addEventListener('click', (e) => {
     if (!e.target.closest('.input-group-relative')) {
@@ -651,7 +680,7 @@ async function handleSubmit(event) {
       formEl.reset();
       
       toggleDelivery(false);
-      handleTopicChange(); // Оновлюємо стан після ресету
+      handleTopicChange(); 
       
       if (cart.length > 0) {
           cart = [];
@@ -686,7 +715,8 @@ if (form) {
    ========================================================================== */
 toggleSwitch.checked = false;
 document.body.classList.remove('light');
-document.body.setAttribute('data-product', 'winter');
+// ЗМІНА: Видалено примусове встановлення 'winter' тут.
+// document.body.setAttribute('data-product', 'winter'); <--- ВИДАЛЕНО
 applyLang();
 
 const canvas = document.querySelector('.snow');
@@ -737,13 +767,11 @@ function addSwipeSupport(element, onLeft, onRight) {
     }
 }
 
-// Свайпи для пляшок
 const productStage = document.getElementById('productStage');
 addSwipeSupport(productStage, 
-    () => { if(index === 0) setProduct('summer'); }, // Swipe Left -> Go Summer
-    () => { if(index === 1) setProduct('winter'); }  // Swipe Right -> Go Winter
+    () => { document.getElementById('prodNextBtn').click(); }, 
+    () => { document.getElementById('prodPrevBtn').click(); } 
 );
 
-// Свайпи для рецептів
 const recipeSection = document.getElementById('recipeSection');
 addSwipeSupport(recipeSection, nextSlide, prevSlide);
