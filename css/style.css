@@ -43,12 +43,19 @@ html.lenis, html.lenis body { height: auto; }
 .lenis.lenis-stopped { overflow: hidden; }
 .lenis.lenis-scrolling iframe { pointer-events: none; }
 
-body {
+/* === БЛОКУВАННЯ ГОРИЗОНТАЛЬНОГО СКРОЛУ === */
+html, body {
+  /* Жорстка фіксація ширини */
+  width: 100%;
+  max-width: 100%;
+  overflow-x: hidden; 
+  overscroll-behavior-x: none; /* Блокує свайпи навігації "вперед/назад" */
+  
   font-family: var(--font-body);
   background-color: var(--main-bg);
   color: var(--text-light);
   line-height: 1.6;
-  overflow-x: hidden;
+  
   transition: background-color 0.5s ease, color 0.3s ease;
   position: relative;
   min-height: 100vh;
@@ -83,6 +90,7 @@ body.no-scroll { overflow: hidden; }
     animation: pulse-syrup 6s ease-in-out infinite;
     z-index: -1; 
     transition: background 0.5s ease;
+    max-width: 100vw; /* Запобіжник від розпирання */
 }
 
 .product-glow { width: 500px; height: 500px; transform: translate(-50%, -60%); }
@@ -279,10 +287,7 @@ body.light .checkmark-box::after { color: #fff; }
   position: relative; 
   z-index: 2; 
 }
-/* Інвертуємо великий логотип при світлій темі */
-body.light .logo-img { 
-  filter: invert(1) drop-shadow(0 5px 15px rgba(0,0,0,0.3)); 
-}
+body.light .logo-img { filter: invert(1) drop-shadow(0 5px 15px rgba(0,0,0,0.3)); }
 
 .hero-brand-text { font-family: var(--font-heading); font-size: clamp(32px, 5vw, 48px); letter-spacing: 6px; margin-bottom: 10px; color: var(--text-light); text-transform: uppercase; font-weight: 600; transition: color 0.3s ease; }
 #tagline { margin-bottom: 30px; max-width: 600px; opacity: 0.9; font-size: 16px; }
