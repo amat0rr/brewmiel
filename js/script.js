@@ -8,6 +8,7 @@ function forceScrollTop() {
 window.onload = forceScrollTop;
 window.onbeforeunload = forceScrollTop;
 
+// Визначаємо, чи це мобільний пристрій
 const isMobile = window.innerWidth < 768;
 
 // Ініціалізація плавного скролу
@@ -16,7 +17,7 @@ const lenis = new Lenis({
   easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)), 
   direction: 'vertical', 
   gestureDirection: 'vertical', 
-  smooth: !isMobile, // На ПК - плавний скрол, на мобільних - нативний
+  smooth: !isMobile, // На ПК - плавний, на мобільних - вимкнено (нативний)
   mouseMultiplier: 1, 
   smoothTouch: false, 
   touchMultiplier: 2,
@@ -25,13 +26,29 @@ const lenis = new Lenis({
 function raf(time) { lenis.raf(time); requestAnimationFrame(raf); }
 requestAnimationFrame(raf);
 
-// Обробка кліків по посиланнях (для "Дізнатися більше")
+// === ВИПРАВЛЕННЯ КНОПКИ "ДІЗНАТИСЯ БІЛЬШЕ" ===
 document.querySelectorAll('a[href^="#"]').forEach(anchor => {
   anchor.addEventListener('click', function (e) {
     e.preventDefault(); 
     const targetId = this.getAttribute('href');
-    // Використовуємо Lenis для скролу, якщо він активний
-    lenis.scrollTo(targetId);
+    const targetElement = document.querySelector(targetId);
+
+    if (targetElement) {
+        if (isMobile) {
+            // ДЛЯ ТЕЛЕФОНІВ: Використовуємо стандартний скрол браузера
+            const headerOffset = 80; // Відступ для хедера
+            const elementPosition = targetElement.getBoundingClientRect().top;
+            const offsetPosition = elementPosition + window.pageYOffset - headerOffset;
+    
+            window.scrollTo({
+                top: offsetPosition,
+                behavior: "smooth"
+            });
+        } else {
+            // ДЛЯ ПК: Використовуємо Lenis
+            lenis.scrollTo(targetId);
+        }
+    }
   });
 });
 
@@ -764,11 +781,11 @@ function addSwipeSupport(element, onLeft, onRight) {
     let touchEndX = 0;
     
     element.addEventListener('touchstart', (e) => {
-        touchStartX = e.changedTouches[0].screenX;
+        touchStartX = e.changedTouches[0].clientX; // Виправлено на clientX
     }, {passive: true});
     
     element.addEventListener('touchend', (e) => {
-        touchEndX = e.changedTouches[0].screenX;
+        touchEndX = e.changedTouches[0].clientX; // Виправлено на clientX
         handleGesture();
     }, {passive: true});
     
@@ -788,8 +805,6 @@ const recipeSection = document.getElementById('recipeSection');
 addSwipeSupport(recipeSection, nextSlide, prevSlide);
 
 /* Фікс для віртуальної клавіатури на Android */
-// ВИПРАВЛЕНО: Додано перевірку, що це дійсно мобільний пристрій і тач-екран
-// Щоб не блокувати висоту на ПК
 if (window.visualViewport && window.innerWidth < 768 && 'ontouchstart' in window) {
     window.visualViewport.addEventListener('resize', () => {
        document.body.style.height = window.visualViewport.height + 'px';
