@@ -45,11 +45,10 @@ html.lenis, html.lenis body { height: auto; }
 
 /* === БЛОКУВАННЯ ГОРИЗОНТАЛЬНОГО СКРОЛУ === */
 html, body {
-  /* Жорстка фіксація ширини */
   width: 100%;
   max-width: 100%;
   overflow-x: hidden; 
-  overscroll-behavior-x: none; /* Блокує свайпи навігації "вперед/назад" */
+  overscroll-behavior-x: none;
   
   font-family: var(--font-body);
   background-color: var(--main-bg);
@@ -59,7 +58,7 @@ html, body {
   transition: background-color 0.5s ease, color 0.3s ease;
   position: relative;
   min-height: 100vh;
-  -webkit-tap-highlight-color: transparent;
+  -webkit-tap-highlight-color: transparent; /* Вимикаємо синє підсвічування тапу */
   -webkit-text-size-adjust: 100%;
 }
 
@@ -90,7 +89,7 @@ body.no-scroll { overflow: hidden; }
     animation: pulse-syrup 6s ease-in-out infinite;
     z-index: -1; 
     transition: background 0.5s ease;
-    max-width: 100vw; /* Запобіжник від розпирання */
+    max-width: 100vw; 
 }
 
 .product-glow { width: 500px; height: 500px; transform: translate(-50%, -60%); }
@@ -146,7 +145,6 @@ body[data-product="summer"] {
     --accent-rgb: var(--rgb-summer);
 }
 
-/* ВИПРАВЛЕННЯ МЕРЕХТІННЯ: Зменшено прозорість шуму */
 body.light .noise-bg { 
     background-image: var(--noise-img-light); 
     opacity: 0.08; 
@@ -169,7 +167,6 @@ h1, h2, h3, .edition { font-family: var(--font-heading); }
 header { position: fixed; top: 0; left: 0; width: 100%; z-index: 50; display: flex; justify-content: space-between; align-items: center; padding: 14px 20px; background: rgba(18, 18, 18, 0.95); backdrop-filter: blur(8px); -webkit-backdrop-filter: blur(8px); border-bottom: 1px solid var(--accent); transition: border-color 0.3s ease; transform: translateZ(0); }
 .brand-container { display: flex; align-items: center; gap: 12px; text-decoration: none; }
 
-/* МАЛЕНЬКИЙ ЛОГОТИП */
 .brand-img { height: 32px; width: auto; display: block; transition: 0.3s; }
 body.light .brand-img { filter: invert(1); }
 
@@ -277,7 +274,6 @@ body.light .checkmark-box::after { color: #fff; }
 .hero { min-height: 100vh; min-height: 100svh; display: flex; flex-direction: column; justify-content: center; align-items: center; text-align: center; padding: 20px; padding-top: 80px; position: relative; z-index: 2; }
 .logo-wrapper { position: relative; display: flex; justify-content: center; align-items: center; margin-bottom: 10px; }
 
-/* ВЕЛИКИЙ ЛОГОТИП */
 .logo-img { 
   width: 260px; 
   max-width: 70vw; 
@@ -397,3 +393,45 @@ body.light .nav-btn { background: rgba(255, 255, 255, 0.5); }
 body.light .suggestions-list { background: var(--bg-base-light); border-color: var(--accent); }
 body.light .suggestions-list li { color: var(--text-dark); border-bottom-color: rgba(0,0,0,0.1); }
 body.light .suggestions-list li:hover { color: #fff; }
+
+/* --- ОПТИМІЗАЦІЯ ДЛЯ ANDROID / MOBILES --- */
+@media (max-width: 768px) {
+    .noise-bg {
+        animation: none; 
+        background-attachment: scroll; 
+        opacity: 0.3; 
+    }
+
+    header, footer, .modal-content, .floating-btn {
+        backdrop-filter: none !important;
+        -webkit-backdrop-filter: none !important;
+    }
+    
+    header { background: rgba(18, 18, 18, 0.98); }
+    body.light header { background: rgba(249, 249, 249, 0.98); }
+    
+    .floating-btn { background-color: rgba(18, 18, 18, 0.95); }
+    body.light .floating-btn { background-color: rgba(245, 241, 224, 0.95); }
+
+    .hero-glow, .product-glow, .recipe-glow {
+        filter: blur(30px); 
+        opacity: 0.5;
+    }
+    
+    /* Зручніші кнопки */
+    .nav-btn {
+        width: 50px;
+        height: 50px; 
+    }
+    
+    .card p {
+        font-size: 14px;
+        -webkit-line-clamp: 3; 
+    }
+    
+    input, select, textarea {
+        font-size: 16px !important; 
+    }
+    
+    .bottle-card:hover { transform: none; }
+}
