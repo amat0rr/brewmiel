@@ -8,16 +8,30 @@ function forceScrollTop() {
 window.onload = forceScrollTop;
 window.onbeforeunload = forceScrollTop;
 
+const isMobile = window.innerWidth < 768;
+
+// Ініціалізація плавного скролу
 const lenis = new Lenis({
-  duration: 1.2, easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)), 
-  direction: 'vertical', gestureDirection: 'vertical', smooth: true, mouseMultiplier: 1, smoothTouch: false, touchMultiplier: 2,
+  duration: 1.2, 
+  easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)), 
+  direction: 'vertical', 
+  gestureDirection: 'vertical', 
+  smooth: !isMobile, // На ПК - плавний скрол, на мобільних - нативний
+  mouseMultiplier: 1, 
+  smoothTouch: false, 
+  touchMultiplier: 2,
 });
+
 function raf(time) { lenis.raf(time); requestAnimationFrame(raf); }
 requestAnimationFrame(raf);
 
+// Обробка кліків по посиланнях (для "Дізнатися більше")
 document.querySelectorAll('a[href^="#"]').forEach(anchor => {
   anchor.addEventListener('click', function (e) {
-    e.preventDefault(); lenis.scrollTo(this.getAttribute('href'));
+    e.preventDefault(); 
+    const targetId = this.getAttribute('href');
+    // Використовуємо Lenis для скролу, якщо він активний
+    lenis.scrollTo(targetId);
   });
 });
 
@@ -37,9 +51,9 @@ let cart = [];
 const drinkRecipes = {
   ua: {
     winter: [
-      { name: "HOT TODDY", short: "Ідеальний зігріваючий напій для холодних вечорів.", full: "Класичний зимовий напій, що зігріває душу.\n\n<strong>Інгредієнти:</strong>\n• 40 мл зимового сиропу\n• 150 мл окропу або чорного чаю\n• Слайс лимона\n• Паличка кориці\n\n<strong>Приготування:</strong>\nЗмішайте сироп з гарячою водою у чашці. Додайте лимон та корицю. Насолоджуйтесь теплом.", icon: "assets/winter-icon-1.png", detailImage: "assets/winter-picture-1.png" },
-      { name: "SPICED COFFEE", short: "Ваша улюблена кава з новим пряним характером.", full: "Кава з новим характером.\n\n<strong>Інгредієнти:</strong>\n• 30 мл зимового сиропу\n• 150 мл чорної кави\n• Збиті вершки\n\n<strong>Приготування:</strong>\nЗваріть вашу улюблену каву. Додайте сироп замість цукру. За бажанням прикрасьте вершками.", icon: "assets/winter-icon-2.png", detailImage: "assets/winter-picture-2.png" },
-      { name: "FOREST TEA", short: "Справжня магія лісу у вашій чашці.", full: "Аромат лісу у вашій чашці.\n\n<strong>Інгредієнти:</strong>\n• 30 мл зимового сиропу\n• 200 мл трав'яного чаю\n• Розмарин\n\n<strong>Приготування:</strong>\nЗаваріть чай. Додайте сироп та перемішайте. Прикрасьте розмарином.", icon: "assets/winter-icon-3.png", detailImage: "assets/winter-picture-3.png" }
+      { name: "HOT TODDY", short: "Ідеальний зігріваючий напій для холодних вечорів.", full: "Класичний зимовий напій, що зігріває душу.\n\n<strong>Інгредієнти:</strong>\n• 40 мл зимового сиропу\n• 150 мл окропу або чорного чаю\n• Слайс лимона\n• Паличка кориці\n\n<strong>Приготування:</strong>\nЗмішайте сироп з гарячою водою у чашці. Додайте лимон та корицю. Насолоджуйтесь теплом.", icon: "assets/winter-icon-1.png", detailImage: "assets/winter-picture-1.jpg" },
+      { name: "SPICED COFFEE", short: "Ваша улюблена кава з новим пряним характером.", full: "Кава з новим характером.\n\n<strong>Інгредієнти:</strong>\n• 30 мл зимового сиропу\n• 150 мл чорної кави\n• Збиті вершки\n\n<strong>Приготування:</strong>\nЗваріть вашу улюблену каву. Додайте сироп замість цукру. За бажанням прикрасьте вершками.", icon: "assets/winter-icon-2.png", detailImage: "assets/winter-picture-2.jpg" },
+      { name: "FOREST TEA", short: "Справжня магія лісу у вашій чашці.", full: "Аромат лісу у вашій чашці.\n\n<strong>Інгредієнти:</strong>\n• 30 мл зимового сиропу\n• 200 мл трав'яного чаю\n• Розмарин\n\n<strong>Приготування:</strong>\nЗаваріть чай. Додайте сироп та перемішайте. Прикрасьте розмарином.", icon: "assets/winter-icon-3.png", detailImage: "assets/winter-picture-3.jpg" }
     ],
     classic: [
       { name: "GOLD RUSH", short: "Золота класика віскі сауер з медовим відтінком.", full: "Сучасна класика, що розкриває смак віскі по-новому.\n\n<strong>Інгредієнти:</strong>\n• 30 мл класичного сиропу\n• 60 мл бурбону\n• 25 мл лимонного соку\n• Лід\n\n<strong>Приготування:</strong>\nЕнергійно збийте всі інгредієнти в шейкері з льодом. Процідіть у стакан з новим льодом.", icon: "assets/winter-icon-1.png", detailImage: "assets/classic-picture-1.jpg" },
@@ -47,26 +61,26 @@ const drinkRecipes = {
       { name: "HONEY LEMONADE", short: "Освіжаючий домашній лимонад.", full: "Найкращий спосіб втамувати спрагу.\n\n<strong>Інгредієнти:</strong>\n• 40 мл класичного сиропу\n• 200 мл газованої води\n• 30 мл лимонного соку\n• М'ята\n\n<strong>Приготування:</strong>\nЗмішайте сироп та сік у склянці. Додайте лід та воду. Прикрасьте м'ятою.", icon: "assets/winter-icon-3.png", detailImage: "assets/classic-picture-3.jpg" }
     ],
     summer: [
-      { name: "CLASSIC TONIC", short: "Освіжаюча класика з гірчинкою тоніка.", full: "Освіжаюча класика для спекотного дня.\n\n<strong>Інгредієнти:</strong>\n• 30 мл літнього сиропу\n• 150 мл тоніка\n• Лід\n• Розмарин\n\n<strong>Приготування:</strong>\nНаповніть келих льодом. Налийте сироп та тонік. Обережно перемішайте.", icon: "assets/summer-icon-1.png", detailImage: "assets/summer-picture-1.png" },
-      { name: "MOON SPRITZ", short: "Легкий, ігристий та святковий аперитив.", full: "Легкий та ігристий аперитив.\n\n<strong>Інгредієнти:</strong>\n• 40 мл літнього сиропу\n• 60 мл Просекко\n• 20 мл газованої води\n• Апельсин\n\n<strong>Приготування:</strong>\nУ келих з льодом налийте всі інгредієнти. Прикрасьте слайсом апельсина.", icon: "assets/summer-icon-2.png", detailImage: "assets/summer-picture-2.png" },
-      { name: "NATURE SOUR", short: "Вишуканий кисло-солодкий баланс.", full: "Кисло-солодкий баланс природи.\n\n<strong>Інгредієнти:</strong>\n• 30 мл літнього сиропу\n• 20 мл лимонного соку\n• Лід\n• Яєчний білок\n\n<strong>Приготування:</strong>\nЗбийте всі інгредієнти у шейкері з льодом. Процідіть у келих.", icon: "assets/summer-icon-3.png", detailImage: "assets/summer-picture-3.png" }
+      { name: "CLASSIC TONIC", short: "Освіжаюча класика з гірчинкою тоніка.", full: "Освіжаюча класика для спекотного дня.\n\n<strong>Інгредієнти:</strong>\n• 30 мл літнього сиропу\n• 150 мл тоніка\n• Лід\n• Розмарин\n\n<strong>Приготування:</strong>\nНаповніть келих льодом. Налийте сироп та тонік. Обережно перемішайте.", icon: "assets/summer-icon-1.png", detailImage: "assets/summer-picture-1.jpg" },
+      { name: "MOON SPRITZ", short: "Легкий, ігристий та святковий аперитив.", full: "Легкий та ігристий аперитив.\n\n<strong>Інгредієнти:</strong>\n• 40 мл літнього сиропу\n• 60 мл Просекко\n• 20 мл газованої води\n• Апельсин\n\n<strong>Приготування:</strong>\nУ келих з льодом налийте всі інгредієнти. Прикрасьте слайсом апельсина.", icon: "assets/summer-icon-2.png", detailImage: "assets/summer-picture-2.jpg" },
+      { name: "NATURE SOUR", short: "Вишуканий кисло-солодкий баланс.", full: "Кисло-солодкий баланс природи.\n\n<strong>Інгредієнти:</strong>\n• 30 мл літнього сиропу\n• 20 мл лимонного соку\n• Лід\n• Яєчний білок\n\n<strong>Приготування:</strong>\nЗбийте всі інгредієнти у шейкері з льодом. Процідіть у келих.", icon: "assets/summer-icon-3.png", detailImage: "assets/summer-picture-3.jpg" }
     ]
   },
   en: {
     winter: [
-      { name: "HOT TODDY", short: "Perfect warming drink for cold evenings.", full: "A classic winter drink that warms the soul.\n\n<strong>Ingredients:</strong>\n• 40 ml winter syrup\n• 150 ml boiling water or black tea\n• Lemon slice\n• Cinnamon stick\n\n<strong>Preparation:</strong>\nMix syrup with hot water in a cup. Add lemon and cinnamon. Enjoy the warmth.", icon: "assets/winter-icon-1.png", detailImage: "assets/winter-picture-1.png" },
-      { name: "SPICED COFFEE", short: "Your favorite coffee with a new spicy character.", full: "Coffee with a new character.\n\n<strong>Ingredients:</strong>\n• 30 ml winter syrup\n• 150 ml black coffee\n• Whipped cream\n\n<strong>Preparation:</strong>\nBrew your favorite coffee. Add syrup instead of sugar. Garnish with cream if desired.", icon: "assets/winter-icon-2.png", detailImage: "assets/winter-picture-2.png" },
-      { name: "FOREST TEA", short: "Real forest magic in your cup.", full: "Forest aroma in your cup.\n\n<strong>Ingredients:</strong>\n• 30 ml winter syrup\n• 200 ml herbal tea\n• Rosemary sprig\n\n<strong>Preparation:</strong>\nBrew the tea. Add syrup and stir. Garnish with rosemary.", icon: "assets/winter-icon-3.png", detailImage: "assets/winter-picture-3.png" }
+      { name: "HOT TODDY", short: "Perfect warming drink for cold evenings.", full: "A classic winter drink that warms the soul.\n\n<strong>Ingredients:</strong>\n• 40 ml winter syrup\n• 150 ml boiling water or black tea\n• Lemon slice\n• Cinnamon stick\n\n<strong>Preparation:</strong>\nMix syrup with hot water in a cup. Add lemon and cinnamon. Enjoy the warmth.", icon: "assets/winter-icon-1.png", detailImage: "assets/winter-picture-1.jpg" },
+      { name: "SPICED COFFEE", short: "Your favorite coffee with a new spicy character.", full: "Coffee with a new character.\n\n<strong>Ingredients:</strong>\n• 30 ml winter syrup\n• 150 ml black coffee\n• Whipped cream\n\n<strong>Preparation:</strong>\nBrew your favorite coffee. Add syrup instead of sugar. Garnish with cream if desired.", icon: "assets/winter-icon-2.png", detailImage: "assets/winter-picture-2.jpg" },
+      { name: "FOREST TEA", short: "Real forest magic in your cup.", full: "Forest aroma in your cup.\n\n<strong>Ingredients:</strong>\n• 30 ml winter syrup\n• 200 ml herbal tea\n• Rosemary sprig\n\n<strong>Preparation:</strong>\nBrew the tea. Add syrup and stir. Garnish with rosemary.", icon: "assets/winter-icon-3.png", detailImage: "assets/winter-picture-3.jpg" }
     ],
     classic: [
       { name: "GOLD RUSH", short: "Golden classic whiskey sour with a honey touch.", full: "A modern classic that reveals whiskey in a new way.\n\n<strong>Ingredients:</strong>\n• 30 ml classic syrup\n• 60 ml bourbon\n• 25 ml lemon juice\n• Ice\n\n<strong>Preparation:</strong>\nShake all ingredients vigorously with ice. Strain into a rock glass with fresh ice.", icon: "assets/winter-icon-1.png", detailImage: "assets/classic-picture-1.jpg" },
-      { name: "BEE'S KNEES", short: "Elegant prohibition-era gin cocktail.", full: "A cocktail appropriately named 'the height of excellence'.\n\n<strong>Ingredients:</strong>\n• 25 ml classic syrup\n• 60 ml gin\n• 25 ml lemon juice\n\n<strong>Preparation:</strong>\nShake ingredients with ice until chilled. Strain into a chilled cocktail glass.", icon: "assets/winter-icon-2.png", detailImage: "assets/classic-picture-2.jpg" },
+      { name: "BEE'S KNEES", short: "Elegant prohibition-era gin cocktail.", full: "A cocktail appropriately named 'the height of excellence'.\n\n<strong>Ingredients:</strong>\n• 25 мл classic syrup\n• 60 ml gin\n• 25 ml lemon juice\n\n<strong>Preparation:</strong>\nShake ingredients with ice until chilled. Strain into a chilled cocktail glass.", icon: "assets/winter-icon-2.png", detailImage: "assets/classic-picture-2.jpg" },
       { name: "HONEY LEMONADE", short: "Refreshing homemade lemonade.", full: "The best way to quench your thirst.\n\n<strong>Ingredients:</strong>\n• 40 ml classic syrup\n• 200 ml soda water\n• 30 ml lemon juice\n• Mint\n\n<strong>Preparation:</strong>\nMix syrup and juice in a glass. Add ice and water. Garnish with mint.", icon: "assets/winter-icon-3.png", detailImage: "assets/classic-picture-3.jpg" }
     ],
     summer: [
-      { name: "CLASSIC TONIC", short: "Refreshing classic with tonic bitterness.", full: "Refreshing classic for a hot day.\n\n<strong>Ingredients:</strong>\n• 30 ml summer syrup\n• 150 ml tonic water\n• Ice\n• Rosemary\n\n<strong>Preparation:</strong>\nFill a glass with ice. Pour syrup and tonic. Stir gently.", icon: "assets/summer-icon-1.png", detailImage: "assets/summer-picture-1.png" },
-      { name: "MOON SPRITZ", short: "Light, bubbly, and festive aperitif.", full: "Light and bubbly aperitif.\n\n<strong>Ingredients:</strong>\n• 40 ml summer syrup\n• 60 ml Prosecco\n• 20 ml soda water\n• Orange\n\n<strong>Preparation:</strong>\nPour all ingredients into a glass with ice. Garnish with an orange slice.", icon: "assets/summer-icon-2.png", detailImage: "assets/summer-picture-2.png" },
-      { name: "NATURE SOUR", short: "Exquisite sweet and sour balance.", full: "Sweet and sour balance of nature.\n\n<strong>Ingredients:</strong>\n• 30 ml summer syrup\n• 20 ml lemon juice\n• Ice\n• Egg white\n\n<strong>Preparation:</strong>\nShake all ingredients in a shaker with ice. Strain into a glass.", icon: "assets/summer-icon-3.png", detailImage: "assets/summer-picture-3.png" }
+      { name: "CLASSIC TONIC", short: "Refreshing classic with tonic bitterness.", full: "Refreshing classic for a hot day.\n\n<strong>Ingredients:</strong>\n• 30 ml summer syrup\n• 150 ml tonic water\n• Ice\n• Rosemary\n\n<strong>Preparation:</strong>\nFill a glass with ice. Pour syrup and tonic. Stir gently.", icon: "assets/summer-icon-1.png", detailImage: "assets/summer-picture-1.jpg" },
+      { name: "MOON SPRITZ", short: "Light, bubbly, and festive aperitif.", full: "Light and bubbly aperitif.\n\n<strong>Ingredients:</strong>\n• 40 ml summer syrup\n• 60 ml Prosecco\n• 20 ml soda water\n• Orange\n\n<strong>Preparation:</strong>\nPour all ingredients into a glass with ice. Garnish with an orange slice.", icon: "assets/summer-icon-2.png", detailImage: "assets/summer-picture-2.jpg" },
+      { name: "NATURE SOUR", short: "Exquisite sweet and sour balance.", full: "Sweet and sour balance of nature.\n\n<strong>Ingredients:</strong>\n• 30 ml summer syrup\n• 20 ml lemon juice\n• Ice\n• Egg white\n\n<strong>Preparation:</strong>\nShake all ingredients in a shaker with ice. Strain into a glass.", icon: "assets/summer-icon-3.png", detailImage: "assets/summer-picture-3.jpg" }
     ]
   }
 };
@@ -133,18 +147,15 @@ const flagUK = `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 480"><p
    3. ЛОГІКА ІНТЕРФЕЙСУ
    ========================================= */
 let lang = 'ua';
-// ЗМІНА: Починаємо з індексу 1 (Classic)
 let index = 1; 
 let currentRecipeIndex = 0;
 
 function updateProductVisuals() {
-  // Очищаємо всі класи позиціонування
   document.querySelectorAll('.bottle-card').forEach(c => c.classList.remove('active', 'on-left', 'on-right'));
 
   const total = productKeys.length;
   const activeKey = productKeys[index];
   
-  // Визначаємо сусідів (циклічно)
   const prevIndex = (index - 1 + total) % total;
   const nextIndex = (index + 1) % total;
 
@@ -152,15 +163,12 @@ function updateProductVisuals() {
   const prevCard = document.querySelector(`.bottle-card.${productKeys[prevIndex]}`);
   const nextCard = document.querySelector(`.bottle-card.${productKeys[nextIndex]}`);
 
-  // Ставимо класи
   if(activeCard) activeCard.classList.add('active');
   if(prevCard) prevCard.classList.add('on-left');
   if(nextCard) nextCard.classList.add('on-right');
 
-  // Встановлюємо продукт для зміни кольорів
   document.body.setAttribute('data-product', activeKey);
   
-  // Кнопки навігації завжди видимі, бо слайдер циклічний
   document.getElementById('prodPrevBtn').classList.remove('hidden');
   document.getElementById('prodNextBtn').classList.remove('hidden');
   
@@ -177,7 +185,6 @@ function updateProductVisuals() {
   updateDrinks(activeKey);
 }
 
-// Запуск
 updateProductVisuals();
 
 function setProduct(selected) {
@@ -188,7 +195,6 @@ function setProduct(selected) {
     }
 }
 
-// Циклічне перемикання
 document.getElementById('prodNextBtn').onclick = () => { 
     index = (index + 1) % productKeys.length; 
     updateProductVisuals(); 
@@ -339,7 +345,7 @@ function updateDrinks(season) {
             <div class="card-link">${copy[lang].readMoreBtn} &rarr;</div>`;
         track.appendChild(card);
     });
-    currentRecipeIndex = 0; // Скидаємо індекс при зміні продукту
+    currentRecipeIndex = 0; 
     updateCarouselVisuals();
 }
 
@@ -715,17 +721,20 @@ if (form) {
    ========================================================================== */
 toggleSwitch.checked = false;
 document.body.classList.remove('light');
-// ЗМІНА: Видалено примусове встановлення 'winter' тут.
-// document.body.setAttribute('data-product', 'winter'); <--- ВИДАЛЕНО
 applyLang();
 
 const canvas = document.querySelector('.snow');
 const ctx = canvas.getContext('2d');
 let w, h;
-const flakesCount = window.innerWidth < 600 ? 30 : 80;
+
+// ОПТИМІЗАЦІЯ СНІГУ: Зменшено кількість для мобільних
+const flakesCount = window.innerWidth < 600 ? 20 : 60;
+
 function resize() { w = canvas.width = window.innerWidth; h = canvas.height = window.innerHeight; }
 window.addEventListener('resize', resize); resize();
+
 const flakes = [...Array(flakesCount)].map(() => ({ x: Math.random() * w, y: Math.random() * h, r: Math.random() * 2 + 1, s: Math.random() * 1 + 0.5 }));
+
 function snow() { 
   ctx.clearRect(0, 0, w, h); 
   ctx.fillStyle = document.body.classList.contains('light') ? 'rgba(0,0,0,0.1)' : 'rgba(255,255,255,0.6)'; 
@@ -738,8 +747,10 @@ function snow() {
 const date = new Date();
 const month = date.getMonth(); 
 const isWinter = (month === 11 || month === 0 || month === 1);
+const hardwareConcurrency = navigator.hardwareConcurrency || 4;
 
-if (isWinter) {
+// Запускаємо сніг тільки якщо зима та процесор достатньо потужний
+if (isWinter && hardwareConcurrency > 2) {
     snow();
 } else {
     canvas.style.display = 'none'; 
@@ -775,3 +786,12 @@ addSwipeSupport(productStage,
 
 const recipeSection = document.getElementById('recipeSection');
 addSwipeSupport(recipeSection, nextSlide, prevSlide);
+
+/* Фікс для віртуальної клавіатури на Android */
+// ВИПРАВЛЕНО: Додано перевірку, що це дійсно мобільний пристрій і тач-екран
+// Щоб не блокувати висоту на ПК
+if (window.visualViewport && window.innerWidth < 768 && 'ontouchstart' in window) {
+    window.visualViewport.addEventListener('resize', () => {
+       document.body.style.height = window.visualViewport.height + 'px';
+    });
+}
