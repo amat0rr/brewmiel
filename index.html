@@ -29,12 +29,10 @@
       <label class="theme-switch" for="checkbox">
         <input type="checkbox" id="checkbox" />
         <div class="slider">
-  <img src="assets/slider_sun.svg" class="icon icon-sun" alt="Sun">
-
-  <img src="assets/slider_moon.svg" class="icon icon-moon" alt="Moon">
-
-  <div class="knob"></div>
-</div>
+          <img src="assets/slider_sun.svg" class="icon icon-sun" alt="Sun">
+          <img src="assets/slider_moon.svg" class="icon icon-moon" alt="Moon">
+          <div class="knob"></div>
+        </div>
       </label>
     </div>
   </div>
@@ -71,7 +69,7 @@
       <input type="text" id="name" name="name" required placeholder="Олександр" autocomplete="off">
       
       <label id="lblContact" for="email">Email або Telegram</label>
-      <input type="text" id="email" name="contact" required placeholder="@username або email" autocomplete="off">
+      <input type="email" id="email" name="contact" required placeholder="@username або email" autocomplete="off">
       
       <div class="delivery-section">
         <label class="custom-check-label">
@@ -111,12 +109,12 @@
 
             <div class="input-group-relative">
                 <label id="lblBranch">Відділення / Поштомат</label>
-                <input type="text" id="delBranch" name="branch" placeholder="Введіть номер..." autocomplete="off">
+                <input type="text" id="delBranch" name="branch" placeholder="Введіть номер..." autocomplete="off" inputmode="numeric" pattern="[0-9]*">
                 <ul id="branchSuggestions" class="suggestions-list"></ul>
             </div>
 
             <label id="lblPhone">Номер телефону</label>
-            <input type="tel" id="delPhone" name="phone" placeholder="+380...">
+            <input type="tel" id="delPhone" name="phone" placeholder="+380..." inputmode="tel">
             
             <div class="payment-info" id="paymentInfo">
                 💰 Оплата: При отриманні
