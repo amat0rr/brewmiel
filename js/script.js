@@ -31,15 +31,19 @@ document.querySelectorAll('a[href^="#"]').forEach(anchor => {
   anchor.addEventListener('click', function (e) {
     e.preventDefault(); 
     const targetId = this.getAttribute('href');
+    if (targetId === '#') return;
+
     const targetElement = document.querySelector(targetId);
 
     if (targetElement) {
         if (isMobile) {
-            // ДЛЯ ТЕЛЕФОНІВ: Використовуємо стандартний скрол браузера
-            const headerOffset = 80; // Відступ для хедера
-            const elementPosition = targetElement.getBoundingClientRect().top;
-            const offsetPosition = elementPosition + window.pageYOffset - headerOffset;
-    
+            // ДЛЯ ТЕЛЕФОНІВ: Розраховуємо позицію вручну
+            const headerOffset = 80; 
+            const bodyRect = document.body.getBoundingClientRect().top;
+            const elementRect = targetElement.getBoundingClientRect().top;
+            const elementPosition = elementRect - bodyRect;
+            const offsetPosition = elementPosition - headerOffset;
+
             window.scrollTo({
                 top: offsetPosition,
                 behavior: "smooth"
@@ -52,8 +56,11 @@ document.querySelectorAll('a[href^="#"]').forEach(anchor => {
   });
 });
 
+/* ...решта коду (база даних, логіка кошика, форми і т.д.) залишається без змін... */
+/* Вставте сюди весь інший код з попереднього файлу script.js починаючи з const productKeys... */
+
 /* ==========================================================================
-   2. БАЗА ДАНИХ (ПРОДУКТИ, РЕЦЕПТИ, ТЕКСТИ)
+   ... (ТУТ ПРОДОВЖЕННЯ ВАШОГО КОДУ) ...
    ========================================================================== */
 const productKeys = ['winter', 'classic', 'summer'];
 
