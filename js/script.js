@@ -26,41 +26,27 @@ const lenis = new Lenis({
 function raf(time) { lenis.raf(time); requestAnimationFrame(raf); }
 requestAnimationFrame(raf);
 
-// === ВИПРАВЛЕННЯ КНОПКИ "ДІЗНАТИСЯ БІЛЬШЕ" ===
+// === СПРОЩЕНА ЛОГІКА ДЛЯ КНОПКИ ===
 document.querySelectorAll('a[href^="#"]').forEach(anchor => {
   anchor.addEventListener('click', function (e) {
-    e.preventDefault(); 
     const targetId = this.getAttribute('href');
     if (targetId === '#') return;
 
-    const targetElement = document.querySelector(targetId);
-
-    if (targetElement) {
-        if (isMobile) {
-            // ДЛЯ ТЕЛЕФОНІВ: Розраховуємо позицію вручну
-            const headerOffset = 80; 
-            const bodyRect = document.body.getBoundingClientRect().top;
-            const elementRect = targetElement.getBoundingClientRect().top;
-            const elementPosition = elementRect - bodyRect;
-            const offsetPosition = elementPosition - headerOffset;
-
-            window.scrollTo({
-                top: offsetPosition,
-                behavior: "smooth"
-            });
-        } else {
-            // ДЛЯ ПК: Використовуємо Lenis
-            lenis.scrollTo(targetId);
-        }
+    if (isMobile) {
+        // НА МОБІЛЬНИХ: "Відключаємо оптимізацію".
+        // Ми просто нічого не робимо (return).
+        // Браузер сам перейде по посиланню, використовуючи CSS scroll-behavior: smooth
+        return; 
     }
+
+    // ДЛЯ ПК: Використовуємо Lenis
+    e.preventDefault(); 
+    lenis.scrollTo(targetId);
   });
 });
 
-/* ...решта коду (база даних, логіка кошика, форми і т.д.) залишається без змін... */
-/* Вставте сюди весь інший код з попереднього файлу script.js починаючи з const productKeys... */
-
 /* ==========================================================================
-   ... (ТУТ ПРОДОВЖЕННЯ ВАШОГО КОДУ) ...
+   2. БАЗА ДАНИХ (ПРОДУКТИ, РЕЦЕПТИ, ТЕКСТИ)
    ========================================================================== */
 const productKeys = ['winter', 'classic', 'summer'];
 
@@ -86,25 +72,8 @@ const drinkRecipes = {
     ],
     summer: [
       { name: "CLASSIC TONIC", short: "Освіжаюча класика з гірчинкою тоніка.", full: "Освіжаюча класика для спекотного дня.\n\n<strong>Інгредієнти:</strong>\n• 30 мл літнього сиропу\n• 150 мл тоніка\n• Лід\n• Розмарин\n\n<strong>Приготування:</strong>\nНаповніть келих льодом. Налийте сироп та тонік. Обережно перемішайте.", icon: "assets/summer-icon-1.png", detailImage: "assets/summer-picture-1.jpg" },
-      { name: "MOON SPRITZ", short: "Легкий, ігристий та святковий аперитив.", full: "Легкий та ігристий аперитив.\n\n<strong>Інгредієнти:</strong>\n• 40 мл літнього сиропу\n• 60 мл Просекко\n• 20 мл газованої води\n• Апельсин\n\n<strong>Приготування:</strong>\nУ келих з льодом налийте всі інгредієнти. Прикрасьте слайсом апельсина.", icon: "assets/summer-icon-2.png", detailImage: "assets/summer-picture-2.jpg" },
-      { name: "NATURE SOUR", short: "Вишуканий кисло-солодкий баланс.", full: "Кисло-солодкий баланс природи.\n\n<strong>Інгредієнти:</strong>\n• 30 мл літнього сиропу\n• 20 мл лимонного соку\n• Лід\n• Яєчний білок\n\n<strong>Приготування:</strong>\nЗбийте всі інгредієнти у шейкері з льодом. Процідіть у келих.", icon: "assets/summer-icon-3.png", detailImage: "assets/summer-picture-3.jpg" }
-    ]
-  },
-  en: {
-    winter: [
-      { name: "HOT TODDY", short: "Perfect warming drink for cold evenings.", full: "A classic winter drink that warms the soul.\n\n<strong>Ingredients:</strong>\n• 40 ml winter syrup\n• 150 ml boiling water or black tea\n• Lemon slice\n• Cinnamon stick\n\n<strong>Preparation:</strong>\nMix syrup with hot water in a cup. Add lemon and cinnamon. Enjoy the warmth.", icon: "assets/winter-icon-1.png", detailImage: "assets/winter-picture-1.jpg" },
-      { name: "SPICED COFFEE", short: "Your favorite coffee with a new spicy character.", full: "Coffee with a new character.\n\n<strong>Ingredients:</strong>\n• 30 ml winter syrup\n• 150 ml black coffee\n• Whipped cream\n\n<strong>Preparation:</strong>\nBrew your favorite coffee. Add syrup instead of sugar. Garnish with cream if desired.", icon: "assets/winter-icon-2.png", detailImage: "assets/winter-picture-2.jpg" },
-      { name: "FOREST TEA", short: "Real forest magic in your cup.", full: "Forest aroma in your cup.\n\n<strong>Ingredients:</strong>\n• 30 ml winter syrup\n• 200 ml herbal tea\n• Rosemary sprig\n\n<strong>Preparation:</strong>\nBrew the tea. Add syrup and stir. Garnish with rosemary.", icon: "assets/winter-icon-3.png", detailImage: "assets/winter-picture-3.jpg" }
-    ],
-    classic: [
-      { name: "GOLD RUSH", short: "Golden classic whiskey sour with a honey touch.", full: "A modern classic that reveals whiskey in a new way.\n\n<strong>Ingredients:</strong>\n• 30 ml classic syrup\n• 60 ml bourbon\n• 25 ml lemon juice\n• Ice\n\n<strong>Preparation:</strong>\nShake all ingredients vigorously with ice. Strain into a rock glass with fresh ice.", icon: "assets/winter-icon-1.png", detailImage: "assets/classic-picture-1.jpg" },
-      { name: "BEE'S KNEES", short: "Elegant prohibition-era gin cocktail.", full: "A cocktail appropriately named 'the height of excellence'.\n\n<strong>Ingredients:</strong>\n• 25 мл classic syrup\n• 60 ml gin\n• 25 ml lemon juice\n\n<strong>Preparation:</strong>\nShake ingredients with ice until chilled. Strain into a chilled cocktail glass.", icon: "assets/winter-icon-2.png", detailImage: "assets/classic-picture-2.jpg" },
-      { name: "HONEY LEMONADE", short: "Refreshing homemade lemonade.", full: "The best way to quench your thirst.\n\n<strong>Ingredients:</strong>\n• 40 ml classic syrup\n• 200 ml soda water\n• 30 ml lemon juice\n• Mint\n\n<strong>Preparation:</strong>\nMix syrup and juice in a glass. Add ice and water. Garnish with mint.", icon: "assets/winter-icon-3.png", detailImage: "assets/classic-picture-3.jpg" }
-    ],
-    summer: [
-      { name: "CLASSIC TONIC", short: "Refreshing classic with tonic bitterness.", full: "Refreshing classic for a hot day.\n\n<strong>Ingredients:</strong>\n• 30 ml summer syrup\n• 150 ml tonic water\n• Ice\n• Rosemary\n\n<strong>Preparation:</strong>\nFill a glass with ice. Pour syrup and tonic. Stir gently.", icon: "assets/summer-icon-1.png", detailImage: "assets/summer-picture-1.jpg" },
-      { name: "MOON SPRITZ", short: "Light, bubbly, and festive aperitif.", full: "Light and bubbly aperitif.\n\n<strong>Ingredients:</strong>\n• 40 ml summer syrup\n• 60 ml Prosecco\n• 20 ml soda water\n• Orange\n\n<strong>Preparation:</strong>\nPour all ingredients into a glass with ice. Garnish with an orange slice.", icon: "assets/summer-icon-2.png", detailImage: "assets/summer-picture-2.jpg" },
-      { name: "NATURE SOUR", short: "Exquisite sweet and sour balance.", full: "Sweet and sour balance of nature.\n\n<strong>Ingredients:</strong>\n• 30 ml summer syrup\n• 20 ml lemon juice\n• Ice\n• Egg white\n\n<strong>Preparation:</strong>\nShake all ingredients in a shaker with ice. Strain into a glass.", icon: "assets/summer-icon-3.png", detailImage: "assets/summer-picture-3.jpg" }
+      { name: "MOON SPRITZ", short: "Легкий, ігристий та святковий аперитив.", full: "Легкий та ігристий аперитив.\n\n<strong>Інгредієнти:</strong>\n• 40 мл літнього сиропу\n• 60 мл Просекко\n• 20 мл газованої води\n• Апельсин\n\n<strong>Приготування:</strong>\nPour all ingredients into a glass with ice. Garnish with an orange slice.", icon: "assets/summer-icon-2.png", detailImage: "assets/summer-picture-2.jpg" },
+      { name: "NATURE SOUR", short: "Вишуканий кисло-солодкий баланс.", full: "Кисло-солодкий баланс природи.\n\n<strong>Інгредієнти:</strong>\n• 30 мл summer syrup\n• 20 ml lemon juice\n• Ice\n• Egg white\n\n<strong>Preparation:</strong>\nShake all ingredients in a shaker with ice. Strain into a glass.", icon: "assets/summer-icon-3.png", detailImage: "assets/summer-picture-3.jpg" }
     ]
   }
 };
