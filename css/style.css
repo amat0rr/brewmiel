@@ -394,7 +394,7 @@ body.light .suggestions-list { background: var(--bg-base-light); border-color: v
 body.light .suggestions-list li { color: var(--text-dark); border-bottom-color: rgba(0,0,0,0.1); }
 body.light .suggestions-list li:hover { color: #fff; }
 
-/* --- ОПТИМІЗАЦІЯ ДЛЯ ANDROID / MOBILES --- */
+/* --- ОПТИМІЗАЦІЯ ДЛЯ МОБІЛЬНИХ (ANDROID) --- */
 @media (max-width: 768px) {
     .noise-bg {
         animation: none; 
@@ -433,5 +433,9 @@ body.light .suggestions-list li:hover { color: #fff; }
         font-size: 16px !important; 
     }
     
-    .bottle-card:hover { transform: none; }
+    /* ВИПРАВЛЕНО: Прибираємо rule, що ламав позицію пляшок (transform: none) */
+    /* Замість видалення ефекту, просто не міняємо його */
+    .bottle-card:active, .bottle-card:hover { 
+        /* Нічого не пишемо, щоб лишилась рідна анімація */
+    }
 }
